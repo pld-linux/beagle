@@ -35,7 +35,7 @@ BuildRequires:	gtk+2-devel >= 2:2.4.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.0
 BuildRequires:	mono-csharp
-BuildRequires:	wv-devel
+BuildRequires:	wv-devel >= 1.0.0
 BuildRequires:	pkgconfig
 Requires:	dotnet-evolution-sharp >= 0.3
 Requires:	dotnet-gtk-sharp
@@ -108,7 +108,8 @@ rm -rf $RPM_BUILD_ROOT
 
 # Kill useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/extensions/*.{a,la} \
-	$RPM_BUILD_ROOT%{_libdir}/gtk-2.0/2.4.0/filesystems/*.la
+	$RPM_BUILD_ROOT%{_libdir}/gtk-2.0/2.4.0/filesystems/*.{a,la} \
+	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.{a,la}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -117,7 +118,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root)%{_bindir}/*
-%{_libdir}/%{name}
+%dir %{_libdir}/%{name}
+%{_libdir}/%{name}/[BFIQTU]*
+%attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 %attr(755,root,root) %{_libdir}/gtk-2.0/2.4.0/filesystems/libbeaglechooserhack.so*
 
 %files devel
