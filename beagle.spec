@@ -7,7 +7,7 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
 Version:	0.0.1
-Release:	0.1
+Release:	0.2
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/0.0/%{name}-%{version}.tar.bz2
@@ -56,8 +56,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/extensions/*.{a,la}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%post -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
