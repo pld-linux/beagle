@@ -1,20 +1,21 @@
 #
 # Conditional build:
-%bcond_without	epiphany	# don't build epiphany extension (it requires
+%bcond_with	epiphany	# build epiphany extension (it requires
 				# epiphany-1.2.x)
 #
-%define		snap 20040813
+#%define	snap 20041214
+#Release:	0.%{snap}.1
 
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.0.3
-Release:	0.%{snap}.2
+Version:	0.0.4
+Release:	0.1
 License:	Various
 Group:		Libraries
-Source0:	%{name}-%{version}-%{snap}.tar.bz2
-# Source0-md5:	318d6918ab80d8d9b75b07b1b2524b02
-#Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/0.0/%{name}-%{version}.tar.bz2
+#Source0:	%{name}-%{version}-%{snap}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/0.0/%{name}-%{version}.tar.bz2
+# Source0-md5:	db81d4d1bd0f841f0ae77829623d2a59
 Patch0:		%{name}-Filters-dir.patch
 Patch1:		%{name}-pc.patch
 URL:		http://www.gnome.com/
@@ -23,6 +24,8 @@ BuildRequires:	automake
 BuildRequires:	dotnet-evolution-sharp-devel >= 0.3
 BuildRequires:	dotnet-gtk-sharp-devel
 BuildRequires:	dotnet-dbus-sharp-devel >= 0.22
+BuildRequires:	dotnet-gmime-sharp-devel
+BuildRequires:	dotnet-gecko-sharp-devel
 %if %{with epiphany}
 BuildRequires:	epiphany-devel >= 1.2.1
 BuildRequires:	epiphany-devel < 1.3.0
@@ -76,8 +79,8 @@ odwiedzan± stronê.
 
 %prep
 %setup -q
-%patch0 -p0
-%patch1 -p0
+#%patch0 -p0
+#%patch1 -p0
 
 %build
 %{__libtoolize}
@@ -109,13 +112,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root)%{_bindir}/*
+%dir %{_libdir}/%{name}
 %{_libdir}/%{name}
-%{_libdir}/libbeaglechooserhack.so.*
+%{_libdir}/gtk-2.0/2.4.0/filesystems/libbeaglechooserhack.so.*
 
 %files devel
 %defattr(644,root,root,755)
 %{_pkgconfigdir}/*
-%{_libdir}/libbeaglechooserhack.la
+%{_libdir}/gtk-2.0/2.4.0/filesystems/libbeaglechooserhack.la
 
 %if %{with epiphany}
 %files -n epiphany-extension-beagle
