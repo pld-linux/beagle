@@ -18,7 +18,7 @@ Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/0.0/%{name}-%{version}.t
 Patch0:		%{name}-Filters-dir.patch
 Patch1:		%{name}-pc.patch
 Patch2:		%{name}-bash.patch
-URL:		http://www.gnome.com
+URL:		http://www.gnome.org
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dotnet-evolution-sharp-devel >= 0.3
