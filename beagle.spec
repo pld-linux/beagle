@@ -21,12 +21,13 @@ Patch2:		%{name}-bash.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	dotnet-evolution-sharp-devel >= 0.3
-BuildRequires:	dotnet-gtk-sharp-devel
 BuildRequires:	dotnet-dbus-sharp-devel >= 0.23
+#BuildRequires:	dotnet-evolution-sharp-devel >= 0.6
 BuildRequires:	dotnet-gmime-sharp-devel
 BuildRequires:	dotnet-gecko-sharp-devel
-BuildRequires:	dotnet-gsf-sharp-devel
+BuildRequires:	dotnet-gsf-sharp-devel >= 0.2
+#BuildRequires:	dotnet-gst-sharp-devel
+BuildRequires:	dotnet-gtk-sharp-devel
 %if %{with epiphany}
 BuildRequires:	epiphany-devel >= 1.2.1
 BuildRequires:	epiphany-devel < 1.3.0
@@ -35,12 +36,13 @@ BuildRequires:	gtk+2-devel >= 2:2.4.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.0
 BuildRequires:	mono-csharp
-BuildRequires:	wv-devel >= 1.0.0
 BuildRequires:	pkgconfig
-Requires:	dotnet-evolution-sharp >= 0.3
-Requires:	dotnet-gtk-sharp
+BuildRequires:	wv-devel >= 1.0.0
 Requires:	dotnet-dbus-sharp >= 0.23
-Requires:	dotnet-gsf-sharp
+#Requires:	dotnet-evolution-sharp >= 0.6
+Requires:	dotnet-gsf-sharp >= 0.2
+#Requires:	dotnet-gst-sharp
+Requires:	dotnet-gtk-sharp
 Requires:	gtk+2 >= 2:2.4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -92,6 +94,7 @@ odwiedzan± stronê.
 %{__autoconf}
 %{__automake}
 %configure \
+	--disable-static \
 %if %{with epiphany}
 	--enable-epiphany-extension
 %else
@@ -107,9 +110,9 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # Kill useless files
-rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/extensions/*.{a,la} \
-	$RPM_BUILD_ROOT%{_libdir}/gtk-2.0/2.4.0/filesystems/*.{a,la} \
-	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.{a,la}
+rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/extensions/*.la \
+	$RPM_BUILD_ROOT%{_libdir}/gtk-2.0/2.4.0/filesystems/*.la \
+	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
