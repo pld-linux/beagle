@@ -1,3 +1,8 @@
+#
+# Conditional build:
+%bcond_without	epiphany	# don't build epiphany extension (it requires
+				# epiphany-1.2.x)
+#
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
@@ -10,7 +15,10 @@ Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/0.0/%{name}-%{version}.t
 URL:		http://www.gnome.com/
 BuildRequires:	dotnet-evolution-sharp-devel >= 0.3
 BuildRequires:	dotnet-gtk-sharp-devel
+%if %{with epiphany}
 BuildRequires:	epiphany-devel >= 1.2.1
+BuildRequires:	epiphany-devel < 1.3.0
+%endif
 BuildRequires:	gtk+2-devel >= 2:2.4.0
 BuildRequires:	libxml2-devel >= 2.6.0
 BuildRequires:	mono
@@ -47,6 +55,7 @@ Summary(pl):	Rozszerzenie dla Epiphany - beagle
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	epiphany >= 1.2.1
+Requires:	epiphany < 1.3.0
 
 %description -n epiphany-extension-beagle
 Epiphany extension that allows Beagle to index every page the user
@@ -60,7 +69,13 @@ odwiedzan± stronê.
 %setup -q
 
 %build
-%configure
+%configure \
+%if %{with epiphany}
+	--enable-epiphany-extension
+%else
+	--disable-epiphany-extension
+%endif
+
 %{__make}
 
 %install
@@ -85,7 +100,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_pkgconfigdir}/*
 
+%if %{with epiphany}
 %files -n epiphany-extension-beagle
 %defattr(644,root,root,755)
 %doc epiphany-extension/README
 %attr(755,root,root)%{_libdir}/epiphany/extensions/libbeagleextension.so*
+%endif
