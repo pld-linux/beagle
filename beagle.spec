@@ -28,6 +28,7 @@ BuildRequires:	epiphany-devel >= 1.2.1
 BuildRequires:	epiphany-devel < 1.3.0
 %endif
 BuildRequires:	gtk+2-devel >= 2:2.4.0
+BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.0
 BuildRequires:	mono-csharp
 BuildRequires:	pkgconfig
