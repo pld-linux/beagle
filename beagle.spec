@@ -108,7 +108,8 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # Kill useless files
-rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/extensions/*.{a,la}
+rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/extensions/*.{a,la} \
+	$RPM_BUILD_ROOT%{_libdir}/gtk-2.0/2.4.0/filesystems/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -119,16 +120,15 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root)%{_bindir}/*
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}
-%{_libdir}/gtk-2.0/2.4.0/filesystems/libbeaglechooserhack.so.*
+%attr(755,root,root) %{_libdir}/gtk-2.0/2.4.0/filesystems/libbeaglechooserhack.so*
 
 %files devel
 %defattr(644,root,root,755)
 %{_pkgconfigdir}/*
-%{_libdir}/gtk-2.0/2.4.0/filesystems/libbeaglechooserhack.la
 
 %if %{with epiphany}
 %files -n epiphany-extension-beagle
 %defattr(644,root,root,755)
 %doc epiphany-extension/README
-%attr(755,root,root)%{_libdir}/epiphany/extensions/libbeagleextension.so*
+%attr(755,root,root) %{_libdir}/epiphany/extensions/libbeagleextension.so*
 %endif
