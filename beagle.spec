@@ -3,6 +3,9 @@
 %bcond_with	epiphany	# build epiphany extension (it requires
 				# epiphany-1.2.x)
 #
+# INFO: need dbus newer than 0.22. you can get it from DEVEL branch.
+#
+
 #%define	snap 20041214
 #Release:	0.%{snap}.1
 
