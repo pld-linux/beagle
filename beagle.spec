@@ -2,13 +2,13 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
 Version:	0.0.1
-Release:	0.9
+Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/0.0/%{name}-%{version}.tar.bz2
 # Source0-md5:	9505a0d8aad8f0d80f9f18aab77dac08
 URL:		http://www.gnome.com/
-BuildRequires:	dotnet-evolution-sharp >= 0.3
+BuildRequires:	dotnet-evolution-sharp-devel >= 0.3
 BuildRequires:	dotnet-gtk-sharp-devel
 BuildRequires:	epiphany-devel >= 1.2.1
 BuildRequires:	gtk+2-devel >= 2:2.4.0
