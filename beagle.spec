@@ -2,10 +2,6 @@
 # Conditional build:
 %bcond_with	epiphany	# build epiphany extension (it requires
 				# epiphany-1.2.x)
-#
-# INFO: need dbus newer than 0.22. you can get it from DEVEL branch.
-#
-
 #%define	snap 20041214
 #Release:	0.%{snap}.1
 
@@ -13,7 +9,7 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
 Version:	0.0.4
-Release:	0.1
+Release:	0.2
 License:	Various
 Group:		Libraries
 #Source0:	%{name}-%{version}-%{snap}.tar.bz2
@@ -22,14 +18,15 @@ Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/0.0/%{name}-%{version}.t
 Patch0:		%{name}-Filters-dir.patch
 Patch1:		%{name}-pc.patch
 Patch2:		%{name}-bash.patch
-URL:		http://www.gnome.com/
+URL:		http://www.gnome.com
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dotnet-evolution-sharp-devel >= 0.3
 BuildRequires:	dotnet-gtk-sharp-devel
-BuildRequires:	dotnet-dbus-sharp-devel >= 0.22
+BuildRequires:	dotnet-dbus-sharp-devel >= 0.23
 BuildRequires:	dotnet-gmime-sharp-devel
 BuildRequires:	dotnet-gecko-sharp-devel
+BuildRequires:	dotnet-gsf-sharp-devel
 %if %{with epiphany}
 BuildRequires:	epiphany-devel >= 1.2.1
 BuildRequires:	epiphany-devel < 1.3.0
@@ -38,10 +35,12 @@ BuildRequires:	gtk+2-devel >= 2:2.4.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.0
 BuildRequires:	mono-csharp
+BuildRequires:	wv-devel
 BuildRequires:	pkgconfig
 Requires:	dotnet-evolution-sharp >= 0.3
 Requires:	dotnet-gtk-sharp
-Requires:	dotnet-dbus-sharp >= 0.22
+Requires:	dotnet-dbus-sharp >= 0.23
+Requires:	dotnet-gsf-sharp
 Requires:	gtk+2 >= 2:2.4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
