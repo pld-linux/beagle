@@ -8,20 +8,20 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.0.4
-Release:	0.2
+Version:	0.0.8.1
+Release:	0.1
 License:	Various
 Group:		Libraries
 #Source0:	%{name}-%{version}-%{snap}.tar.bz2
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.0/%{name}-%{version}.tar.bz2
-# Source0-md5:	db81d4d1bd0f841f0ae77829623d2a59
+# Source0-md5:	35558219e489466eb10697b80196827d
 Patch0:		%{name}-Filters-dir.patch
 Patch1:		%{name}-pc.patch
 Patch2:		%{name}-bash.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	dotnet-dbus-sharp-devel >= 0.23
+BuildRequires:	dotnet-dbus-sharp-devel >= 0.23.4
 #BuildRequires:	dotnet-evolution-sharp-devel >= 0.6
 BuildRequires:	dotnet-gmime-sharp-devel
 BuildRequires:	dotnet-gecko-sharp-devel
@@ -38,7 +38,7 @@ BuildRequires:	libxml2-devel >= 2.6.0
 BuildRequires:	mono-csharp
 BuildRequires:	pkgconfig
 BuildRequires:	wv-devel >= 1.0.0
-Requires:	dotnet-dbus-sharp >= 0.23
+Requires:	dotnet-dbus-sharp >= 0.23.4
 #Requires:	dotnet-evolution-sharp >= 0.6
 Requires:	dotnet-gsf-sharp >= 0.2
 #Requires:	dotnet-gst-sharp
@@ -122,9 +122,15 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root)%{_bindir}/*
 %dir %{_libdir}/%{name}
-%{_libdir}/%{name}/[BFIQTU]*
+%{_libdir}/%{name}/Filters
+%{_libdir}/%{name}/*.exe
+%{_libdir}/%{name}/*.dll
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
+%attr(755,root,root) %{_libdir}/%{name}/beagled-index-helper
 %attr(755,root,root) %{_libdir}/gtk-2.0/2.4.0/filesystems/libbeaglechooserhack.so*
+%{_pixmapsdir}/*.png
+%{_desktopdir}/*.desktop
+%{_mandir}/man1/*
 
 %files devel
 %defattr(644,root,root,755)
