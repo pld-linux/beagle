@@ -13,12 +13,12 @@ Release:	0.2
 License:	Various
 Group:		Libraries
 #Source0:	%{name}-%{version}-%{snap}.tar.bz2
-Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/0.0/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.0/%{name}-%{version}.tar.bz2
 # Source0-md5:	db81d4d1bd0f841f0ae77829623d2a59
 Patch0:		%{name}-Filters-dir.patch
 Patch1:		%{name}-pc.patch
 Patch2:		%{name}-bash.patch
-URL:		http://www.gnome.org
+URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dotnet-evolution-sharp-devel >= 0.3
