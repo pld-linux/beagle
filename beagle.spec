@@ -9,7 +9,7 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
 Version:	0.0.3
-Release:	0.%{snap}.1
+Release:	0.%{snap}.2
 License:	Various
 Group:		Libraries
 Source0:	%{name}-%{version}-%{snap}.tar.bz2
