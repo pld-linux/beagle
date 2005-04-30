@@ -114,10 +114,12 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/extensions/*.la \
 	$RPM_BUILD_ROOT%{_libdir}/gtk-2.0/2.4.0/filesystems/*.la \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.la
 
+%find_lang %{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root)%{_bindir}/*
