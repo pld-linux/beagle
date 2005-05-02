@@ -33,10 +33,12 @@ BuildRequires:	epiphany-devel >= 1.2.1
 BuildRequires:	epiphany-devel < 1.3.0
 %endif
 BuildRequires:	gtk+2-devel >= 2:2.4.0
+BuildRequires:	libexif >= 0.5.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.0
 BuildRequires:	mono-csharp >= 1.0.6
 BuildRequires:	pkgconfig
+BuildRequires:	sqlite-devel
 BuildRequires:	wv-devel >= 1.0.0
 Requires:	dotnet-dbus-sharp >= 0.23.4
 #Requires:	dotnet-evolution-sharp >= 0.6
