@@ -33,7 +33,7 @@ BuildRequires:	epiphany-devel >= 1.2.1
 BuildRequires:	epiphany-devel < 1.3.0
 %endif
 BuildRequires:	gtk+2-devel >= 2:2.4.0
-BuildRequires:	libexif >= 0.5.0
+BuildRequires:	libexif-devel >= 0.5.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.0
 BuildRequires:	mono-csharp >= 1.0.6
