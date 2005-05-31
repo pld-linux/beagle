@@ -21,6 +21,7 @@ Patch2:		%{name}-bash.patch
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
+BuildRequires:	dbus-devel
 BuildRequires:	dotnet-dbus-sharp-devel >= 0.23.4
 #BuildRequires:	dotnet-evolution-sharp-devel >= 0.6
 BuildRequires:	dotnet-gmime-sharp-devel
@@ -34,9 +35,11 @@ BuildRequires:	epiphany-devel < 1.3.0
 %endif
 BuildRequires:	gtk+2-devel >= 2:2.4.0
 BuildRequires:	libexif-devel >= 0.5.0
+BuildRequires:	libpng-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.0
 BuildRequires:	mono-csharp >= 1.0.6
+#BuildRequires:	mozilla-devel
 BuildRequires:	pkgconfig
 BuildRequires:	sqlite-devel
 BuildRequires:	wv-devel >= 1.0.0
