@@ -1,3 +1,5 @@
+#	TODO:
+#	- bcond is broken, it must be checked
 #
 # Conditional build:
 %bcond_with	epiphany	# build epiphany extension (it requires
@@ -8,13 +10,13 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.0.9
+Version:	0.0.10
 Release:	0.1
 License:	Various
 Group:		Libraries
 #Source0:	%{name}-%{version}-%{snap}.tar.bz2
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.0/%{name}-%{version}.tar.bz2
-# Source0-md5:	638a2a5ab80d468877792db9b9fb332f
+# Source0-md5:	2bf353b11837e220bdbbf069d5be99db
 Patch0:		%{name}-Filters-dir.patch
 Patch1:		%{name}-pc.patch
 Patch2:		%{name}-bash.patch
@@ -23,15 +25,14 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dbus-devel
 BuildRequires:	dotnet-dbus-sharp-devel >= 0.23.4
-#BuildRequires:	dotnet-evolution-sharp-devel >= 0.6
+BuildRequires:	dotnet-evolution-sharp-devel >= 0.6
 BuildRequires:	dotnet-gmime-sharp-devel
 BuildRequires:	dotnet-gecko-sharp-devel
 BuildRequires:	dotnet-gsf-sharp-devel >= 0.2
 #BuildRequires:	dotnet-gst-sharp-devel
 BuildRequires:	dotnet-gtk-sharp-devel
 %if %{with epiphany}
-BuildRequires:	epiphany-devel >= 1.2.1
-BuildRequires:	epiphany-devel < 1.3.0
+BuildRequires:	epiphany-devel >= 1.6
 %endif
 BuildRequires:	gtk+2-devel >= 2:2.4.0
 BuildRequires:	libexif-devel >= 0.5.0
@@ -131,7 +132,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/Filters
 %{_libdir}/%{name}/*.exe
-%{_libdir}/%{name}/*.dll
+%{_libdir}/%{name}/*.dll*
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 %attr(755,root,root) %{_libdir}/%{name}/beagled-index-helper
 %attr(755,root,root) %{_libdir}/gtk-2.0/2.4.0/filesystems/libbeaglechooserhack.so*
