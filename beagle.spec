@@ -12,7 +12,6 @@ Version:	0.0.12
 Release:	0.1
 License:	Various
 Group:		Libraries
-#Source0:	%{name}-%{version}-%{snap}.tar.bz2
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.0/%{name}-%{version}.tar.bz2
 # Source0-md5:	27bfdc64982a471a7d9c2a86c620752d
 Patch0:		%{name}-Filters-dir.patch
@@ -108,7 +107,8 @@ odwiedzan± stronê.
 	--disable-epiphany-extension
 %endif
 
-%{__make}
+%{__make} \
+	MOZILLA_HOME=%{_libdir}/mozilla
 
 %install
 rm -rf $RPM_BUILD_ROOT
