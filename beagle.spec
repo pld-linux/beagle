@@ -1,5 +1,6 @@
-#	TODO:
-#	- bcond is broken, it must be checked
+#
+# TODO:
+# - MOZILLA_HOME misdetected
 #
 # Conditional build:
 %bcond_with	epiphany	# build epiphany extension
