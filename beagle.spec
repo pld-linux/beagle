@@ -2,21 +2,18 @@
 #	- bcond is broken, it must be checked
 #
 # Conditional build:
-%bcond_with	epiphany	# build epiphany extension (it requires
-				# epiphany-1.2.x)
-#%define	snap 20041214
-#Release:	0.%{snap}.1
-
+%bcond_with	epiphany	# build epiphany extension
+				# (just a hack)
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.0.10
+Version:	0.0.12
 Release:	0.1
 License:	Various
 Group:		Libraries
 #Source0:	%{name}-%{version}-%{snap}.tar.bz2
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.0/%{name}-%{version}.tar.bz2
-# Source0-md5:	2bf353b11837e220bdbbf069d5be99db
+# Source0-md5:	27bfdc64982a471a7d9c2a86c620752d
 Patch0:		%{name}-Filters-dir.patch
 Patch1:		%{name}-pc.patch
 Patch2:		%{name}-bash.patch
@@ -26,27 +23,29 @@ BuildRequires:	automake
 BuildRequires:	dbus-devel
 BuildRequires:	dotnet-dbus-sharp-devel >= 0.23.4
 BuildRequires:	dotnet-evolution-sharp-devel >= 0.6
+BuildRequires:	dotnet-gecko-sharp-devel = 0.6
 BuildRequires:	dotnet-gmime-sharp-devel
-BuildRequires:	dotnet-gecko-sharp-devel
-BuildRequires:	dotnet-gsf-sharp-devel >= 0.2
+#BuildRequires:	dotnet-gsf-sharp-devel >= 0.2
 #BuildRequires:	dotnet-gst-sharp-devel
+BuildRequires:	dotnet-gtk-sharp-gnome-devel
 BuildRequires:	dotnet-gtk-sharp-devel
-%if %{with epiphany}
-BuildRequires:	epiphany-devel >= 1.6
-%endif
+%{?with_epiphany:BuildRequires:	epiphany-devel >= 1.6}
+BuildRequires:	gnome-vfs2-devel
 BuildRequires:	gtk+2-devel >= 2:2.4.0
 BuildRequires:	libexif-devel >= 0.5.0
+BuildRequires:	libgnome-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.0
 BuildRequires:	mono-csharp >= 1.0.6
-#BuildRequires:	mozilla-devel
+BuildRequires:	mozilla-devel
 BuildRequires:	pkgconfig
-BuildRequires:	sqlite-devel
+BuildRequires:	sqlite3-devel
 BuildRequires:	wv-devel >= 1.0.0
+BuildRequires:	zip
 Requires:	dotnet-dbus-sharp >= 0.23.4
-#Requires:	dotnet-evolution-sharp >= 0.6
-Requires:	dotnet-gsf-sharp >= 0.2
+Requires:	dotnet-evolution-sharp = 0.6
+#Requires:	dotnet-gsf-sharp >= 0.2
 #Requires:	dotnet-gst-sharp
 Requires:	dotnet-gtk-sharp
 Requires:	gtk+2 >= 2:2.4.0
@@ -92,7 +91,7 @@ odwiedzan± stronê.
 %setup -q
 #%patch0 -p0
 #%patch1 -p0
-%patch2 -p0
+#%patch2 -p0
 
 %build
 %{__libtoolize}
@@ -125,6 +124,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/extensions/*.la \
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
+
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README
@@ -133,6 +135,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/%{name}/Filters
 %{_libdir}/%{name}/*.exe
 %{_libdir}/%{name}/*.dll*
+%attr(755,root,root) %{_libdir}/lib*.so*
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 %attr(755,root,root) %{_libdir}/%{name}/beagled-index-helper
 %attr(755,root,root) %{_libdir}/gtk-2.0/2.4.0/filesystems/libbeaglechooserhack.so*
@@ -142,6 +145,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%{_includedir}/libbeagle
 %{_pkgconfigdir}/*
 
 %if %{with epiphany}
