@@ -17,8 +17,6 @@ Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.0/%{name}-%{version}.ta
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	dbus-glib-devel
-BuildRequires:	dotnet-dbus-sharp-devel >= 0.23.4
 BuildRequires:	dotnet-evolution-sharp-devel >= 0.6
 BuildRequires:	dotnet-gecko-sharp-devel = 0.6
 BuildRequires:	dotnet-gmime-sharp-devel >= 2.1.15
@@ -40,13 +38,13 @@ BuildRequires:	pkgconfig
 BuildRequires:	sqlite-devel
 BuildRequires:	wv-devel >= 1.0.0
 BuildRequires:	zip
-Requires:	dotnet-dbus-sharp >= 0.23.4
 Requires:	dotnet-evolution-sharp >= 0.6
 Requires:	dotnet-gecko-sharp = 0.6
 Requires:	dotnet-gmime-sharp >= 2.1.15
 #Requires:	dotnet-gsf-sharp-devel >= 0.2
 #Requires:	dotnet-gst-sharp-devel
 Requires:	dotnet-gtk-sharp-gnome
+%{?with_epiphany:Requires:	epiphany-extensions}
 Requires:	gtk+2 >= 2:2.4.0
 Requires:	sqlite
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -115,8 +113,9 @@ rm -rf $RPM_BUILD_ROOT
 # Kill useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/extensions/*.la \
 	$RPM_BUILD_ROOT%{_libdir}/gtk-2.0/2.4.0/filesystems/*.la \
-	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.la \
-	$RPM_BUILD_ROOT%{_datadir}/locale/no
+	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.la
+	
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/no
 
 %find_lang %{name}
 
@@ -145,6 +144,8 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/libbeagle
+%{_libdir}/*.la
+%{_libdir}/*.so
 %{_pkgconfigdir}/*
 
 %if %{with epiphany}
