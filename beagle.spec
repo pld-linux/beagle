@@ -41,7 +41,7 @@ BuildRequires:	libxml2-devel >= 2.6.0
 BuildRequires:	mono-csharp >= 1.0.6
 BuildRequires:	mozilla-devel
 BuildRequires:	pkgconfig
-BuildRequires:	sqlite3-devel
+BuildRequires:	sqlite-devel
 BuildRequires:	wv-devel >= 1.0.0
 BuildRequires:	zip
 Requires:	dotnet-dbus-sharp >= 0.23.4
@@ -50,6 +50,7 @@ Requires:	dotnet-evolution-sharp = 0.6
 #Requires:	dotnet-gst-sharp
 Requires:	dotnet-gtk-sharp
 Requires:	gtk+2 >= 2:2.4.0
+Requires:	sqlite
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
