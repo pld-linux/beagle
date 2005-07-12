@@ -14,9 +14,6 @@ License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.0/%{name}-%{version}.tar.bz2
 # Source0-md5:	27bfdc64982a471a7d9c2a86c620752d
-Patch0:		%{name}-Filters-dir.patch
-Patch1:		%{name}-pc.patch
-Patch2:		%{name}-bash.patch
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -92,9 +89,6 @@ odwiedzan± stronê.
 
 %prep
 %setup -q
-#%patch0 -p0
-#%patch1 -p0
-#%patch2 -p0
 
 %build
 %{__libtoolize}
@@ -121,7 +115,8 @@ rm -rf $RPM_BUILD_ROOT
 # Kill useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/extensions/*.la \
 	$RPM_BUILD_ROOT%{_libdir}/gtk-2.0/2.4.0/filesystems/*.la \
-	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.la
+	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.la \
+	$RPM_BUILD_ROOT%{_datadir}/locale/no
 
 %find_lang %{name}
 
