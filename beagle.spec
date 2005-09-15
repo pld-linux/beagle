@@ -8,22 +8,21 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.0.12
+Version:	0.1.0
 Release:	0.1
 License:	Various
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.0/%{name}-%{version}.tar.bz2
-# Source0-md5:	27bfdc64982a471a7d9c2a86c620752d
+Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.1/%{name}-%{version}.tar.bz2
+# Source0-md5:	79d43b6b3ff0de919b54b08844b5cea2
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dotnet-evolution-sharp-devel >= 0.6
-BuildRequires:	dotnet-gecko-sharp-devel = 0.6
-BuildRequires:	dotnet-gmime-sharp-devel >= 2.1.15
+BuildRequires:	dotnet-gecko-sharp2-devel = 0.11
+BuildRequires:	dotnet-gmime-sharp-devel >= 2.1.16-2
 #BuildRequires:	dotnet-gsf-sharp-devel >= 0.2
 #BuildRequires:	dotnet-gst-sharp-devel
-BuildRequires:	dotnet-gtk-sharp-gnome-devel
-BuildRequires:	dotnet-gtk-sharp-devel
+BuildRequires:	dotnet-gtk-sharp2-gnome-devel
 %{?with_epiphany:BuildRequires:	epiphany-devel >= 1.6}
 BuildRequires:	gnome-vfs2-devel
 BuildRequires:	gtk+2-devel >= 2:2.4.0
@@ -39,11 +38,11 @@ BuildRequires:	sqlite-devel
 BuildRequires:	wv-devel >= 1.0.0
 BuildRequires:	zip
 Requires:	dotnet-evolution-sharp >= 0.6
-Requires:	dotnet-gecko-sharp = 0.6
-Requires:	dotnet-gmime-sharp >= 2.1.15
+Requires:	dotnet-gecko-sharp >= 0.11
+Requires:	dotnet-gmime-sharp >= 2.1.16-2
 #Requires:	dotnet-gsf-sharp-devel >= 0.2
 #Requires:	dotnet-gst-sharp-devel
-Requires:	dotnet-gtk-sharp-gnome
+Requires:	dotnet-gtk-sharp2-gnome
 %{?with_epiphany:Requires:	epiphany-extensions}
 Requires:	gtk+2 >= 2:2.4.0
 Requires:	sqlite
@@ -112,7 +111,6 @@ rm -rf $RPM_BUILD_ROOT
 
 # Kill useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany-*/extensions/*.la \
-	$RPM_BUILD_ROOT%{_libdir}/gtk-2.0/2.4.0/filesystems/*.la \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.la
 	
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/no
@@ -136,7 +134,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.so*
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 %attr(755,root,root) %{_libdir}/%{name}/beagled-index-helper
-%attr(755,root,root) %{_libdir}/gtk-2.0/2.4.0/filesystems/libbeaglechooserhack.so*
 %{_pixmapsdir}/*.png
 %{_desktopdir}/*.desktop
 %{_mandir}/man1/*
