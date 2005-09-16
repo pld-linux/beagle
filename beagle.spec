@@ -1,10 +1,14 @@
 #
 # TODO:
-# - MOZILLA_HOME misdetected
+# - package 'crawl' files
+# - check .desktop files
+# - separate libs (future proof)
+#
+%include	/usr/lib/rpm/macros.mono
 #
 # Conditional build:
-%bcond_with	epiphany	# build epiphany extension
-				# (just a hack)
+%bcond_without	epiphany	# build epiphany extension
+#
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
@@ -23,9 +27,10 @@ BuildRequires:	dotnet-gmime-sharp-devel >= 2.1.16-2
 #BuildRequires:	dotnet-gsf-sharp-devel >= 0.2
 #BuildRequires:	dotnet-gst-sharp-devel
 BuildRequires:	dotnet-gtk-sharp2-gnome-devel
-%{?with_epiphany:BuildRequires:	epiphany-devel >= 1.6}
+%{?with_epiphany:BuildRequires:	epiphany-devel >= 1.8}
 BuildRequires:	gnome-vfs2-devel
 BuildRequires:	gtk+2-devel >= 2:2.4.0
+BuildRequires:	gtk-doc
 BuildRequires:	libexif-devel >= 0.5.0
 BuildRequires:	libgnome-devel
 BuildRequires:	libpng-devel
@@ -38,7 +43,7 @@ BuildRequires:	sqlite-devel
 BuildRequires:	wv-devel >= 1.0.0
 BuildRequires:	zip
 Requires:	dotnet-evolution-sharp >= 0.6
-Requires:	dotnet-gecko-sharp >= 0.11
+Requires:	dotnet-gecko-sharp2 >= 0.11
 Requires:	dotnet-gmime-sharp >= 2.1.16-2
 #Requires:	dotnet-gsf-sharp-devel >= 0.2
 #Requires:	dotnet-gst-sharp-devel
@@ -94,6 +99,8 @@ odwiedzan± stronê.
 %{__automake}
 %configure \
 	--disable-static \
+	--enable-gtk-doc \
+	--with-html-dir=%{_gtkdocdir} \
 %if %{with epiphany}
 	--enable-epiphany-extension
 %else
@@ -110,7 +117,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # Kill useless files
-rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany-*/extensions/*.la \
+rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/1.8/extensions/*.la \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.la
 	
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/no
@@ -126,29 +133,35 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README
-%attr(755,root,root)%{_bindir}/*
+%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_sbindir}/*
+
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/Filters
 %{_libdir}/%{name}/*.exe
 %{_libdir}/%{name}/*.dll*
+
+# to be separtated
 %attr(755,root,root) %{_libdir}/lib*.so*
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 %attr(755,root,root) %{_libdir}/%{name}/beagled-index-helper
+
 %{_pixmapsdir}/*.png
 %{_desktopdir}/*.desktop
-%{_mandir}/man1/*
+%{_mandir}/man*/*
 
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/libbeagle
 %{_libdir}/*.la
 %{_libdir}/*.so
+%{_gtkdocdir}/beagle
 %{_pkgconfigdir}/*
 
 %if %{with epiphany}
 %files -n epiphany-extension-beagle
 %defattr(644,root,root,755)
 %doc epiphany-extension/README
-%attr(755,root,root) %{_libdir}/epiphany-*/extensions/libbeagleextension.so*
-%{_libdir}/epiphany-*/extensions/*.xml
+%attr(755,root,root) %{_libdir}/epiphany/1.8/extensions/libbeagleextension.so*
+%{_libdir}/epiphany/1.8/extensions/*.xml
 %endif
