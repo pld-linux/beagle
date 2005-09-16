@@ -7,7 +7,8 @@
 %include	/usr/lib/rpm/macros.mono
 #
 # Conditional build:
-%bcond_without	epiphany	# build epiphany extension
+%bcond_without	epiphany	# don't build epiphany extension
+%bcond_without	evolution	# don't include evolution support
 #
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
@@ -21,7 +22,7 @@ Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.1/%{name}-%{version}.ta
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	dotnet-evolution-sharp-devel >= 0.6
+%{?with_evolution:BuildRequires:	dotnet-evolution-sharp-devel >= 0.6}
 BuildRequires:	dotnet-gecko-sharp2-devel = 0.11
 BuildRequires:	dotnet-gmime-sharp-devel >= 2.1.16-2
 #BuildRequires:	dotnet-gsf-sharp-devel >= 0.2
@@ -96,11 +97,9 @@ odwiedzan± stronê.
 	--disable-static \
 	--enable-gtk-doc \
 	--with-html-dir=%{_gtkdocdir} \
-%if %{with epiphany}
-	--enable-epiphany-extension
-%else
-	--disable-epiphany-extension
-%endif
+	--%{!?with_epiphany:dis}%{?with_epiphany:en}able-epiphany-extension \
+	--%{!?with_evoultion:dis}%{?with_evolution:en}able-evolution-sharp
+	
 
 %{__make} \
 	MOZILLA_HOME=%{_libdir}/mozilla
