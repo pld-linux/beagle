@@ -42,12 +42,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	sqlite-devel
 BuildRequires:	wv-devel >= 1.0.0
 BuildRequires:	zip
-Requires:	dotnet-evolution-sharp >= 0.6
-Requires:	dotnet-gecko-sharp2 >= 0.11
 Requires:	dotnet-gmime-sharp >= 2.1.16-2
-#Requires:	dotnet-gsf-sharp-devel >= 0.2
-#Requires:	dotnet-gst-sharp-devel
-Requires:	dotnet-gtk-sharp2-gnome
 %{?with_epiphany:Requires:	epiphany-extensions}
 Requires:	gtk+2 >= 2:2.4.0
 Requires:	sqlite
