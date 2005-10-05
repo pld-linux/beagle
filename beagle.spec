@@ -8,17 +8,17 @@
 #
 # Conditional build:
 %bcond_without	epiphany	# don't build epiphany extension
-%bcond_without	evolution	# don't include evolution support
+%bcond_with	evolution	# don't include evolution support
 #
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.1.0
+Version:	0.1.1
 Release:	0.1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.1/%{name}-%{version}.tar.bz2
-# Source0-md5:	79d43b6b3ff0de919b54b08844b5cea2
+# Source0-md5:	e788ed11077e576797a0793631f2fe8b
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
