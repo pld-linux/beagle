@@ -1,24 +1,23 @@
 #
-# TODO:
-# - package 'crawl' files
-# - check .desktop files
-# - separate libs (future proof)
+# TODO: finish crawl system
 #
 %include	/usr/lib/rpm/macros.mono
 #
 # Conditional build:
-%bcond_without	epiphany	# don't build epiphany extension
+%bcond_with	epiphany	# don't build epiphany extension
 %bcond_with	evolution	# don't include evolution support
 #
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
 Version:	0.1.1
-Release:	0.1
+Release:	0.9
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.1/%{name}-%{version}.tar.bz2
 # Source0-md5:	e788ed11077e576797a0793631f2fe8b
+Patch0:		%{name}-desktop.patch
+PAtch1:		%{name}-crawl.patch
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -43,6 +42,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	sqlite-devel
 BuildRequires:	wv-devel >= 1.0.0
 BuildRequires:	zip
+Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dotnet-gmime-sharp >= 2.1.16-2
 %{?with_epiphany:Requires:	epiphany-extensions}
 Requires:	gtk+2 >= 2:2.4.0
@@ -57,11 +57,22 @@ Lucene.Net.
 Beagle jest podsystemem indeksuj±cym i wyszukuj±cym zbudowanym na
 bazie Lucene.Net.
 
+%package libs
+Summary:	Beagle libraries
+Summary(pl):	Bibiloteki Beagle
+Group:		Libraries
+
+%description libs
+Beagle libraries.
+
+%description libs -l pl
+Bibiloteki Beagle.
+
 %package devel
 Summary:	Beagle development files
 Summary(pl):	Pliki programistyczne Beagle
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}-libs = %{version}-%{release}
 
 %description devel
 Beagle development files.
@@ -69,13 +80,35 @@ Beagle development files.
 %description devel -l pl
 Pliki programistyczne Beagle.
 
+%package static
+Summary:	Beagle static libraries
+Summary(pl):	Statyczne biblioteki Beagle
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description static
+Beagle static libraries.
+
+%description static -l pl
+Statyczne biblioteki Beagle.
+
+%package crawl-system
+Summary:	Beagle crawl system
+#Summary(pl):   ???
+Group:		Applications/System
+
+%description crawl-system
+Beagle crawl system.
+
+#%description crawl-system -l pl
+# ???
+
 %package -n epiphany-extension-beagle
 Summary:	Epiphany extension - beagle
 Summary(pl):	Rozszerzenie dla Epiphany - beagle
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	epiphany >= 1.2.1
-Requires:	epiphany < 1.3.0
 
 %description -n epiphany-extension-beagle
 Epiphany extension that allows Beagle to index every page the user
@@ -87,6 +120,8 @@ odwiedzan± stronê.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -94,13 +129,12 @@ odwiedzan± stronê.
 %{__autoconf}
 %{__automake}
 %configure \
-	--disable-static \
+	--enable-static \
 	--enable-gtk-doc \
 	--with-html-dir=%{_gtkdocdir} \
 	--%{!?with_epiphany:dis}%{?with_epiphany:en}able-epiphany-extension \
 	--%{!?with_evoultion:dis}%{?with_evolution:en}able-evolution-sharp
 	
-
 %{__make} \
 	MOZILLA_HOME=%{_libdir}/mozilla
 
@@ -128,21 +162,22 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_sbindir}/*
 
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/Filters
 %{_libdir}/%{name}/*.exe
 %{_libdir}/%{name}/*.dll*
 
-# to be separtated
-%attr(755,root,root) %{_libdir}/lib*.so*
-%attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 %attr(755,root,root) %{_libdir}/%{name}/beagled-index-helper
 
 %{_pixmapsdir}/*.png
 %{_desktopdir}/*.desktop
 %{_mandir}/man*/*
+
+%files libs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/lib*.so*
+%attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 
 %files devel
 %defattr(644,root,root,755)
@@ -151,6 +186,19 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.so
 %{_gtkdocdir}/beagle
 %{_pkgconfigdir}/*
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/*.a
+%{_libdir}/%{name}/*.a
+
+# not finished yet
+%files crawl-system
+%defattr(644,root,root,755)
+%attr(750,root,root) %config(noreplace) %verify(not size mtime md5) /etc/cron.daily/*
+%attr(750,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/beagle/*
+%attr(755,root,root) %{_sbindir}/*
+%{_libdir}/beagle-crawl-system
 
 %if %{with epiphany}
 %files -n epiphany-extension-beagle
