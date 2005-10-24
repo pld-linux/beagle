@@ -176,14 +176,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so*
-%attr(755,root,root) %{_libdir}/%{name}/lib*.so*
+%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%attr(755,root,root) %{_libdir}/%{name}/lib*.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/libbeagle
+%attr(755,root,root) %{_libdir}/*.so
+%attr(755,root,root) %{_libdir}/%{name}/*.so
 %{_libdir}/*.la
-%{_libdir}/*.so
 %{_gtkdocdir}/beagle
 %{_pkgconfigdir}/*
 
