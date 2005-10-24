@@ -1,0 +1,33 @@
+diff -aurN beagle-0.1.1.orig/Best/best.desktop beagle-0.1.1/Best/best.desktop
+--- beagle-0.1.1.orig/Best/best.desktop	2005-07-26 22:22:09.000000000 +0200
++++ beagle-0.1.1/Best/best.desktop	2005-10-24 20:18:17.000000000 +0200
+@@ -1,9 +1,9 @@
+ [Desktop Entry]
+-X-SuSE-translate=true
+ Encoding=UTF-8
+ Name=Beagle Search
++Name[pl]=Wyszukiwanie Beagle
+ GenericName=Desktop Search
+ Exec=best --no-tray
+ Icon=best
+ Type=Application
+-Categories=GTK;GNOME;Application;Core;Utility;Filesystem;
+\
++Categories=GTK;GNOME;Utility;
+diff -aurN beagle-0.1.1.orig/tools/beagle-settings.desktop beagle-0.1.1/tools/beagle-settings.desktop
+--- beagle-0.1.1.orig/tools/beagle-settings.desktop	2005-07-26 22:22:11.000000000 +0200
++++ beagle-0.1.1/tools/beagle-settings.desktop	2005-10-24 20:17:07.000000000 +0200
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Encoding=UTF-8
+-X-SuSE-translate=true
+ Name=Search & Indexing
++Name[pl]=Wyszukiwanie i indeksowanie
+ GenericName=Configure Desktop Search & Indexing
+ Comment=Configure search & indexing properties
++Comment[pl]=Konfiguracja wyszukiwania i indeksowania
+ Exec=beagle-settings
+ Icon=gnome-searchtool
+ Type=Application
+-Categories=Application;Settings;AdvancedSettings;Utility;Filesystem;X-Ximian-Settings;
++Categories=GTK:GNOME;Settings;AdvancedSettings;
