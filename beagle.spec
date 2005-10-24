@@ -96,14 +96,14 @@ Statyczne biblioteki Beagle.
 
 %package crawl-system
 Summary:	Beagle crawl system
-#Summary(pl):   ???
+Summary(pl):	System przeszukuj±cy beagle-crawl 
 Group:		Applications/System
 
 %description crawl-system
 Beagle crawl system.
 
-#%description crawl-system -l pl
-# ???
+%description crawl-system -l pl
+System przeszukuj±cy beagle-crawl.
 
 %package -n epiphany-extension-beagle
 Summary:	Epiphany extension - beagle
@@ -165,7 +165,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/*
 
-%dir %{_libdir}/%{name}
 %{_libdir}/%{name}/Filters
 %{_libdir}/%{name}/*.exe
 %{_libdir}/%{name}/*.dll*
@@ -179,13 +178,14 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/libbeagle
 %attr(755,root,root) %{_libdir}/*.so
 %attr(755,root,root) %{_libdir}/%{name}/*.so
+%{_includedir}/libbeagle
 %{_libdir}/*.la
 %{_gtkdocdir}/beagle
 %{_pkgconfigdir}/*
@@ -198,8 +198,8 @@ rm -rf $RPM_BUILD_ROOT
 # not finished yet
 %files crawl-system
 %defattr(644,root,root,755)
-%attr(750,root,root) %config(noreplace) %verify(not size mtime md5) /etc/cron.daily/*
-%attr(750,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/beagle/*
+%attr(750,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/cron.daily/*
+%attr(750,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/*
 %attr(755,root,root) %{_sbindir}/*
 %{_libdir}/beagle-crawl-system
 
