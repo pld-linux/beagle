@@ -12,14 +12,14 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.1.1
+Version:	0.1.2
 Release:	0.9
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.1/%{name}-%{version}.tar.bz2
-# Source0-md5:	e788ed11077e576797a0793631f2fe8b
+# Source0-md5:	944553979659ed21a68bba307126126a
 Patch0:		%{name}-desktop.patch
-PAtch1:		%{name}-crawl.patch
+Patch1:		%{name}-crawl.patch
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
