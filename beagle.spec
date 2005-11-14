@@ -38,7 +38,7 @@ BuildRequires:	libgnome-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.0
-BuildRequires:	mono-csharp >= 1.0.6
+BuildRequires:	mono-csharp >= 1.1.10
 BuildRequires:	mozilla-devel
 BuildRequires:	pkgconfig
 BuildRequires:	sqlite-devel
