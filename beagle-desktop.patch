@@ -7,7 +7,7 @@ diff -aurN beagle-0.1.2.orig/Best/best.desktop beagle-0.1.2/Best/best.desktop
  Encoding=UTF-8
  Name=Beagle Search
  Name[en_CA]=Beagle Search
-+Name[pl]=Wyszykiwanie Beagle
++Name[pl]=Wyszukiwanie Beagle
  GenericName=Desktop Search
  GenericName[en_CA]=Desktop Search
  Exec=best --no-tray
@@ -24,7 +24,7 @@ diff -aurN beagle-0.1.2.orig/tools/beagle-settings.desktop beagle-0.1.2/tools/be
 -X-SuSE-translate=true
  Name=Search & Indexing
  Name[en_CA]=Search & Indexing
-+Name[pl]=Wyszuiwanie i indekswanie
++Name[pl]=Wyszukiwanie i indeksowanie
  GenericName=Configure Desktop Search & Indexing
  GenericName[en_CA]=Configure Desktop Search & Indexing
  Comment=Configure search & indexing properties
