@@ -26,7 +26,7 @@ BuildRequires:	automake
 %{?with_evolution:BuildRequires:	dotnet-evolution-sharp-devel >= 0.6}
 BuildRequires:	dotnet-gecko-sharp2-devel = 0.11
 BuildRequires:	dotnet-gmime-sharp-devel >= 2.1.16-2
-#BuildRequires:	dotnet-gsf-sharp-devel >= 0.2
+BuildRequires:	dotnet-gsf-sharp-devel >= 0.7
 #BuildRequires:	dotnet-gst-sharp-devel
 BuildRequires:	dotnet-gtk-sharp2-gnome-devel
 %{?with_epiphany:BuildRequires:	epiphany-devel >= 1.8}
@@ -49,6 +49,7 @@ Requires:	dotnet-gmime-sharp >= 2.1.16-2
 %{?with_epiphany:Requires:	epiphany-extensions}
 Requires:	gtk+2 >= 2:2.4.0
 Requires:	sqlite
+ExcludeArch:	alpha i386 sparc sparc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
