@@ -169,6 +169,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/1.8/extensions/*.la \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.la
 
 rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{a,la}
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/*.{a,la}
 
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/no
 
@@ -184,9 +185,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 
 %{_libdir}/%{name}/Filters
-%{_libdir}/%{name}/*.exe
+%attr(755,root,root) %{_libdir}/%{name}/*.exe
 %{_libdir}/%{name}/*.dll*
 
 %attr(755,root,root) %{_libdir}/%{name}/beagled-index-helper
@@ -199,12 +201,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %dir %{_libdir}/%{name}
-%attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/*.so
-%attr(755,root,root) %{_libdir}/%{name}/*.so
 %{_includedir}/libbeagle
 %{_libdir}/*.la
 %{_gtkdocdir}/beagle
@@ -213,7 +213,6 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/*.a
-%{_libdir}/%{name}/*.a
 
 # not finished yet
 %files crawl-system
