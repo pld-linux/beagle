@@ -1,35 +1,27 @@
-diff -aurN beagle-0.1.2.orig/Best/best.desktop beagle-0.1.2/Best/best.desktop
---- beagle-0.1.2.orig/Best/best.desktop	2005-11-10 21:22:35.000000000 +0100
-+++ beagle-0.1.2/Best/best.desktop	2005-11-14 17:43:50.000000000 +0100
-@@ -1,11 +1,11 @@
+diff -aurN beagle-0.1.3.orig/Best/best.desktop.in beagle-0.1.3/Best/best.desktop.in
+--- beagle-0.1.3.orig/Best/best.desktop.in	2005-11-04 21:22:24.000000000 +0100
++++ beagle-0.1.3/Best/best.desktop.in	2005-12-08 08:21:04.000000000 +0100
+@@ -1,9 +1,8 @@
  [Desktop Entry]
 -X-SuSE-translate=true
  Encoding=UTF-8
- Name=Beagle Search
- Name[en_CA]=Beagle Search
-+Name[pl]=Wyszukiwanie Beagle
- GenericName=Desktop Search
- GenericName[en_CA]=Desktop Search
+ _Name=Beagle Search
+ _GenericName=Desktop Search
  Exec=best --no-tray
  Icon=best
  Type=Application
 -Categories=GTK;GNOME;Application;Core;Utility;Filesystem;
 +Categories=GTK;GNOME;Utility;
-diff -aurN beagle-0.1.2.orig/tools/beagle-settings.desktop beagle-0.1.2/tools/beagle-settings.desktop
---- beagle-0.1.2.orig/tools/beagle-settings.desktop	2005-11-10 21:22:30.000000000 +0100
-+++ beagle-0.1.2/tools/beagle-settings.desktop	2005-11-14 17:45:49.000000000 +0100
-@@ -1,13 +1,14 @@
+diff -aurN beagle-0.1.3.orig/tools/beagle-settings.desktop.in beagle-0.1.3/tools/beagle-settings.desktop.in
+--- beagle-0.1.3.orig/tools/beagle-settings.desktop.in	2005-11-04 21:22:25.000000000 +0100
++++ beagle-0.1.3/tools/beagle-settings.desktop.in	2005-12-08 08:22:06.000000000 +0100
+@@ -1,10 +1,9 @@
  [Desktop Entry]
  Encoding=UTF-8
 -X-SuSE-translate=true
- Name=Search & Indexing
- Name[en_CA]=Search & Indexing
-+Name[pl]=Wyszukiwanie i indeksowanie
- GenericName=Configure Desktop Search & Indexing
- GenericName[en_CA]=Configure Desktop Search & Indexing
- Comment=Configure search & indexing properties
- Comment[en_CA]=Configure search & indexing properties
-+Comment[pl]=Konfiguracja wyszukiwania i indeksowania
+ _Name=Search & Indexing
+ _GenericName=Configure Desktop Search & Indexing
+ _Comment=Configure search & indexing properties
  Exec=beagle-settings
  Icon=gnome-searchtool
  Type=Application
