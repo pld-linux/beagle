@@ -125,7 +125,7 @@ odwiedzan± stronê.
 
 %package -n python-%{name}
 Summary:	Beagle Python bindings
-Summary(pl):	Wi^Ezania j^Yzyka Python dla Beagle
+Summary(pl):	Wi±zania jêzyka Python dla Beagle
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 %pyrequires_eq  python-libs
@@ -134,7 +134,7 @@ Requires:	%{name} = %{version}-%{release}
 Beagle Python bindings.
 
 %description -n python-%{name} -l pl
-Wi^Ezania j^Yzyka Python dla Beagle.
+Wi±zania jêzyka Python dla Beagle.
 
 %prep
 %setup -q
