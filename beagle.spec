@@ -1,5 +1,5 @@
 #
-# TODO: 
+# TODO:
 #	- finish crawl system
 #       - separtate CLI utilities
 #
@@ -12,12 +12,12 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.1.2
+Version:	0.1.3
 Release:	0.9
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.1/%{name}-%{version}.tar.bz2
-# Source0-md5:	944553979659ed21a68bba307126126a
+# Source0-md5:	d24c10650a5d39758da19a5d067dfee2
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 URL:		http://beaglewiki.org/Main_Page
@@ -41,6 +41,7 @@ BuildRequires:	libxml2-devel >= 2.6.0
 BuildRequires:	mono-csharp >= 1.1.10
 BuildRequires:	mozilla-devel
 BuildRequires:	pkgconfig
+BuildRequires:	python-devel
 BuildRequires:	sqlite-devel
 BuildRequires:	wv-devel >= 1.0.0
 BuildRequires:	zip
@@ -49,6 +50,7 @@ Requires:	dotnet-gmime-sharp >= 2.1.16-2
 %{?with_epiphany:Requires:	epiphany-extensions}
 Requires:	gtk+2 >= 2:2.4.0
 Requires:	sqlite
+
 ExcludeArch:	alpha i386 sparc sparc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -97,7 +99,7 @@ Statyczne biblioteki Beagle.
 
 %package crawl-system
 Summary:	Beagle crawl system
-Summary(pl):	System przeszukuj±cy beagle-crawl 
+Summary(pl):	System przeszukuj±cy beagle-crawl
 Group:		Applications/System
 
 %description crawl-system
@@ -121,6 +123,19 @@ views.
 Rozszerzenie dla Epiphany sprawiaj±ce, ¿e Beagle indeksuje ka¿d±
 odwiedzan± stronê.
 
+%package -n python-%{name}
+Summary:	Beagle Python bindings
+Summary(pl):	Wi^Ezania j^Yzyka Python dla Beagle
+Group:		Libraries/Python
+Requires:	%{name} = %{version}-%{release}
+%pyrequires_eq  python-libs
+
+%description -n python-%{name}
+Beagle Python bindings.
+
+%description -n python-%{name} -l pl
+Wi^Ezania j^Yzyka Python dla Beagle.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -137,20 +152,24 @@ odwiedzan± stronê.
 	--with-html-dir=%{_gtkdocdir} \
 	--%{!?with_epiphany:dis}%{?with_epiphany:en}able-epiphany-extension \
 	--%{!?with_evoultion:dis}%{?with_evolution:en}able-evolution-sharp
-	
+
 %{__make} \
-	MOZILLA_HOME=%{_libdir}/mozilla
+	MOZILLA_HOME=%{_libdir}/mozilla \
+	pythondir=%{py_sitedir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	pythondir=%{py_sitedir}
 
 # Kill useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/1.8/extensions/*.la \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.la
-	
+
+rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{a,la}
+
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/no
 
 %find_lang %{name}
@@ -211,3 +230,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/epiphany/1.8/extensions/libbeagleextension.so*
 %{_libdir}/epiphany/1.8/extensions/*.xml
 %endif
+
+%files -n python-%{name}
+%defattr(644,root,root,755)
+%attr(755,root,root) %{py_sitedir}/*.so
