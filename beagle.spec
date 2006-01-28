@@ -151,7 +151,7 @@ Wi±zania jêzyka Python dla Beagle.
 	--enable-gtk-doc \
 	--with-html-dir=%{_gtkdocdir} \
 	--%{!?with_epiphany:dis}%{?with_epiphany:en}able-epiphany-extension \
-	--%{!?with_evoultion:dis}%{?with_evolution:en}able-evolution-sharp
+	--%{!?with_evolution:dis}%{?with_evolution:en}able-evolution-sharp
 
 %{__make} \
 	MOZILLA_HOME=%{_libdir}/mozilla \
