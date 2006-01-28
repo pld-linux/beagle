@@ -12,32 +12,31 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.1.3
+Version:	0.2.0
 Release:	0.9
 License:	Various
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.1/%{name}-%{version}.tar.bz2
-# Source0-md5:	d24c10650a5d39758da19a5d067dfee2
+Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
+# Source0-md5:	faa236b812db1a8ee72c58d2cb810010
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-%{?with_evolution:BuildRequires:	dotnet-evolution-sharp-devel >= 0.6}
-BuildRequires:	dotnet-gecko-sharp2-devel = 0.11
-BuildRequires:	dotnet-gmime-sharp-devel >= 2.1.16-2
+%{?with_evolution:BuildRequires:	dotnet-evolution-sharp-devel >= 0.10.2}
+BuildRequires:	dotnet-gmime-sharp-devel >= 2.1.19
 BuildRequires:	dotnet-gsf-sharp-devel >= 0.7
 #BuildRequires:	dotnet-gst-sharp-devel
-BuildRequires:	dotnet-gtk-sharp2-gnome-devel
+BuildRequires:	dotnet-gtk-sharp2-gnome-devel >= 2.3.90
 %{?with_epiphany:BuildRequires:	epiphany-devel >= 1.8}
 BuildRequires:	gnome-vfs2-devel
-BuildRequires:	gtk+2-devel >= 2:2.4.0
+BuildRequires:	gtk+2-devel >= 2:2.6.0
 BuildRequires:	gtk-doc
 BuildRequires:	libexif-devel >= 0.5.0
 BuildRequires:	libgnome-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 2.6.0
+BuildRequires:	libxml2-devel >= 2.6.19
 BuildRequires:	mono-csharp >= 1.1.10
 BuildRequires:	mozilla-devel
 BuildRequires:	pkgconfig
@@ -46,9 +45,9 @@ BuildRequires:	sqlite-devel
 BuildRequires:	wv-devel >= 1.0.0
 BuildRequires:	zip
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	dotnet-gmime-sharp >= 2.1.16-2
+Requires:	dotnet-gmime-sharp >= 2.1.19
 %{?with_epiphany:Requires:	epiphany-extensions}
-Requires:	gtk+2 >= 2:2.4.0
+Requires:	gtk+2 >= 2:2.6.0
 Requires:	sqlite
 
 ExcludeArch:	alpha i386 sparc sparc64
@@ -138,8 +137,8 @@ Wi±zania jêzyka Python dla Beagle.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
+#%patch0 -p1
+#%patch1 -p1
 
 %build
 %{__libtoolize}
