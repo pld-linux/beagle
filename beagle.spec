@@ -242,6 +242,7 @@ fi
 %files crawl-system
 %defattr(644,root,root,755)
 %attr(640,root,crontab) %config(noreplace) %verify(not md5 mtime size) /etc/cron.d/*.crontab
+%dir %{_sysconfdir}/beagle
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/*
 %dir %attr(755,beagleindex,beagleindex) %{_var}/cache/beagle
 %dir %attr(755,beagleindex,beagleindex) %{_var}/cache/beagle/index
