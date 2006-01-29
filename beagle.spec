@@ -6,14 +6,15 @@
 %include	/usr/lib/rpm/macros.mono
 #
 # Conditional build:
-%bcond_with	epiphany	# don't build epiphany extension
-%bcond_with	evolution	# don't include evolution support
+%bcond_with	epiphany	# build epiphany extension
+%bcond_with	gsf		# build with libgsf support
+%bcond_without	evolution	# don't include evolution support
 #
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
 Version:	0.2.0
-Release:	0.9
+Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
@@ -25,7 +26,7 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 %{?with_evolution:BuildRequires:	dotnet-evolution-sharp-devel >= 0.10.2}
 BuildRequires:	dotnet-gmime-sharp-devel >= 2.1.19
-BuildRequires:	dotnet-gsf-sharp-devel >= 0.7
+%{?with_gsf:BuildRequires:	dotnet-gsf-sharp-devel >= 0.7}
 #BuildRequires:	dotnet-gst-sharp-devel
 BuildRequires:	dotnet-gtk-sharp2-gnome-devel >= 2.3.90
 %{?with_epiphany:BuildRequires:	epiphany-devel >= 1.8}
@@ -49,7 +50,6 @@ Requires:	dotnet-gmime-sharp >= 2.1.19
 %{?with_epiphany:Requires:	epiphany-extensions}
 Requires:	gtk+2 >= 2:2.6.0
 Requires:	sqlite
-
 ExcludeArch:	alpha i386 sparc sparc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -100,6 +100,9 @@ Statyczne biblioteki Beagle.
 Summary:	Beagle crawl system
 Summary(pl):	System przeszukuj±cy beagle-crawl
 Group:		Applications/System
+Requires:	crondaemon
+Provides:       group(avahi)
+Provides:       user(avahi)
 
 %description crawl-system
 Beagle crawl system.
@@ -137,8 +140,8 @@ Wi±zania jêzyka Python dla Beagle.
 
 %prep
 %setup -q
-#%patch0 -p1
-#%patch1 -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -158,6 +161,7 @@ Wi±zania jêzyka Python dla Beagle.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_var}/cache/beagle/index
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -177,6 +181,16 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/no
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%pre crawl-system
+%groupadd -g 166 -r -f beagleindex
+%useradd -u 166 -r -d /var/cache/beagle -s /bin/false -c "Beagle indexing" -g beagleindex beagleindex
+
+%postun crawl-system
+if [ "$1" = "0" ]; then
+        %userremove beagleindex
+        %groupremove beagleindex
+fi
+
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
 
@@ -185,7 +199,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
-
+%{_libdir}/%{name}/Backends
 %{_libdir}/%{name}/Filters
 %attr(755,root,root) %{_libdir}/%{name}/*.exe
 %{_libdir}/%{name}/*.dll*
@@ -213,11 +227,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/*.a
 
-# not finished yet
 %files crawl-system
 %defattr(644,root,root,755)
-%attr(750,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/cron.daily/*
+%attr(750,root,crontab) %config(noreplace) %verify(not md5 mtime size) /etc/cron.d/*.crontab
 %attr(750,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/*
+%dir %attr(750,beagleindex,beagleindex) %{_var}/cache/beagle
+%dir %attr(750,beagleindex,beagleindex) %{_var}/cache/beagle/index
 %attr(755,root,root) %{_sbindir}/*
 %{_libdir}/beagle-crawl-system
 
