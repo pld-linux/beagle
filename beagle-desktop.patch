@@ -1,20 +1,24 @@
-diff -aurN beagle-0.1.3.orig/Best/best.desktop.in beagle-0.1.3/Best/best.desktop.in
---- beagle-0.1.3.orig/Best/best.desktop.in	2005-11-04 21:22:24.000000000 +0100
-+++ beagle-0.1.3/Best/best.desktop.in	2005-12-08 08:21:04.000000000 +0100
-@@ -1,9 +1,8 @@
+diff -aurN beagle-0.2.0.orig/search/beagle-search.desktop.in beagle-0.2.0/search/beagle-search.desktop.in
+--- beagle-0.2.0.orig/search/beagle-search.desktop.in	2006-01-17 22:45:32.000000000 +0100
++++ beagle-0.2.0/search/beagle-search.desktop.in	2006-01-29 09:02:59.684369000 +0100
+@@ -1,11 +1,11 @@
  [Desktop Entry]
 -X-SuSE-translate=true
- Encoding=UTF-8
- _Name=Beagle Search
- _GenericName=Desktop Search
- Exec=best --no-tray
- Icon=best
+ Name=Search
+ GenericName=Search
+ Icon=tango-system-search
+-Exec=@BINDIR@/beagle-search
++Exec=beagle-search
+ Terminal=false
  Type=Application
--Categories=GTK;GNOME;Application;Core;Utility;Filesystem;
+ StartupNotify=true
+ Encoding=UTF-8
+-Categories=GNOME;Application;Core;Utility;Filesystem;
 +Categories=GTK;GNOME;Utility;
-diff -aurN beagle-0.1.3.orig/tools/beagle-settings.desktop.in beagle-0.1.3/tools/beagle-settings.desktop.in
---- beagle-0.1.3.orig/tools/beagle-settings.desktop.in	2005-11-04 21:22:25.000000000 +0100
-+++ beagle-0.1.3/tools/beagle-settings.desktop.in	2005-12-08 08:22:06.000000000 +0100
++
+diff -aurN beagle-0.2.0.orig/tools/beagle-settings.desktop.in beagle-0.2.0/tools/beagle-settings.desktop.in
+--- beagle-0.2.0.orig/tools/beagle-settings.desktop.in	2005-11-04 21:16:13.000000000 +0100
++++ beagle-0.2.0/tools/beagle-settings.desktop.in	2006-01-29 09:04:53.994369000 +0100
 @@ -1,10 +1,9 @@
  [Desktop Entry]
  Encoding=UTF-8
