@@ -1,29 +1,6 @@
-diff -aurN beagle-0.1.3.orig/tools/beagle-crawl-system.crontab.in beagle-0.1.3/tools/beagle-crawl-system.crontab.in
---- beagle-0.1.3.orig/tools/beagle-crawl-system.crontab.in	2005-08-22 21:02:29.000000000 +0200
-+++ beagle-0.1.3/tools/beagle-crawl-system.crontab.in	2005-12-08 08:25:27.000000000 +0100
-@@ -1,4 +1,3 @@
--SHELL=/bin/sh
--
--# Run at 4:30 am every day
--30 4 * * *	root	@libexecdir@/beagle-crawl-system
-+#!/bin/sh
-+@libexecdir@/beagle-crawl-system
-+exit 0
-diff -aurN beagle-0.1.3.orig/tools/beagle-crawl-system.in beagle-0.1.3/tools/beagle-crawl-system.in
---- beagle-0.1.3.orig/tools/beagle-crawl-system.in	2005-11-22 20:27:00.000000000 +0100
-+++ beagle-0.1.3/tools/beagle-crawl-system.in	2005-12-08 08:26:24.000000000 +0100
-@@ -54,7 +54,7 @@
-                      echo --allow-pattern $CRAWL_DENY_PATTERNS`"
- 
-             export TMPDIR=/tmp
--	    eval nice -n 19 su $CRAWL_USER -c \"@sbindir@/beagle-build-index --target @localstatedir@/cache/beagle/indexes/$CRAWL_INDEX_NAME $OPTIONS $CRAWL_PATHS\" 2> /dev/null
-+	    eval nice -n 19 \"@sbindir@/beagle-build-index --target @localstatedir@/cache/beagle/indexes/$CRAWL_INDEX_NAME $OPTIONS $CRAWL_PATHS\" 2> /dev/null
- 	fi
-     fi
- done
-diff -aurN beagle-0.1.3.orig/tools/crawl-rules/crawl-applications beagle-0.1.3/tools/crawl-rules/crawl-applications
---- beagle-0.1.3.orig/tools/crawl-rules/crawl-applications	2005-08-11 16:42:21.000000000 +0200
-+++ beagle-0.1.3/tools/crawl-rules/crawl-applications	2005-12-08 08:26:48.000000000 +0100
+diff -aurN beagle-0.2.0.orig/tools/crawl-rules/crawl-applications beagle-0.2.0/tools/crawl-rules/crawl-applications
+--- beagle-0.2.0.orig/tools/crawl-rules/crawl-applications	2005-08-11 16:42:21.000000000 +0200
++++ beagle-0.2.0/tools/crawl-rules/crawl-applications	2006-01-29 09:15:47.084369000 +0100
 @@ -2,7 +2,7 @@
  
  CRAWL_INDEX_NAME="applications"
@@ -33,9 +10,9 @@ diff -aurN beagle-0.1.3.orig/tools/crawl-rules/crawl-applications beagle-0.1.3/t
  
  CRAWL_RECURSIVE="yes"
  
-diff -aurN beagle-0.1.3.orig/tools/crawl-rules/crawl-documentation beagle-0.1.3/tools/crawl-rules/crawl-documentation
---- beagle-0.1.3.orig/tools/crawl-rules/crawl-documentation	2005-08-11 23:54:14.000000000 +0200
-+++ beagle-0.1.3/tools/crawl-rules/crawl-documentation	2005-12-08 08:27:10.000000000 +0100
+diff -aurN beagle-0.2.0.orig/tools/crawl-rules/crawl-documentation beagle-0.2.0/tools/crawl-rules/crawl-documentation
+--- beagle-0.2.0.orig/tools/crawl-rules/crawl-documentation	2005-08-12 00:11:48.000000000 +0200
++++ beagle-0.2.0/tools/crawl-rules/crawl-documentation	2006-01-29 09:16:35.484369000 +0100
 @@ -2,7 +2,7 @@
  
  CRAWL_INDEX_NAME="documentation"
@@ -45,10 +22,10 @@ diff -aurN beagle-0.1.3.orig/tools/crawl-rules/crawl-documentation beagle-0.1.3/
  
  CRAWL_ALLOW_PATTERNS="*.xml,*.html,*.docbook"
  
-diff -aurN beagle-0.1.3.orig/tools/Makefile.am beagle-0.1.3/tools/Makefile.am
---- beagle-0.1.3.orig/tools/Makefile.am	2005-12-05 16:08:18.000000000 +0100
-+++ beagle-0.1.3/tools/Makefile.am	2005-12-08 08:28:02.000000000 +0100
-@@ -37,19 +37,18 @@
+diff -aurN beagle-0.2.0.orig/tools/Makefile.am beagle-0.2.0/tools/Makefile.am
+--- beagle-0.2.0.orig/tools/Makefile.am	2006-01-05 22:50:35.000000000 +0100
++++ beagle-0.2.0/tools/Makefile.am	2006-01-29 09:19:12.034369000 +0100
+@@ -37,7 +37,6 @@
  	chmod +x $(CRAWL_WRAPPER)
  
  CRAWL_RULES = \
@@ -56,17 +33,3 @@ diff -aurN beagle-0.1.3.orig/tools/Makefile.am beagle-0.1.3/tools/Makefile.am
  	$(srcdir)/crawl-rules/crawl-applications	\
  	$(srcdir)/crawl-rules/crawl-documentation
  
- libexec_SCRIPTS = $(CRAWL_WRAPPER)
- 
--CRAWL_WRAPPER_CRONTAB = beagle-crawl-system.crontab
-+CRAWL_WRAPPER_CRONTAB = beagle-crawl-system
- CRAWL_WRAPPER_CRONTAB_IN = beagle-crawl-system.crontab.in
- 
- $(CRAWL_WRAPPER_CRONTAB): $(CRAWL_WRAPPER_CRONTAB_IN)
- 	$(WRAPPER_SED) < $(srcdir)/$(CRAWL_WRAPPER_CRONTAB_IN) > $@
- 
--crondir = $(sysconfdir)/cron.d
-+crondir = $(sysconfdir)/cron.daily
- cron_DATA = $(CRAWL_WRAPPER_CRONTAB)
- 
- # FIXME: Per-distribution specific crawl rules
