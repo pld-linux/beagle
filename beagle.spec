@@ -110,6 +110,19 @@ Beagle crawl system.
 %description crawl-system -l pl
 System przeszukuj±cy beagle-crawl.
 
+%package evolution
+Summary:	Beagle Evolution backend
+Summary(pl):	Backend Beagle dla Evolution
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+Requires:	evolution
+
+%description
+Beagle Evolution backend.
+
+%description evolution -l pl
+Backend Beagle dla Evolution.
+
 %package -n epiphany-extension-beagle
 Summary:	Epiphany extension - beagle
 Summary(pl):	Rozszerzenie dla Epiphany - beagle
@@ -199,7 +212,7 @@ fi
 %doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
-%{_libdir}/%{name}/Backends
+%dir %{_libdir}/%{name}/Backends
 %{_libdir}/%{name}/Filters
 %attr(755,root,root) %{_libdir}/%{name}/*.exe
 %{_libdir}/%{name}/*.dll*
@@ -235,6 +248,10 @@ fi
 %dir %attr(755,beagleindex,beagleindex) %{_var}/cache/beagle/index
 %attr(755,root,root) %{_sbindir}/*
 %{_libdir}/beagle-crawl-system
+
+%files evolution
+%defattr(644,root,root,755)
+%{_libdir}/%{name}/Backends/Evolution*
 
 %if %{with epiphany}
 %files -n epiphany-extension-beagle
