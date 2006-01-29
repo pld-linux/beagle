@@ -1,6 +1,5 @@
 #
 # TODO:
-#	- finish crawl system
 #       - separtate CLI utilities
 #
 %include	/usr/lib/rpm/macros.mono
