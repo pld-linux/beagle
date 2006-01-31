@@ -12,15 +12,14 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.2.0
+Version:	0.2.1
 Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	faa236b812db1a8ee72c58d2cb810010
+# Source0-md5:	325ed91dc66fb6be060d0a5f4c8f56dd
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
-Patch2:		%{name}-mono-1.1.12-bludgeon.patch
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -101,8 +100,8 @@ Summary:	Beagle crawl system
 Summary(pl):	System przeszukuj±cy beagle-crawl
 Group:		Applications/System
 Requires:	crondaemon
-Provides:       group(avahi)
-Provides:       user(avahi)
+Provides:       group(beagleindex)
+Provides:       user(beagleindex)
 
 %description crawl-system
 Beagle crawl system.
@@ -155,7 +154,6 @@ Wi±zania jêzyka Python dla Beagle.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p0
 
 %build
 %{__libtoolize}
