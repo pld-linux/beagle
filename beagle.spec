@@ -100,8 +100,8 @@ Summary:	Beagle crawl system
 Summary(pl):	System przeszukuj±cy beagle-crawl
 Group:		Applications/System
 Requires:	crondaemon
-Provides:       group(beagleindex)
-Provides:       user(beagleindex)
+Provides:	group(beagleindex)
+Provides:	user(beagleindex)
 
 %description crawl-system
 Beagle crawl system.
