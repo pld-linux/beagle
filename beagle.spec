@@ -20,6 +20,7 @@ Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.ta
 # Source0-md5:	faa236b812db1a8ee72c58d2cb810010
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
+Patch2:		%{name}-mono-1.1.12-bludgeon.patch
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -154,6 +155,7 @@ Wi±zania jêzyka Python dla Beagle.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p0
 
 %build
 %{__libtoolize}
