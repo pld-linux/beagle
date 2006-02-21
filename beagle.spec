@@ -13,7 +13,7 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
 Version:	0.2.1
-Release:	1
+Release:	2
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
@@ -114,6 +114,7 @@ Summary:	Beagle Evolution backend
 Summary(pl):	Backend Beagle dla Evolution
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
+Requires:	dotnet-evolution-sharp >= 0.10.2-4
 Requires:	evolution
 
 %description
@@ -247,7 +248,7 @@ fi
 %dir %attr(755,beagleindex,beagleindex) %{_var}/cache/beagle
 %dir %attr(755,beagleindex,beagleindex) %{_var}/cache/beagle/index
 %attr(755,root,root) %{_sbindir}/*
-%{_libdir}/beagle-crawl-system
+%attr(755,root,root) %{_libdir}/beagle-crawl-system
 
 %files evolution
 %defattr(644,root,root,755)
