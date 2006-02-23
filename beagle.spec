@@ -1,19 +1,25 @@
 #
 # TODO:
-#       - separtate CLI utilities
+#       - kill bashisms in crawl stuff
 #
 %include	/usr/lib/rpm/macros.mono
 #
 # Conditional build:
 %bcond_with	epiphany	# build epiphany extension
 %bcond_with	gsf		# build with libgsf support
+%bcond_without	apidocs		# don't build API documentation
 %bcond_without	evolution	# don't include evolution support
+%bcond_without	gui		# don't build GNOME based GUI
+#
+%if %{without gui}
+%undefine	with_evolution
+%endif
 #
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
 Version:	0.2.1
-Release:	2
+Release:	2.1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
@@ -27,13 +33,11 @@ BuildRequires:	automake
 BuildRequires:	dotnet-gmime-sharp-devel >= 2.1.19
 %{?with_gsf:BuildRequires:	dotnet-gsf-sharp-devel >= 0.7}
 #BuildRequires:	dotnet-gst-sharp-devel
-BuildRequires:	dotnet-gtk-sharp2-gnome-devel >= 2.3.90
+BuildRequires:	dotnet-gtk-sharp2-devel >= 2.3.90
 %{?with_epiphany:BuildRequires:	epiphany-devel >= 1.8}
-BuildRequires:	gnome-vfs2-devel
 BuildRequires:	gtk+2-devel >= 2:2.6.0
-BuildRequires:	gtk-doc
+%{?with_apidocs:BuildRequires:	gtk-doc}
 BuildRequires:	libexif-devel >= 0.5.0
-BuildRequires:	libgnome-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.19
@@ -44,6 +48,12 @@ BuildRequires:	python-devel
 BuildRequires:	sqlite-devel
 BuildRequires:	wv-devel >= 1.0.0
 BuildRequires:	zip
+# GUI BRs
+%if %{with gui}
+BuildRequires:	dotnet-gtk-sharp2-gnome-devel >= 2.3.90
+BuildRequires:	gnome-vfs2-devel
+BuildRequires:	libgnome-devel
+%endif
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dotnet-gmime-sharp >= 2.1.19
 %{?with_epiphany:Requires:	epiphany-extensions}
@@ -151,6 +161,18 @@ Beagle Python bindings.
 %description -n python-%{name} -l pl
 Wi±zania jêzyka Python dla Beagle.
 
+%package search-gui
+Summary:	GNOME based Beagle GUI
+Summary(pl):	Bazowane na GNOME GUI dla Beagle
+Group:		Libraries/Python
+Requires:	%{name} = %{version}-%{release}
+
+%description search-gui
+GNOME based Beagle GUI.
+
+%description search-gui -l pl
+Bazowane na GNOME GUI dla Beagle.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -163,10 +185,11 @@ Wi±zania jêzyka Python dla Beagle.
 %{__automake}
 %configure \
 	--enable-static \
-	--enable-gtk-doc \
+	%{?with_apidocs:--enable-gtk-doc} \
 	--with-html-dir=%{_gtkdocdir} \
 	--%{!?with_epiphany:dis}%{?with_epiphany:en}able-epiphany-extension \
-	--%{!?with_evolution:dis}%{?with_evolution:en}able-evolution-sharp
+	--%{!?with_evolution:dis}%{?with_evolution:en}able-evolution-sharp \
+	--%{!?with_gui:dis}%{?with_gui:en}able-gui \
 
 %{__make} \
 	MOZILLA_HOME=%{_libdir}/mozilla \
@@ -210,7 +233,16 @@ fi
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/beagle-config
+%attr(755,root,root) %{_bindir}/beagle-exercise-file-system
+%attr(755,root,root) %{_bindir}/beagle-index-info
+%attr(755,root,root) %{_bindir}/beagle-index-url
+%attr(755,root,root) %{_bindir}/beagle-info
+%attr(755,root,root) %{_bindir}/beagle-ping
+%attr(755,root,root) %{_bindir}/beagle-query
+%attr(755,root,root) %{_bindir}/beagle-shutdown
+%attr(755,root,root) %{_bindir}/beagle-status
+%attr(755,root,root) %{_bindir}/beagled
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 %dir %{_libdir}/%{name}/Backends
 %{_libdir}/%{name}/Filters
@@ -219,8 +251,6 @@ fi
 
 %attr(755,root,root) %{_libdir}/%{name}/beagled-index-helper
 
-%{_pixmapsdir}/*.png
-%{_desktopdir}/*.desktop
 %{_mandir}/man*/*
 
 %files libs
@@ -233,7 +263,7 @@ fi
 %attr(755,root,root) %{_libdir}/*.so
 %{_includedir}/libbeagle
 %{_libdir}/*.la
-%{_gtkdocdir}/beagle
+%{?with_apidocs:%{_gtkdocdir}/beagle}
 %{_pkgconfigdir}/*
 
 %files static
@@ -250,9 +280,11 @@ fi
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/beagle-crawl-system
 
+%if %{with evolution}
 %files evolution
 %defattr(644,root,root,755)
 %{_libdir}/%{name}/Backends/Evolution*
+%endif
 
 %if %{with epiphany}
 %files -n epiphany-extension-beagle
@@ -265,3 +297,11 @@ fi
 %files -n python-%{name}
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/*.so
+
+%if %{with gui}
+%files search-gui
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/beagle-search
+%{_pixmapsdir}/*.png
+%{_desktopdir}/*.desktop
+%endif
