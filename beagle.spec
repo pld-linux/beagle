@@ -56,8 +56,6 @@ BuildRequires:	libgnome-devel
 %endif
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dotnet-gmime-sharp >= 2.1.19
-%{?with_epiphany:Requires:	epiphany-extensions}
-Requires:	gtk+2 >= 2:2.6.0
 Requires:	sqlite
 ExcludeArch:	alpha i386 sparc sparc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -138,7 +136,7 @@ Summary:	Epiphany extension - beagle
 Summary(pl):	Rozszerzenie dla Epiphany - beagle
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
-Requires:	epiphany >= 1.2.1
+Requires:	epiphany-extensions
 
 %description -n epiphany-extension-beagle
 Epiphany extension that allows Beagle to index every page the user
@@ -166,6 +164,7 @@ Summary:	GNOME based Beagle GUI
 Summary(pl):	Bazowane na GNOME GUI dla Beagle
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
+Requires:	gtk+2 >= 2:2.6.0
 
 %description search-gui
 GNOME based Beagle GUI.
@@ -243,20 +242,18 @@ fi
 %attr(755,root,root) %{_bindir}/beagle-shutdown
 %attr(755,root,root) %{_bindir}/beagle-status
 %attr(755,root,root) %{_bindir}/beagled
-%attr(755,root,root) %{_libdir}/%{name}/lib*.so*
+%attr(755,root,root) %{_libdir}/%{name}/libbeagleglue.so*
+%attr(755,root,root) %{_libdir}/%{name}/*.exe
+%dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/Backends
 %{_libdir}/%{name}/Filters
-%attr(755,root,root) %{_libdir}/%{name}/*.exe
 %{_libdir}/%{name}/*.dll*
-
 %attr(755,root,root) %{_libdir}/%{name}/beagled-index-helper
-
 %{_mandir}/man*/*
 
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%dir %{_libdir}/%{name}
 
 %files devel
 %defattr(644,root,root,755)
@@ -304,6 +301,7 @@ fi
 %attr(755,root,root) %{_bindir}/beagle-search
 %attr(755,root,root) %{_bindir}/beagle-imlogviewer
 %attr(755,root,root) %{_bindir}/beagle-settings
+%attr(755,root,root) %{_libdir}/%{name}/libbeagleuiglue.so*
 %{_pixmapsdir}/*.png
 %{_desktopdir}/*.desktop
 %endif
