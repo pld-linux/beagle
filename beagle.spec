@@ -302,6 +302,8 @@ fi
 %files search-gui
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/beagle-search
+%attr(755,root,root) %{_bindir}/beagle-imlogviewer
+%attr(755,root,root) %{_bindir}/beagle-settings
 %{_pixmapsdir}/*.png
 %{_desktopdir}/*.desktop
 %endif
