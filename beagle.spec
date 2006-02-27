@@ -10,6 +10,8 @@
 %bcond_without	apidocs		# don't build API documentation
 %bcond_without	evolution	# don't include evolution support
 %bcond_without	gui		# don't build GNOME based GUI
+%bcond_without	python		# don't build python libraries
+%bcond_with	sqlite3		# use sqlite3 instead of sqlite2
 #
 %if %{without gui}
 %undefine	with_evolution
@@ -38,14 +40,22 @@ BuildRequires:	dotnet-gtk-sharp2-devel >= 2.3.90
 BuildRequires:	gtk+2-devel >= 2:2.6.0
 %{?with_apidocs:BuildRequires:	gtk-doc}
 BuildRequires:	libexif-devel >= 0.5.0
+BuildRequires:	librsvg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.19
 BuildRequires:	mono-csharp >= 1.1.10
-BuildRequires:	mozilla-devel
+# not used atm
+#BuildRequires:	mozilla-devel
+%{?with_python:BuildRequires:	python-pygtk-devel}
 BuildRequires:	pkgconfig
+BuildRequires:	perl-XML-Parser
 BuildRequires:	python-devel
+%if %{with sqlite3}
+BuildRequires:	sqlite3-devel >= 3.3.4
+%else
 BuildRequires:	sqlite-devel
+%endif
 BuildRequires:	wv-devel >= 1.0.0
 BuildRequires:	zip
 # GUI BRs
@@ -56,7 +66,11 @@ BuildRequires:	libgnome-devel
 %endif
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dotnet-gmime-sharp >= 2.1.19
+%if %{with sqlite3}
+Requires:	sqlite3
+%else
 Requires:	sqlite
+%endif
 ExcludeArch:	alpha i386 sparc sparc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -291,9 +305,11 @@ fi
 %{_libdir}/epiphany/1.8/extensions/*.xml
 %endif
 
+%if %{with python}
 %files -n python-%{name}
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/*.so
+%endif
 
 %if %{with gui}
 %files search-gui
