@@ -1,0 +1,2 @@
+- 0.2.2, unpacked some *.mdb files
+  added kill_exec_a patch (killed exec -a)
