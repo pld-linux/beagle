@@ -5,12 +5,13 @@
 %include	/usr/lib/rpm/macros.mono
 #
 # Conditional build:
-%bcond_with	epiphany	# build epiphany extension
-%bcond_with	gsf		# build with libgsf support
 %bcond_without	apidocs		# don't build API documentation
 %bcond_without	evolution	# don't include evolution support
+%bcond_without	galago		# build without galago support
+%bcond_without	gsf		# build without libgsf support
 %bcond_without	gui		# don't build GNOME based GUI
 %bcond_without	python		# don't build python libraries
+%bcond_with	epiphany	# build epiphany extension
 %bcond_with	sqlite3		# use sqlite3 instead of sqlite2
 #
 %if %{without gui}
@@ -20,12 +21,12 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.2.2
+Version:	0.2.2.1
 Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	d8c4765a30b9bf989a769f4337f35b3f
+# Source0-md5:	4d153ebc1c72a4d8f05562d387877abb
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-kill_exec_a.patch
@@ -33,6 +34,7 @@ URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 %{?with_evolution:BuildRequires:	dotnet-evolution-sharp-devel >= 0.10.2}
+%{?with_galago:BuildRequires:	dotnet-galago-sharp-devel}
 BuildRequires:	dotnet-gmime-sharp-devel >= 2.1.19
 %{?with_gsf:BuildRequires:	dotnet-gsf-sharp-devel >= 0.7}
 #BuildRequires:	dotnet-gst-sharp-devel
