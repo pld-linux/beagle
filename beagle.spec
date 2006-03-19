@@ -22,7 +22,7 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
 Version:	0.2.3
-Release:	1
+Release:	2
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
@@ -47,7 +47,7 @@ BuildRequires:	librsvg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.19
-BuildRequires:	mono-csharp >= 1.1.10
+BuildRequires:	mono-csharp >= 1.1.13.4
 # not used atm
 #BuildRequires:	mozilla-devel
 %{?with_python:BuildRequires:	python-pygtk-devel}
@@ -59,7 +59,7 @@ BuildRequires:	sqlite3-devel >= 3.3.4
 %else
 BuildRequires:	sqlite-devel
 %endif
-BuildRequires:	wv-devel >= 1.0.0
+BuildRequires:	wv-devel >= 1.2.1
 BuildRequires:	zip
 # GUI BRs
 %if %{with gui}
