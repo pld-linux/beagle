@@ -21,15 +21,16 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.2.3
-Release:	2
+Version:	0.2.4
+Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	4519156a909e8371c59454cab882c616
+# Source0-md5:	bd915b5f7de56c91dae2c26121c586fa
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-kill_exec_a.patch
+Patch3:		%{name}-filtertiff.patch
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -194,6 +195,7 @@ Bazowane na GNOME GUI dla Beagle.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p0
 
 %build
 %{__libtoolize}
@@ -251,7 +253,9 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/beagle-config
+%attr(755,root,root) %{_bindir}/beagled
 %attr(755,root,root) %{_bindir}/beagle-exercise-file-system
+%attr(755,root,root) %{_bindir}/beagle-extract-content
 %attr(755,root,root) %{_bindir}/beagle-index-info
 %attr(755,root,root) %{_bindir}/beagle-index-url
 %attr(755,root,root) %{_bindir}/beagle-info
@@ -259,7 +263,6 @@ fi
 %attr(755,root,root) %{_bindir}/beagle-query
 %attr(755,root,root) %{_bindir}/beagle-shutdown
 %attr(755,root,root) %{_bindir}/beagle-status
-%attr(755,root,root) %{_bindir}/beagled
 %attr(755,root,root) %{_libdir}/%{name}/libbeagleglue.so*
 %attr(755,root,root) %{_libdir}/%{name}/*.exe
 %dir %{_libdir}/%{name}
@@ -287,7 +290,7 @@ fi
 
 %files crawl-system
 %defattr(644,root,root,755)
-%attr(640,root,crontab) %config(noreplace) %verify(not md5 mtime size) /etc/cron.d/*.crontab
+%attr(640,root,crontab) %config(noreplace) %verify(not md5 mtime size) /etc/cron.daily/*
 %dir %{_sysconfdir}/beagle
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/*
 %dir %attr(755,beagleindex,beagleindex) %{_var}/cache/beagle
