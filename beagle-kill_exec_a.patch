@@ -6,7 +6,7 @@ diff -aurN beagle-0.2.4.orig/ImLogViewer/beagle-imlogviewer.in beagle-0.2.4/ImLo
  fi
  
 -MONO_GAC_PREFIX="@gacprefix@${MONO_GAC_PREFIX+:$MONO_GAC_PREFIX}" MONO_PATH="$THIS_PATH${MONO_PATH+:$MONO_PATH}" exec -a beagle-imlogviewer mono $MONO_EXTRA_ARGS --debug $THIS_EXE "$@"
-+MONO_GAC_PREFIX="@gacprefix@${MONO_GAC_PREFIX+:$MONO_GAC_PREFIX}" MONO_PATH="$THIS_PATH${MONO_PATH+:$MONO_PATH}" exec mono $MONO_EXTRA_ARGS --debug $THIS_EXE "$@"
++MONO_GAC_PREFIX="@gacprefix@${MONO_GAC_PREFIX+:$MONO_GAC_PREFIX}" MONO_PATH="$THIS_PATH${MONO_PATH+:$MONO_PATH}" exec mono $--debug $THIS_EXE "$@"
  
 diff -aurN beagle-0.2.4.orig/search/beagle-search.in beagle-0.2.4/search/beagle-search.in
 --- beagle-0.2.4.orig/search/beagle-search.in	2006-03-24 22:55:23.000000000 +0100
@@ -17,7 +17,7 @@ diff -aurN beagle-0.2.4.orig/search/beagle-search.in beagle-0.2.4/search/beagle-
  
 -exec -a beagle-search $BEAGLE_MONO_RUNTIME --debug $MONO_EXTRA_ARGS $THIS_EXE "$@"
 \ Brak znaku nowej linii na koñcu pliku
-+exec --debug $MONO_EXTRA_ARGS $THIS_EXE "$@"
++exec $BEAGLE_MONO_RUNTIME --debug $MONO_EXTRA_ARGS $THIS_EXE "$@"
 diff -aurN beagle-0.2.4.orig/tools/beagle-index-info beagle-0.2.4/tools/beagle-index-info
 --- beagle-0.2.4.orig/tools/beagle-index-info	2006-04-07 18:16:02.000000000 +0200
 +++ beagle-0.2.4/tools/beagle-index-info	2006-04-07 22:09:33.666172344 +0200
