@@ -1,0 +1,11 @@
+diff -aurN beagle-0.2.7.orig/configure.in beagle-0.2.7/configure.in
+--- beagle-0.2.7.orig/configure.in	2006-06-19 19:54:24.000000000 +0200
++++ beagle-0.2.7/configure.in	2006-06-27 22:04:51.686068696 +0200
+@@ -332,7 +332,6 @@
+ 
+ PKG_CHECK_MODULES(BEAGLED,
+ [
+-	shared-mime-info
+ 	gmime-sharp >= $GMIME_SHARP_REQUIRED
+ 	gtk-sharp-2.0 >= $GTK_SHARP_REQUIRED
+ ])
