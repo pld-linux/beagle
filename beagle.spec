@@ -21,36 +21,36 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.2.6
+Version:	0.2.7
 Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	56437aed8e5ac14a1b679755784e1a12
+# Source0-md5:	d4c8e93db23c9b7d06104ce97a182502
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-kill_exec_a.patch
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-%{?with_evolution:BuildRequires:	dotnet-evolution-sharp-devel >= 0.10.2}
-%{?with_galago:BuildRequires:	dotnet-galago-sharp-devel}
+%{?with_evolution:BuildRequires:	dotnet-evolution-sharp-devel >= 0.11.1}
+%{?with_galago:BuildRequires:	dotnet-galago-sharp-devel >= 0.3.2}
 BuildRequires:	dotnet-gmime-sharp-devel >= 2.1.19
 %{?with_gsf:BuildRequires:	dotnet-gsf-sharp-devel >= 0.7}
 #BuildRequires:	dotnet-gst-sharp-devel
-BuildRequires:	dotnet-gtk-sharp2-devel >= 2.3.90
-%{?with_epiphany:BuildRequires:	epiphany-devel >= 1.8}
-BuildRequires:	gtk+2-devel >= 2:2.6.0
-%{?with_apidocs:BuildRequires:	gtk-doc}
-BuildRequires:	libexif-devel >= 0.5.0
-BuildRequires:	librsvg-devel
+BuildRequires:	dotnet-gtk-sharp2-devel >= 2.8.2
+%{?with_epiphany:BuildRequires:	epiphany-devel >= 2.15.3}
+BuildRequires:	gtk+2-devel >= 2:2.9.4
+%{?with_apidocs:BuildRequires:	gtk-doc >= 1.6}
+BuildRequires:	libexif-devel >= 0.6.13
+BuildRequires:	librsvg-devel >= 1:2.15.0
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 2.6.19
-BuildRequires:	mono-csharp >= 1.1.13.4
+BuildRequires:	libxml2-devel >= 1:2.6.26
+BuildRequires:	mono-csharp >= 1.1.13.8
 # not used atm
 #BuildRequires:	mozilla-devel
-%{?with_python:BuildRequires:	python-pygtk-devel}
+%{?with_python:BuildRequires:	python-pygtk-devel >= 2.9.2}
 BuildRequires:	pkgconfig
 BuildRequires:	perl-XML-Parser
 BuildRequires:	python-devel
@@ -60,12 +60,12 @@ BuildRequires:	sqlite3-devel >= 3.3.4
 BuildRequires:	sqlite-devel
 %endif
 BuildRequires:	wv-devel >= 1.2.1
+BuildRequires:	xorg-lib-libXScrnSaver-devel
 BuildRequires:	zip
 # GUI BRs
 %if %{with gui}
-BuildRequires:	dotnet-gtk-sharp2-gnome-devel >= 2.3.90
-BuildRequires:	gnome-vfs2-devel
-BuildRequires:	libgnome-devel
+BuildRequires:	dotnet-gtk-sharp2-gnome-devel >= 2.8.2
+BuildRequires:	gnome-vfs2-devel >= 2.15.2
 %endif
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dotnet-gmime-sharp >= 2.1.19
@@ -139,8 +139,8 @@ Summary:	Beagle Evolution backend
 Summary(pl):	Backend Beagle dla Evolution
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
-Requires:	dotnet-evolution-sharp >= 0.10.2-4
-Requires:	evolution
+Requires:	dotnet-evolution-sharp >= 0.11.1
+Requires:	evolution >= 2.7.3
 
 %description
 Beagle Evolution backend.
@@ -153,7 +153,7 @@ Summary:	Epiphany extension - beagle
 Summary(pl):	Rozszerzenie dla Epiphany - beagle
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
-Requires:	epiphany-extensions
+Requires:	epiphany-extensions >= 2.15.1
 
 %description -n epiphany-extension-beagle
 Epiphany extension that allows Beagle to index every page the user
@@ -181,7 +181,7 @@ Summary:	GNOME based Beagle GUI
 Summary(pl):	Bazowane na GNOME GUI dla Beagle
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
-Requires:	gtk+2 >= 2:2.6.0
+Requires:	gtk+2 >= 2:2.9.4
 
 %description search-gui
 GNOME based Beagle GUI.
