@@ -1,6 +1,6 @@
-diff -aurN beagle-0.2.5.orig/tools/crawl-rules/crawl-applications beagle-0.2.5/tools/crawl-rules/crawl-applications
---- beagle-0.2.5.orig/tools/crawl-rules/crawl-applications	2006-03-22 16:09:41.000000000 +0100
-+++ beagle-0.2.5/tools/crawl-rules/crawl-applications	2006-04-20 20:54:21.746270952 +0200
+diff -aurN beagle-0.2.7.orig/tools/crawl-rules/crawl-applications beagle-0.2.7/tools/crawl-rules/crawl-applications
+--- beagle-0.2.7.orig/tools/crawl-rules/crawl-applications	2006-04-07 18:16:02.000000000 +0200
++++ beagle-0.2.7/tools/crawl-rules/crawl-applications	2006-06-27 20:24:01.295867816 +0200
 @@ -2,7 +2,7 @@
  
  CRAWL_INDEX_NAME="applications"
@@ -10,21 +10,21 @@ diff -aurN beagle-0.2.5.orig/tools/crawl-rules/crawl-applications beagle-0.2.5/t
  
  CRAWL_RECURSIVE="yes"
  
-diff -aurN beagle-0.2.5.orig/tools/crawl-rules/crawl-documentation beagle-0.2.5/tools/crawl-rules/crawl-documentation
---- beagle-0.2.5.orig/tools/crawl-rules/crawl-documentation	2006-04-12 21:41:03.000000000 +0200
-+++ beagle-0.2.5/tools/crawl-rules/crawl-documentation	2006-04-20 20:54:43.089026360 +0200
+diff -aurN beagle-0.2.7.orig/tools/crawl-rules/crawl-documentation beagle-0.2.7/tools/crawl-rules/crawl-documentation
+--- beagle-0.2.7.orig/tools/crawl-rules/crawl-documentation	2006-06-19 19:54:27.000000000 +0200
++++ beagle-0.2.7/tools/crawl-rules/crawl-documentation	2006-06-27 20:25:28.212654456 +0200
 @@ -2,7 +2,7 @@
  
  CRAWL_INDEX_NAME="documentation"
  
--CRAWL_PATHS="/usr/share/doc /usr/local/share/doc /opt/kde3/share/doc /opt/gnome/share/gnome/help /usr/share/gnome/help"
+-CRAWL_PATHS="/usr/share/doc /usr/local/share/doc /opt/kde3/share/doc /opt/gnome/share/gnome/help /usr/share/gnome/help /opt/gnome/share/gtk-doc/html /usr/share/gtk-doc/html /usr/share/gnome/html"
 +CRAWL_PATHS="/usr/share/doc /usr/share/gnome/help"
  
  CRAWL_ALLOW_PATTERNS="*.xml,*.html,*.docbook"
  
-diff -aurN beagle-0.2.5.orig/tools/Makefile.am beagle-0.2.5/tools/Makefile.am
---- beagle-0.2.5.orig/tools/Makefile.am	2006-04-19 02:30:36.000000000 +0200
-+++ beagle-0.2.5/tools/Makefile.am	2006-04-20 20:55:00.322406488 +0200
+diff -aurN beagle-0.2.7.orig/tools/Makefile.am beagle-0.2.7/tools/Makefile.am
+--- beagle-0.2.7.orig/tools/Makefile.am	2006-06-19 19:54:27.000000000 +0200
++++ beagle-0.2.7/tools/Makefile.am	2006-06-27 20:25:56.806307560 +0200
 @@ -35,7 +35,6 @@
  	chmod +x $(CRAWL_WRAPPER)
  
