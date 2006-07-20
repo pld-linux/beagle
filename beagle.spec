@@ -102,6 +102,7 @@ Summary:	Beagle development files
 Summary(pl):	Pliki programistyczne Beagle
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Beagle development files.
