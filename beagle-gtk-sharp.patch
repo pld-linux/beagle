@@ -1,0 +1,12 @@
+diff -urN aaa/beagle-0.2.7/search/Search.cs beagle-0.2.7/search/Search.cs
+--- aaa/beagle-0.2.7/search/Search.cs	2006-06-19 19:54:27.000000000 +0200
++++ beagle-0.2.7/search/Search.cs	2006-08-12 21:40:20.534907250 +0200
+@@ -218,7 +218,7 @@
+ 			}
+ 
+ 			if (IconEnabled) {
+-				tray = new TrayIcon ();
++				tray = new Search.Tray.TrayIcon ();
+ 				tray.Clicked += OnTrayActivated;
+ 				tray.Search += OnTraySearch;
+ 
