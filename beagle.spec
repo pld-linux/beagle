@@ -31,15 +31,16 @@ Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-kill_exec_a.patch
 Patch3:		%{name}-configure.patch
+Patch4:		%{name}-gtk-sharp.patch
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 %{?with_evolution:BuildRequires:	dotnet-evolution-sharp-devel >= 0.11.1}
 %{?with_galago:BuildRequires:	dotnet-galago-sharp-devel >= 0.3.2}
-BuildRequires:	dotnet-gmime-sharp-devel >= 2.1.19
+BuildRequires:	dotnet-gmime-sharp-devel >= 2.2.3
 %{?with_gsf:BuildRequires:	dotnet-gsf-sharp-devel >= 0.7}
 #BuildRequires:	dotnet-gst-sharp-devel
-BuildRequires:	dotnet-gtk-sharp2-devel >= 2.8.2
+BuildRequires:	dotnet-gtk-sharp2-devel >= 2.9.0
 %{?with_epiphany:BuildRequires:	epiphany-devel >= 2.15.3}
 BuildRequires:	gtk+2-devel >= 2:2.9.4
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.6}
@@ -65,11 +66,11 @@ BuildRequires:	xorg-lib-libXScrnSaver-devel
 BuildRequires:	zip
 # GUI BRs
 %if %{with gui}
-BuildRequires:	dotnet-gtk-sharp2-gnome-devel >= 2.8.2
+BuildRequires:	dotnet-gnome-sharp-devel >= 2.15.0
 BuildRequires:	gnome-vfs2-devel >= 2.15.2
 %endif
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	dotnet-gmime-sharp >= 2.1.19
+Requires:	dotnet-gmime-sharp >= 2.2.3
 %if %{with sqlite3}
 Requires:	sqlite3
 %else
@@ -197,6 +198,7 @@ Bazowane na GNOME GUI dla Beagle.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__libtoolize}
