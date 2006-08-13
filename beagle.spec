@@ -22,7 +22,7 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
 Version:	0.2.7
-Release:	2
+Release:	3
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
@@ -32,11 +32,12 @@ Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-kill_exec_a.patch
 Patch3:		%{name}-configure.patch
 Patch4:		%{name}-gtk-sharp.patch
+Patch5:		%{name}-galago05.patch
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 %{?with_evolution:BuildRequires:	dotnet-evolution-sharp-devel >= 0.11.1}
-%{?with_galago:BuildRequires:	dotnet-galago-sharp-devel >= 0.3.2}
+%{?with_galago:BuildRequires:	dotnet-galago-sharp-devel >= 0.5.0}
 BuildRequires:	dotnet-gmime-sharp-devel >= 2.2.3
 %{?with_gsf:BuildRequires:	dotnet-gsf-sharp-devel >= 0.7}
 #BuildRequires:	dotnet-gst-sharp-devel
@@ -123,6 +124,18 @@ Beagle static libraries.
 %description static -l pl
 Statyczne biblioteki Beagle.
 
+%package apidocs
+Summary:	libbeagle API documentation
+Summary(pl):	Dokumentacja API libbeagle
+Group:		Documentation
+Requires:	gtk-doc-common
+
+%description apidocs
+libbeagle API documentation.
+
+%description apidocs -l pl
+Dokumentacja API libbeagle.
+
 %package crawl-system
 Summary:	Beagle crawl system
 Summary(pl):	System przeszukuj±cy beagle-crawl
@@ -199,6 +212,7 @@ Bazowane na GNOME GUI dla Beagle.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %{__libtoolize}
@@ -284,12 +298,17 @@ fi
 %attr(755,root,root) %{_libdir}/*.so
 %{_includedir}/libbeagle
 %{_libdir}/*.la
-%{?with_apidocs:%{_gtkdocdir}/beagle}
 %{_pkgconfigdir}/*
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/*.a
+
+%if %{with apidocs}
+%files apidocs
+%defattr(644,root,root,755)
+%{_gtkdocdir}/beagle
+%endif
 
 %files crawl-system
 %defattr(644,root,root,755)
