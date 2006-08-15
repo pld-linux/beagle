@@ -22,7 +22,7 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
 Version:	0.2.7
-Release:	1
+Release:	2
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
@@ -216,7 +216,7 @@ Bazowane na GNOME GUI dla Beagle.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_var}/cache/beagle/index
+install -d $RPM_BUILD_ROOT%{_var}/cache/beagle/indexes
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -290,11 +290,11 @@ fi
 
 %files crawl-system
 %defattr(644,root,root,755)
-%attr(640,root,crontab) %config(noreplace) %verify(not md5 mtime size) /etc/cron.daily/*
+%attr(750,root,crontab) %config(noreplace) %verify(not md5 mtime size) /etc/cron.daily/*
 %dir %{_sysconfdir}/beagle
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/*
 %dir %attr(755,beagleindex,beagleindex) %{_var}/cache/beagle
-%dir %attr(755,beagleindex,beagleindex) %{_var}/cache/beagle/index
+%dir %attr(755,beagleindex,beagleindex) %{_var}/cache/beagle/indexes
 %attr(755,root,root) %{_sbindir}/*
 
 %if %{with evolution}
