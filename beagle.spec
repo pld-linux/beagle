@@ -11,7 +11,7 @@
 %bcond_without	gsf		# build without libgsf support
 %bcond_without	gui		# don't build GNOME based GUI
 %bcond_without	python		# don't build python libraries
-%bcond_with	epiphany	# build epiphany extension
+%bcond_without	epiphany	# don't build epiphany extension
 %bcond_with	sqlite3		# use sqlite3 instead of sqlite2
 #
 %if %{without gui}
@@ -323,8 +323,8 @@ fi
 %files -n epiphany-extension-beagle
 %defattr(644,root,root,755)
 %doc epiphany-extension/README
-%attr(755,root,root) %{_libdir}/epiphany/1.8/extensions/libbeagleextension.so*
-%{_libdir}/epiphany/1.8/extensions/*.xml
+%attr(755,root,root) %{_libdir}/epiphany/2.14/extensions/libbeagleextension.so*
+%{_libdir}/epiphany/2.14/extensions/*.xml
 %endif
 
 %if %{with python}
