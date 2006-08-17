@@ -21,18 +21,17 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.2.7
-Release:	5
+Version:	0.2.8
+Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	d4c8e93db23c9b7d06104ce97a182502
+# Source0-md5:	477e34538776ca2f4da8f3404edf28dd
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-kill_exec_a.patch
 Patch3:		%{name}-configure.patch
-Patch4:		%{name}-gtk-sharp.patch
-Patch5:		%{name}-galago05.patch
+Patch4:		%{name}-galago05.patch
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -44,16 +43,16 @@ BuildRequires:	dotnet-gmime-sharp-devel >= 2.2.3
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.9.0
 %{?with_epiphany:BuildRequires:	epiphany-devel >= 2.15.3}
 BuildRequires:	gtk+2-devel >= 2:2.9.4
-%{?with_apidocs:BuildRequires:	gtk-doc >= 1.6}
+%{?with_apidocs:BuildRequires:	gtk-doc >= 1.7}
 BuildRequires:	libexif-devel >= 0.6.13
-BuildRequires:	librsvg-devel >= 1:2.15.0
+BuildRequires:	librsvg-devel >= 1:2.15.90
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.26
-BuildRequires:	mono-csharp >= 1.1.13.8
+BuildRequires:	mono-csharp >= 1.1.16.1
 # not used atm
 #BuildRequires:	mozilla-devel
-%{?with_python:BuildRequires:	python-pygtk-devel >= 2.9.2}
+%{?with_python:BuildRequires:	python-pygtk-devel >= 2.9.6}
 BuildRequires:	pkgconfig
 BuildRequires:	perl-XML-Parser
 BuildRequires:	python-devel
@@ -68,7 +67,7 @@ BuildRequires:	zip
 # GUI BRs
 %if %{with gui}
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.15.0
-BuildRequires:	gnome-vfs2-devel >= 2.15.2
+BuildRequires:	gnome-vfs2-devel >= 2.15.91
 %endif
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dotnet-gmime-sharp >= 2.2.3
@@ -77,7 +76,8 @@ Requires:	sqlite3
 %else
 Requires:	sqlite
 %endif
-ExcludeArch:	alpha i386 sparc sparc64
+ExclusiveArch:	%{ix86} %{x8664} arm hppa ia64 ppc s390 s390x sparc sparcv9 sparc64
+ExcludeArch:    i386
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -163,6 +163,18 @@ Beagle Evolution backend.
 %description evolution -l pl
 Backend Beagle dla Evolution.
 
+%package thunderbird
+Summary:	Beagle Mozilla Thunderbird backend
+Summary(pl):	Backend Beagle dla Mozilli Thunderbird
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+
+%description thunderbird
+Beagle Mozilla Thunderbird backend.
+
+%description thunderbird -l pl
+Backend Beagle dla Mozilli Thunderbird.
+
 %package -n epiphany-extension-beagle
 Summary:	Epiphany extension - beagle
 Summary(pl):	Rozszerzenie dla Epiphany - beagle
@@ -196,7 +208,7 @@ Summary:	GNOME based Beagle GUI
 Summary(pl):	Bazowane na GNOME GUI dla Beagle
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
-Requires:	gtk+2 >= 2:2.9.4
+Requires:	gtk+2 >= 2:2.10.1
 
 %description search-gui
 GNOME based Beagle GUI.
@@ -211,7 +223,6 @@ Bazowane na GNOME GUI dla Beagle.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 %build
 %{__libtoolize}
@@ -321,8 +332,12 @@ fi
 %if %{with evolution}
 %files evolution
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/Backends/Evolution*
+%{_libdir}/%{name}/Backends/Evolution*.dll
 %endif
+
+%files thunderbird
+%defattr(644,root,root,755)
+%{_libdir}/%{name}/Backends/Thunderbird*.dll
 
 %if %{with epiphany}
 %files -n epiphany-extension-beagle
@@ -341,8 +356,9 @@ fi
 %if %{with gui}
 %files search-gui
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/beagle-search
+%attr(755,root,root) %{_bindir}/beagle-contactviewer
 %attr(755,root,root) %{_bindir}/beagle-imlogviewer
+%attr(755,root,root) %{_bindir}/beagle-search
 %attr(755,root,root) %{_bindir}/beagle-settings
 %attr(755,root,root) %{_libdir}/%{name}/libbeagleuiglue.so*
 %{_pixmapsdir}/*.png
