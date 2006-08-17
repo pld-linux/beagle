@@ -21,12 +21,12 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.2.7
-Release:	2
+Version:	0.2.8
+Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	d4c8e93db23c9b7d06104ce97a182502
+# Source0-md5:	477e34538776ca2f4da8f3404edf28dd
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-kill_exec_a.patch
@@ -39,12 +39,12 @@ BuildRequires:	automake
 BuildRequires:	dotnet-gmime-sharp-devel >= 2.1.19
 %{?with_gsf:BuildRequires:	dotnet-gsf-sharp-devel >= 0.7}
 #BuildRequires:	dotnet-gst-sharp-devel
-BuildRequires:	dotnet-gtk-sharp2-devel >= 2.3.90
-%{?with_epiphany:BuildRequires:	epiphany-devel >= 1.8}
-BuildRequires:	gtk+2-devel >= 2:2.6.0
+BuildRequires:	dotnet-gtk-sharp2-devel >= 2.8.0
+%{?with_epiphany:BuildRequires:	epiphany-devel >= 2.14.0}
+BuildRequires:	gtk+2-devel >= 2:2.8.0
 %{?with_apidocs:BuildRequires:	gtk-doc}
 BuildRequires:	libexif-devel >= 0.5.0
-BuildRequires:	librsvg-devel
+BuildRequires:	librsvg-devel >= 1:2.14.0
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.6.19
@@ -64,9 +64,9 @@ BuildRequires:	wv-devel >= 1.2.1
 BuildRequires:	zip
 # GUI BRs
 %if %{with gui}
-BuildRequires:	dotnet-gtk-sharp2-gnome-devel >= 2.3.90
-BuildRequires:	gnome-vfs2-devel
-BuildRequires:	libgnome-devel
+BuildRequires:	dotnet-gtk-sharp2-gnome-devel >= 2.8.0
+BuildRequires:	gnome-vfs2-devel >= 2.14.0
+BuildRequires:	libgnome-devel >= 2.14.0
 %endif
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dotnet-gmime-sharp >= 2.1.19
@@ -141,7 +141,7 @@ Summary(pl):	Backend Beagle dla Evolution
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	dotnet-evolution-sharp >= 0.10.2-4
-Requires:	evolution
+Requires:	evolution >= 2.6.0
 
 %description
 Beagle Evolution backend.
@@ -149,12 +149,24 @@ Beagle Evolution backend.
 %description evolution -l pl
 Backend Beagle dla Evolution.
 
+%package thunderbird
+Summary:	Beagle Mozilla Thunderbird backend
+Summary(pl):	Backend Beagle dla Mozilli Thunderbird
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+
+%description thunderbird
+Beagle Mozilla Thunderbird backend.
+
+%description thunderbird -l pl
+Backend Beagle dla Mozilli Thunderbird.
+
 %package -n epiphany-extension-beagle
 Summary:	Epiphany extension - beagle
 Summary(pl):	Rozszerzenie dla Epiphany - beagle
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
-Requires:	epiphany-extensions
+Requires:	epiphany-extensions >= 2.14.0
 
 %description -n epiphany-extension-beagle
 Epiphany extension that allows Beagle to index every page the user
@@ -182,7 +194,7 @@ Summary:	GNOME based Beagle GUI
 Summary(pl):	Bazowane na GNOME GUI dla Beagle
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
-Requires:	gtk+2 >= 2:2.6.0
+Requires:	gtk+2 >= 2:2.8.0
 
 %description search-gui
 GNOME based Beagle GUI.
@@ -300,8 +312,12 @@ fi
 %if %{with evolution}
 %files evolution
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/Backends/Evolution*
+%{_libdir}/%{name}/Backends/Evolution*.dll
 %endif
+
+%files thunderbird
+%defattr(644,root,root,755)
+%{_libdir}/%{name}/Backends/Thunderbird*.dll
 
 %if %{with epiphany}
 %files -n epiphany-extension-beagle
@@ -320,8 +336,9 @@ fi
 %if %{with gui}
 %files search-gui
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/beagle-search
+%attr(755,root,root) %{_bindir}/beagle-contactviewer
 %attr(755,root,root) %{_bindir}/beagle-imlogviewer
+%attr(755,root,root) %{_bindir}/beagle-search
 %attr(755,root,root) %{_bindir}/beagle-settings
 %attr(755,root,root) %{_libdir}/%{name}/libbeagleuiglue.so*
 %{_pixmapsdir}/*.png
