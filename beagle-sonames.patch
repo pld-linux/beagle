@@ -1,0 +1,36 @@
+diff -aurN beagle-0.2.8.orig/beagled/BeagleDaemon.cs beagle-0.2.8/beagled/BeagleDaemon.cs
+--- beagle-0.2.8.orig/beagled/BeagleDaemon.cs	2006-08-17 18:16:27.000000000 +0200
++++ beagle-0.2.8/beagled/BeagleDaemon.cs	2006-08-18 22:08:15.000000000 +0200
+@@ -236,7 +236,7 @@
+ 			}
+ 		}
+ 
+-		[DllImport("libgobject-2.0.so")]
++		[DllImport("libgobject-2.0.so.0")]
+ 		static extern void g_type_init ();
+ 
+ 		public static void DoMain (string[] args)
+diff -aurN beagle-0.2.8.orig/beagled/IndexHelper/IndexHelper.cs beagle-0.2.8/beagled/IndexHelper/IndexHelper.cs
+--- beagle-0.2.8.orig/beagled/IndexHelper/IndexHelper.cs	2006-08-17 18:16:28.000000000 +0200
++++ beagle-0.2.8/beagled/IndexHelper/IndexHelper.cs	2006-08-18 22:07:55.000000000 +0200
+@@ -60,7 +60,7 @@
+ 			}
+ 		}
+ 
+-		[DllImport("libgobject-2.0.so")]
++		[DllImport("libgobject-2.0.so.0")]
+ 		static extern void g_type_init ();
+ 
+ 		private static void DoMain (string [] args)
+diff -aurN beagle-0.2.8.orig/tools/Query.cs beagle-0.2.8/tools/Query.cs
+--- beagle-0.2.8.orig/tools/Query.cs	2006-08-17 18:16:31.000000000 +0200
++++ beagle-0.2.8/tools/Query.cs	2006-08-18 22:08:41.000000000 +0200
+@@ -233,7 +233,7 @@
+ 		}
+ 	}
+ 	
+-	[DllImport("libgobject-2.0.so")]
++	[DllImport("libgobject-2.0.so.0")]
+ 	static extern void g_type_init ();
+ 
+ 	public static void Main (string[] args) 
