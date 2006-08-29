@@ -218,6 +218,19 @@ GNOME based Beagle GUI.
 %description search-gui -l pl
 Bazowane na GNOME GUI dla Beagle.
 
+%package gnome
+Summary:	GNOME session startup integration for Beagle
+Summary(pl):	Integracja funkcji automatycznego startu Beagle z sesj± GNOME
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
+Requires:	gnome-session
+
+%description gnome
+GNOME session startup integration for Beagle
+
+%description gnome -l pl
+Integracja funkcji automatycznego startu Beagle z sesj± GNOME
+
 %prep
 %setup -q
 %patch0 -p1
@@ -301,7 +314,6 @@ fi
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/Backends
 %dir %{_libdir}/%{name}/Filters
-%{_datadir}/gnome/autostart/beagle-autostart.desktop
 %{_libdir}/%{name}/*.dll
 %{_libdir}/%{name}/Filters/*.dll
 %attr(755,root,root) %{_libdir}/%{name}/beagled-index-helper
@@ -372,3 +384,7 @@ fi
 %{_pixmapsdir}/*.png
 %{_desktopdir}/*.desktop
 %endif
+
+%files gnome
+%defattr(644,root,root,755)
+%{_datadir}/gnome/autostart/beagle-autostart.desktop
