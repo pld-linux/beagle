@@ -27,6 +27,7 @@ License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
 # Source0-md5:	477e34538776ca2f4da8f3404edf28dd
+Source1:	%{name}-autostart.desktop
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-kill_exec_a.patch
@@ -246,10 +247,13 @@ Bazowane na GNOME GUI dla Beagle.
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_var}/cache/beagle/indexes
+install -d $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	pythondir=%{py_sitedir}
+
+install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
 
 # Kill useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/1.8/extensions/*.la \
@@ -297,6 +301,7 @@ fi
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/Backends
 %dir %{_libdir}/%{name}/Filters
+%{_datadir}/gnome/autostart/beagle-autostart.desktop
 %{_libdir}/%{name}/*.dll
 %{_libdir}/%{name}/Filters/*.dll
 %attr(755,root,root) %{_libdir}/%{name}/beagled-index-helper
