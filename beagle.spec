@@ -315,6 +315,7 @@ fi
 %dir %{_libdir}/%{name}/Backends
 %dir %{_libdir}/%{name}/Filters
 %{_libdir}/%{name}/*.dll
+%{_libdir}/%{name}/*.dll.config
 %{_libdir}/%{name}/Filters/*.dll
 %attr(755,root,root) %{_libdir}/%{name}/beagled-index-helper
 %{_mandir}/man*/*
