@@ -26,7 +26,6 @@ diff -aurN beagle-0.2.8.orig/search/beagle-search.in beagle-0.2.8/search/beagle-
  fi
  
 -exec -a beagle-search $BEAGLE_MONO_RUNTIME --debug $MONO_EXTRA_ARGS $THIS_EXE "$@"
-\ No newline at end of file
 +exec $BEAGLE_MONO_RUNTIME --debug $MONO_EXTRA_ARGS $THIS_EXE "$@"
 diff -aurN beagle-0.2.8.orig/tools/beagle-index-info beagle-0.2.8/tools/beagle-index-info
 --- beagle-0.2.8.orig/tools/beagle-index-info	2006-04-07 18:16:02.000000000 +0200
