@@ -21,19 +21,18 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.2.8
-Release:	3
+Version:	0.2.9
+Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	477e34538776ca2f4da8f3404edf28dd
+# Source0-md5:	a4d3a7f22fda739f2245b61e77a6a899
 Source1:	%{name}-autostart.desktop
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-kill_exec_a.patch
 Patch3:		%{name}-configure.patch
 Patch4:		%{name}-galago05.patch
-Patch5:		%{name}-sonames.patch
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -42,12 +41,15 @@ BuildRequires:	automake
 BuildRequires:	dotnet-gmime-sharp-devel >= 2.2.3
 %{?with_gsf:BuildRequires:	dotnet-gsf-sharp-devel >= 0.7}
 #BuildRequires:	dotnet-gst-sharp-devel
-BuildRequires:	dotnet-gtk-sharp2-devel >= 2.9.0
-%{?with_epiphany:BuildRequires:	epiphany-devel >= 2.15.3}
-BuildRequires:	gtk+2-devel >= 2:2.9.4
+BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
+%if %{with epiphany} 
+BuildRequires:	epiphany-devel >= 2.14.0
+BuildRequires:	epiphany-devel < 2.15.0
+%endif
+BuildRequires:	gtk+2-devel >= 2:2.10.2
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.7}
 BuildRequires:	libexif-devel >= 0.6.13
-BuildRequires:	librsvg-devel >= 1:2.15.90
+BuildRequires:	librsvg-devel >= 1:2.16.0
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.26
@@ -68,8 +70,8 @@ BuildRequires:	xorg-lib-libXScrnSaver-devel
 BuildRequires:	zip
 # GUI BRs
 %if %{with gui}
-BuildRequires:	dotnet-gnome-sharp-devel >= 2.15.0
-BuildRequires:	gnome-vfs2-devel >= 2.15.91
+BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
+BuildRequires:	gnome-vfs2-devel >= 2.15.92
 %endif
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dotnet-gmime-sharp >= 2.2.3
@@ -157,7 +159,7 @@ Summary(pl):	Backend Beagle dla Evolution
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	dotnet-evolution-sharp >= 0.11.1
-Requires:	evolution >= 2.7.3
+Requires:	evolution >= 2.7.92
 
 %description
 Beagle Evolution backend.
@@ -182,7 +184,7 @@ Summary:	Epiphany extension - beagle
 Summary(pl):	Rozszerzenie dla Epiphany - beagle
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
-Requires:	epiphany-extensions >= 2.15.1
+Requires:	epiphany-extensions >= 2.15.2
 
 %description -n epiphany-extension-beagle
 Epiphany extension that allows Beagle to index every page the user
@@ -210,7 +212,7 @@ Summary:	GNOME based Beagle GUI
 Summary(pl):	Bazowane na GNOME GUI dla Beagle
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
-Requires:	gtk+2 >= 2:2.10.1
+Requires:	gtk+2 >= 2:2.10.2
 
 %description search-gui
 GNOME based Beagle GUI.
@@ -218,18 +220,17 @@ GNOME based Beagle GUI.
 %description search-gui -l pl
 Bazowane na GNOME GUI dla Beagle.
 
-%package gnome
-Summary:	GNOME session startup integration for Beagle
-Summary(pl):	Integracja funkcji automatycznego startu Beagle z sesj± GNOME
+%package startup
+Summary:	Automatic startup integration for Beagle
+Summary(pl):	Integracja funkcji automatycznego startu Beagle
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
-Requires:	gnome-session
 
-%description gnome
-GNOME session startup integration for Beagle
+%description startup
+Automatic session startup integration for Beagle.
 
-%description gnome -l pl
-Integracja funkcji automatycznego startu Beagle z sesj± GNOME
+%description startup -l pl
+Integracja funkcji automatycznego startu Beagle.
 
 %prep
 %setup -q
@@ -238,7 +239,6 @@ Integracja funkcji automatycznego startu Beagle z sesj± GNOME
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 %build
 %{__libtoolize}
@@ -260,13 +260,13 @@ Integracja funkcji automatycznego startu Beagle z sesj± GNOME
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_var}/cache/beagle/indexes
-install -d $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	pythondir=%{py_sitedir}
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart
 
 # Kill useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/1.8/extensions/*.la \
@@ -386,6 +386,6 @@ fi
 %{_desktopdir}/*.desktop
 %endif
 
-%files gnome
+%files startup
 %defattr(644,root,root,755)
-%{_datadir}/gnome/autostart/beagle-autostart.desktop
+%{_sysconfdir}/xdg/autostart/beagle-autostart.desktop
