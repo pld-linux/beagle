@@ -209,7 +209,7 @@ Wi±zania jêzyka Python dla Beagle.
 
 %package search-gui
 Summary:	GNOME based Beagle GUI
-Summary(pl):	Bazowane na GNOME GUI dla Beagle
+Summary(pl):	Oparty na GNOME graficzny interfejs dla Beagle
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 Requires:	gtk+2 >= 2:2.10.2
@@ -218,13 +218,14 @@ Requires:	gtk+2 >= 2:2.10.2
 GNOME based Beagle GUI.
 
 %description search-gui -l pl
-Bazowane na GNOME GUI dla Beagle.
+Oparty na GNOME graficzny interfejs dla Beagle.
 
 %package startup
 Summary:	Automatic startup integration for Beagle
 Summary(pl):	Integracja funkcji automatycznego startu Beagle
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	beagle-gnome
 
 %description startup
 Automatic session startup integration for Beagle.
