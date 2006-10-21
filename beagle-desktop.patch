@@ -7,12 +7,15 @@ diff -aurN beagle-0.2.2.orig/search/beagle-search.desktop.in beagle-0.2.2/search
  _Name=Search
  _GenericName=Search
  _Comment=Search for data on your desktop
-@@ -9,4 +8,4 @@
+@@ -9,7 +8,7 @@
  Type=Application
  StartupNotify=true
  Encoding=UTF-8
 -Categories=GNOME;GTK;Application;Core;Utility;Filesystem;
 +Categories=GTK;GNOME;Utility;
+ X-GNOME-Bugzilla-Bugzilla=GNOME
+ X-GNOME-Bugzilla-Product=beagle
+ X-GNOME-Bugzilla-Component=General
 diff -aurN beagle-0.2.2.orig/tools/beagle-settings.desktop.in beagle-0.2.2/tools/beagle-settings.desktop.in
 --- beagle-0.2.2.orig/tools/beagle-settings.desktop.in	2005-11-04 21:22:25.000000000 +0100
 +++ beagle-0.2.2/tools/beagle-settings.desktop.in	2006-03-06 22:51:47.837672880 +0100
