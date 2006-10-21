@@ -21,12 +21,12 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.2.10
+Version:	0.2.11
 Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	443579117f3aff893a5897d2cb91802d
+# Source0-md5:	d44521a1c321407ba3a3de8bd625ff1f
 Source1:	%{name}-autostart.desktop
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
@@ -42,9 +42,9 @@ BuildRequires:	dotnet-gmime-sharp-devel >= 2.2.3
 #BuildRequires:	dotnet-gst-sharp-devel
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
 %if %{with epiphany} 
-BuildRequires:	epiphany-devel >= 2.16.0
+BuildRequires:	epiphany-devel >= 2.16.1
 %endif
-BuildRequires:	gtk+2-devel >= 2:2.10.3
+BuildRequires:	gtk+2-devel >= 2:2.10.6
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.7}
 BuildRequires:	libexif-devel >= 0.6.13
 BuildRequires:	librsvg-devel >= 1:2.16.0
@@ -54,7 +54,7 @@ BuildRequires:	libxml2-devel >= 1:2.6.26
 BuildRequires:	mono-csharp >= 1.1.16.1
 # not used atm
 #BuildRequires:	mozilla-devel
-%{?with_python:BuildRequires:	python-pygtk-devel >= 2.10.1}
+%{?with_python:BuildRequires:	python-pygtk-devel >= 2.10.3}
 BuildRequires:	pkgconfig
 BuildRequires:	perl-XML-Parser
 BuildRequires:	python-devel
@@ -69,7 +69,7 @@ BuildRequires:	zip
 # GUI BRs
 %if %{with gui}
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
-BuildRequires:	gnome-vfs2-devel >= 2.16.0
+BuildRequires:	gnome-vfs2-devel >= 2.16.1
 %endif
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dotnet-gmime-sharp >= 2.2.3
@@ -182,7 +182,7 @@ Summary:	Epiphany extension - beagle
 Summary(pl):	Rozszerzenie dla Epiphany - beagle
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
-Requires:	epiphany-extensions >= 2.16.0
+Requires:	epiphany-extensions >= 2.16.1
 
 %description -n epiphany-extension-beagle
 Epiphany extension that allows Beagle to index every page the user
@@ -210,7 +210,7 @@ Summary:	GNOME based Beagle GUI
 Summary(pl):	Oparty na GNOME graficzny interfejs dla Beagle
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
-Requires:	gtk+2 >= 2:2.10.3
+Requires:	gtk+2 >= 2:2.10.6
 
 %description search-gui
 GNOME based Beagle GUI.
