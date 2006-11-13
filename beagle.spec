@@ -14,7 +14,7 @@
 %bcond_without	epiphany	# don't build epiphany extension
 %bcond_with	sqlite3		# use sqlite3 instead of sqlite2
 #
-%if %{without gui}
+%if !%{with gui}
 %undefine	with_evolution
 %endif
 #
