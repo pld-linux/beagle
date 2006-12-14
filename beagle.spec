@@ -21,12 +21,12 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.2.13
-Release:	1
+Version:	0.2.14
+Release:	0.9
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	6c159ccb84b4dd1297668ea463805c18
+# Source0-md5:	c3eeccdafc030a7d283bf85b75f5c0bb
 Source1:	%{name}-autostart.desktop
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
@@ -387,3 +387,4 @@ fi
 %files startup
 %defattr(644,root,root,755)
 %{_sysconfdir}/xdg/autostart/beagle-autostart.desktop
+%{_sysconfdir}/xdg/autostart/beagle-search-autostart.desktop
