@@ -1,6 +1,7 @@
 #
 # TODO:
 #       - kill bashisms in crawl stuff
+#	- mozilla extension?
 #
 %include	/usr/lib/rpm/macros.mono
 #
@@ -22,12 +23,11 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
 Version:	0.2.14
-Release:	0.9
+Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
 # Source0-md5:	c3eeccdafc030a7d283bf85b75f5c0bb
-Source1:	%{name}-autostart.desktop
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-kill_exec_a.patch
@@ -35,6 +35,7 @@ Patch3:		%{name}-configure.patch
 URL:		http://beaglewiki.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
+BuildRequires:	chmlib-devel
 %{?with_evolution:BuildRequires:	dotnet-evolution-sharp-devel >= 0.11.1}
 %{?with_galago:BuildRequires:	dotnet-galago-sharp-devel >= 0.5.0}
 BuildRequires:	dotnet-gmime-sharp-devel >= 2.2.3
@@ -258,13 +259,10 @@ Integracja funkcji automatycznego startu Beagle.
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_var}/cache/beagle/indexes
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	pythondir=%{py_sitedir}
-
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart
 
 # Kill useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/2.16/extensions/*.{la,a} \
@@ -386,5 +384,5 @@ fi
 
 %files startup
 %defattr(644,root,root,755)
-%{_sysconfdir}/xdg/autostart/beagle-autostart.desktop
+%{_sysconfdir}/xdg/autostart/beagled-autostart.desktop
 %{_sysconfdir}/xdg/autostart/beagle-search-autostart.desktop
