@@ -160,7 +160,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	dotnet-evolution-sharp >= 0.11.1
 Requires:	evolution >= 2.8.0
 
-%description
+%description evolution
 Beagle Evolution backend.
 
 %description evolution -l pl
