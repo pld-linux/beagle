@@ -1,39 +1,6 @@
-diff -aurN beagle-0.2.2.orig/search/beagle-search.desktop.in beagle-0.2.2/search/beagle-search.desktop.in
---- beagle-0.2.2.orig/search/beagle-search.desktop.in	2006-02-02 20:32:27.000000000 +0100
-+++ beagle-0.2.2/search/beagle-search.desktop.in	2006-03-06 22:51:11.036267544 +0100
-@@ -1,5 +1,4 @@
- [Desktop Entry]
--X-SuSE-translate=true
- _Name=Search
- _GenericName=Search
- _Comment=Search for data on your desktop
-@@ -9,7 +8,7 @@
- Type=Application
- StartupNotify=true
- Encoding=UTF-8
--Categories=GNOME;GTK;Application;Core;Utility;Filesystem;
-+Categories=GTK;GNOME;Utility;
- X-GNOME-Bugzilla-Bugzilla=GNOME
- X-GNOME-Bugzilla-Product=beagle
- X-GNOME-Bugzilla-Component=General
-diff -aurN beagle-0.2.2.orig/tools/beagle-settings.desktop.in beagle-0.2.2/tools/beagle-settings.desktop.in
---- beagle-0.2.2.orig/tools/beagle-settings.desktop.in	2005-11-04 21:22:25.000000000 +0100
-+++ beagle-0.2.2/tools/beagle-settings.desktop.in	2006-03-06 22:51:47.837672880 +0100
-@@ -1,10 +1,9 @@
- [Desktop Entry]
- Encoding=UTF-8
--X-SuSE-translate=true
- _Name=Search & Indexing
- _GenericName=Configure Desktop Search & Indexing
- _Comment=Configure search & indexing properties
- Exec=beagle-settings
- Icon=gnome-searchtool
- Type=Application
--Categories=Application;Settings;AdvancedSettings;Utility;Filesystem;X-Ximian-Settings;
-+Categories=GTK;GNOME;Settings;AdvancedSettings;
-diff -ur beagle-0.2.14/beagled/beagled-autostart.desktop beagle-0.2.14-autostart/beagled/beagled-autostart.desktop
---- beagle-0.2.14/beagled/beagled-autostart.desktop	2006-12-04 20:41:16.000000000 +0100
-+++ beagle-0.2.14-autostart/beagled/beagled-autostart.desktop	2006-12-15 14:14:55.000000000 +0100
+diff -ur beagle-0.2.15.1/beagled/beagled-autostart.desktop beagle-0.2.15.1-desktop/beagled/beagled-autostart.desktop
+--- beagle-0.2.15.1/beagled/beagled-autostart.desktop	2007-01-24 18:52:36.000000000 +0100
++++ beagle-0.2.15.1-desktop/beagled/beagled-autostart.desktop	2007-01-27 09:24:41.000000000 +0100
 @@ -1,8 +1,13 @@
  [Desktop Entry]
  Encoding=UTF-8
@@ -49,3 +16,39 @@ diff -ur beagle-0.2.14/beagled/beagled-autostart.desktop beagle-0.2.14-autostart
  X-KDE-autostart-after=panel
  X-KDE-StartupNotify=false
 +X-GNOME-Autostart-enabled=true
+diff -ur beagle-0.2.15.1/search/beagle-search.desktop.in beagle-0.2.15.1-desktop/search/beagle-search.desktop.in
+--- beagle-0.2.15.1/search/beagle-search.desktop.in	2007-01-26 00:39:00.000000000 +0100
++++ beagle-0.2.15.1-desktop/search/beagle-search.desktop.in	2007-01-27 09:24:41.000000000 +0100
+@@ -1,5 +1,4 @@
+ [Desktop Entry]
+-X-SuSE-translate=true
+ _Name=Search
+ _GenericName=Search
+ _Comment=Search for data on your desktop
+@@ -9,7 +8,7 @@
+ Type=Application
+ StartupNotify=true
+ Encoding=UTF-8
+-Categories=GNOME;GTK;Application;Core;Utility;Filesystem;
++Categories=GTK;GNOME;Utility;
+ X-GNOME-Bugzilla-Bugzilla=GNOME
+ X-GNOME-Bugzilla-Product=beagle
+ X-GNOME-Bugzilla-Component=General
+diff -ur beagle-0.2.15.1/tools/beagle-settings.desktop.in beagle-0.2.15.1-desktop/tools/beagle-settings.desktop.in
+--- beagle-0.2.15.1/tools/beagle-settings.desktop.in	2007-01-26 00:39:00.000000000 +0100
++++ beagle-0.2.15.1-desktop/tools/beagle-settings.desktop.in	2007-01-27 09:26:36.000000000 +0100
+@@ -1,13 +1,12 @@
+ [Desktop Entry]
+ Encoding=UTF-8
+-X-SuSE-translate=true
+ _Name=Search & Indexing
+ _GenericName=Configure Desktop Search & Indexing
+ _Comment=Configure search & indexing properties
+ Exec=beagle-settings
+ Icon=system-search
+ Type=Application
+-Categories=Application;Settings;AdvancedSettings;Utility;Filesystem;X-Ximian-Settings;
++Categories=GTK;GNOME;Settings;AdvancedSettings;
+ X-GNOME-Bugzilla-Bugzilla=GNOME
+ X-GNOME-Bugzilla-Product=beagle
+ X-GNOME-Bugzilla-Component=General
