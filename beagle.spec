@@ -14,6 +14,7 @@
 %bcond_without	python		# don't build python libraries
 %bcond_without	epiphany	# don't build epiphany extension
 %bcond_with	sqlite3		# use sqlite3 instead of sqlite2
+%bcond_with	thunderbird	# use Thunderbird backend
 #
 %if !%{with gui}
 %undefine	with_evolution
@@ -22,12 +23,12 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.2.14
+Version:	0.2.15.1
 Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	c3eeccdafc030a7d283bf85b75f5c0bb
+# Source0-md5:	91fb5a499467b3ef468a5f003830c9fa
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-kill_exec_a.patch
@@ -52,7 +53,7 @@ BuildRequires:	librsvg-devel >= 1:2.16.0
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.26
-BuildRequires:	mono-csharp >= 1.1.16.1
+BuildRequires:	mono-csharp >= 1.1.18
 # not used atm
 #BuildRequires:	mozilla-devel
 %{?with_python:BuildRequires:	python-pygtk-devel >= 2.10.3}
@@ -64,7 +65,7 @@ BuildRequires:	sqlite3-devel >= 3.3.4
 %else
 BuildRequires:	sqlite-devel
 %endif
-BuildRequires:	wv-devel >= 1.2.1
+BuildRequires:	wv-devel >= 1.2.4
 BuildRequires:	xorg-lib-libXScrnSaver-devel
 BuildRequires:	zip
 # GUI BRs
@@ -251,6 +252,7 @@ Integracja funkcji automatycznego startu Beagle.
 	--%{!?with_epiphany:dis}%{?with_epiphany:en}able-epiphany-extension \
 	--%{!?with_evolution:dis}%{?with_evolution:en}able-evolution-sharp \
 	--%{!?with_gui:dis}%{?with_gui:en}able-gui \
+	--%{!?with_thunderbird:dis}%{?with_thunderbird:en}able-thunderbird
 
 %{__make} \
 	MOZILLA_HOME=%{_libdir}/mozilla \
@@ -296,6 +298,7 @@ fi
 %doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/beagle-config
 %attr(755,root,root) %{_bindir}/beagled
+%attr(755,root,root) %{_bindir}/beagle-doc-extractor
 %attr(755,root,root) %{_bindir}/beagle-exercise-file-system
 %attr(755,root,root) %{_bindir}/beagle-extract-content
 %attr(755,root,root) %{_bindir}/beagle-index-info
@@ -352,9 +355,12 @@ fi
 %{_libdir}/%{name}/Backends/Evolution*.dll
 %endif
 
+%if %{with thunderbird}
 %files thunderbird
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/beagle-contactviewer
 %{_libdir}/%{name}/Backends/Thunderbird*.dll
+%endif
 
 %if %{with epiphany}
 %files -n epiphany-extension-beagle
@@ -373,7 +379,6 @@ fi
 %if %{with gui}
 %files search-gui
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/beagle-contactviewer
 %attr(755,root,root) %{_bindir}/beagle-imlogviewer
 %attr(755,root,root) %{_bindir}/beagle-search
 %attr(755,root,root) %{_bindir}/beagle-settings
