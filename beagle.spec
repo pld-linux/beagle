@@ -33,7 +33,7 @@ Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-kill_exec_a.patch
 Patch3:		%{name}-configure.patch
-URL:		http://beaglewiki.org/Main_Page
+URL:		http://beagle-project.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	chmlib-devel
