@@ -24,7 +24,7 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
 Version:	0.2.15.1
-Release:	1
+Release:	2
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
@@ -179,6 +179,21 @@ Beagle Mozilla Thunderbird backend.
 %description thunderbird -l pl
 Backend Beagle dla Mozilli Thunderbird.
 
+%package -n mozilla-firefox-extension-beagle
+Summary:	Mozilla Firefox extension - beagle
+Summary(pl):	Rozszerzenie dla Mozilla Firefox - beagle
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+Requires:	mozilla-firefox
+
+%description -n mozilla-firefox-extension-beagle
+Mozilla Firefox extension that allows Beagle to index every page the
+user views.
+
+%description -n mozilla-firefox-extension-beagle -l pl
+Rozszerzenie dla Mozilla Firefox sprawiaj±ce, ¿e Beagle indeksuje
+ka¿d± odwiedzan± stronê.
+
 %package -n epiphany-extension-beagle
 Summary:	Epiphany extension - beagle
 Summary(pl):	Rozszerzenie dla Epiphany - beagle
@@ -265,6 +280,11 @@ install -d $RPM_BUILD_ROOT%{_var}/cache/beagle/indexes
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	pythondir=%{py_sitedir}
+
+dest=$RPM_BUILD_ROOT%{_datadir}/mozilla-firefox/extensions/\{fda00e13-8c62-4f63-9d19-d168115b11ca\}
+install -d $dest $dest/chrome
+install mozilla-extension/{chrome.manifest,install.rdf} $dest
+install mozilla-extension/chrome/beagle.jar $dest/chrome
 
 # Kill useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/2.16/extensions/*.{la,a} \
@@ -361,6 +381,10 @@ fi
 %attr(755,root,root) %{_bindir}/beagle-contactviewer
 %{_libdir}/%{name}/Backends/Thunderbird*.dll
 %endif
+
+%files -n mozilla-firefox-extension-beagle
+%defattr(644,root,root,755)
+%{_datadir}/mozilla-firefox/extensions/{fda00e13-8c62-4f63-9d19-d168115b11ca}
 
 %if %{with epiphany}
 %files -n epiphany-extension-beagle
