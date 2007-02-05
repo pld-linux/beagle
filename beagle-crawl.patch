@@ -33,23 +33,13 @@ diff -aurN beagle-0.2.7.orig/tools/Makefile.am beagle-0.2.7/tools/Makefile.am
  	$(srcdir)/crawl-rules/crawl-applications	\
  	$(srcdir)/crawl-rules/crawl-documentation
  
---- beagle-0.2.15.1/tools/beagle-crawl-system~	2007-01-24 18:56:19.000000000 +0100
-+++ beagle-0.2.15.1/tools/beagle-crawl-system	2007-02-05 17:39:20.000000000 +0100
-@@ -36,7 +36,7 @@
- MONO_SHARED_DIR=`mktemp -d -p $TMPDIR .beagleindexwapi.XXXXXXXXXX`|| ( echo "Can't create wapi directory!" ; exit 1 )
- chown $CRAWL_USER $MONO_SHARED_DIR
- 
--for crawl_file in /home/joe/build/beagle/etc/beagle/crawl-*; do 
-+for crawl_file in /etc/beagle/crawl-*; do 
-     unset CRAWL_ENABLED CRAWL_DISABLE_FILTERING CRAWL_RECURSIVE CRAWL_CACHE_TEXT CRAWL_ALLOW_PATTERNS CRAWL_DENY_PATTERNS CRAWL_PATHS CRAWL_INDEX_NAME
- 
-     if [ -f $crawl_file ] ; then
-@@ -67,7 +67,7 @@
-                 IONICE="$IONICE -c 3"
-             fi
- 
--	    eval $IONICE su -s /bin/bash $CRAWL_USER -c \"MONO_SHARED_DIR=$MONO_SHARED_DIR /home/joe/build/beagle/sbin/beagle-build-index --target /home/joe/build/beagle/var/cache/beagle/indexes/$CRAWL_INDEX_NAME $OPTIONS $CRAWL_PATHS\" > /dev/null 2>&1
-+	    eval $IONICE su -s /bin/bash $CRAWL_USER -c \"MONO_SHARED_DIR=$MONO_SHARED_DIR /usr/sbin/beagle-build-index --target /var/cache/beagle/indexes/$CRAWL_INDEX_NAME $OPTIONS $CRAWL_PATHS\" > /dev/null 2>&1
- 	fi
-     fi
- done
+--- beagle-0.2.15.1/configure.in~	2007-02-05 18:07:14.000000000 +0100
++++ beagle-0.2.15.1/configure.in	2007-02-05 18:25:44.000000000 +0100
+@@ -696,6 +696,7 @@
+ Filters/Makefile
+ tools/Makefile
+ tools/beagle-settings.desktop.in
++tools/beagle-crawl-system
+ search/Makefile
+ search/beagle-search.desktop.in
+ ImLogViewer/Makefile
