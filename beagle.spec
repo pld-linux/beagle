@@ -184,7 +184,7 @@ Summary:	Mozilla Firefox extension - beagle
 Summary(pl):	Rozszerzenie dla Mozilla Firefox - beagle
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
-Requires:	mozilla-firefox
+Requires:	mozilla-firefox >= 2.0.0.1-2
 
 %description -n mozilla-firefox-extension-beagle
 Mozilla Firefox extension that allows Beagle to index every page the
