@@ -34,16 +34,14 @@ diff -ur beagle-0.2.15.1/search/beagle-search.desktop.in beagle-0.2.15.1-desktop
  X-GNOME-Bugzilla-Bugzilla=GNOME
  X-GNOME-Bugzilla-Product=beagle
  X-GNOME-Bugzilla-Component=General
-diff -ur beagle-0.2.15.1/tools/beagle-settings.desktop.in beagle-0.2.15.1-desktop/tools/beagle-settings.desktop.in
---- beagle-0.2.15.1/tools/beagle-settings.desktop.in	2007-01-26 00:39:00.000000000 +0100
-+++ beagle-0.2.15.1-desktop/tools/beagle-settings.desktop.in	2007-01-27 09:26:36.000000000 +0100
-@@ -1,13 +1,12 @@
+--- beagle-0.2.16/tools/beagle-settings.desktop.in~	2007-02-10 23:17:37.000000000 +0100
++++ beagle-0.2.16/tools/beagle-settings.desktop.in	2007-02-10 23:22:36.000000000 +0100
+@@ -1,12 +1,11 @@
  [Desktop Entry]
  Encoding=UTF-8
 -X-SuSE-translate=true
  _Name=Search & Indexing
- _GenericName=Configure Desktop Search & Indexing
- _Comment=Configure search & indexing properties
+ _GenericName=Configure Desktop Search
  Exec=beagle-settings
  Icon=system-search
  Type=Application

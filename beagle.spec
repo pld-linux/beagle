@@ -23,16 +23,17 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl):	Beagle - podsystem indeksuj±cy
 Name:		beagle
-Version:	0.2.15.1
-Release:	2
+Version:	0.2.16
+Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	91fb5a499467b3ef468a5f003830c9fa
+# Source0-md5:	4818ca64dc2311208a27f03893836e49
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-kill_exec_a.patch
 Patch3:		%{name}-configure.patch
+Patch4:		%{name}-unary-plus-string.patch
 URL:		http://beagle-project.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -53,7 +54,7 @@ BuildRequires:	librsvg-devel >= 1:2.16.0
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.26
-BuildRequires:	mono-csharp >= 1.1.18
+BuildRequires:	mono-csharp >= 1.1.13.5
 # not used atm
 #BuildRequires:	mozilla-devel
 %{?with_python:BuildRequires:	python-pygtk-devel >= 2.10.3}
@@ -254,6 +255,7 @@ Integracja funkcji automatycznego startu Beagle.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__libtoolize}
