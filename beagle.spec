@@ -21,7 +21,7 @@
 %endif
 #
 Summary:	Beagle - An indexing subsystem
-Summary(pl):	Beagle - podsystem indeksuj±cy
+Summary(pl.UTF-8):   Beagle - podsystem indeksujÄ…cy
 Name:		beagle
 Version:	0.2.16
 Release:	1
@@ -89,60 +89,60 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Beagle is an indexing sub-system and search aggregator built on top of
 Lucene.Net.
 
-%description -l pl
-Beagle jest podsystemem indeksuj±cym i wyszukuj±cym zbudowanym na
+%description -l pl.UTF-8
+Beagle jest podsystemem indeksujÄ…cym i wyszukujÄ…cym zbudowanym na
 bazie Lucene.Net.
 
 %package libs
 Summary:	Beagle libraries
-Summary(pl):	Bibiloteki Beagle
+Summary(pl.UTF-8):   Bibiloteki Beagle
 Group:		Libraries
 
 %description libs
 Beagle libraries.
 
-%description libs -l pl
+%description libs -l pl.UTF-8
 Bibiloteki Beagle.
 
 %package devel
 Summary:	Beagle development files
-Summary(pl):	Pliki programistyczne Beagle
+Summary(pl.UTF-8):   Pliki programistyczne Beagle
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 
 %description devel
 Beagle development files.
 
-%description devel -l pl
+%description devel -l pl.UTF-8
 Pliki programistyczne Beagle.
 
 %package static
 Summary:	Beagle static libraries
-Summary(pl):	Statyczne biblioteki Beagle
+Summary(pl.UTF-8):   Statyczne biblioteki Beagle
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Beagle static libraries.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczne biblioteki Beagle.
 
 %package apidocs
 Summary:	libbeagle API documentation
-Summary(pl):	Dokumentacja API libbeagle
+Summary(pl.UTF-8):   Dokumentacja API libbeagle
 Group:		Documentation
 Requires:	gtk-doc-common
 
 %description apidocs
 libbeagle API documentation.
 
-%description apidocs -l pl
+%description apidocs -l pl.UTF-8
 Dokumentacja API libbeagle.
 
 %package crawl-system
 Summary:	Beagle crawl system
-Summary(pl):	System przeszukuj±cy beagle-crawl
+Summary(pl.UTF-8):   System przeszukujÄ…cy beagle-crawl
 Group:		Applications/System
 Requires:	crondaemon
 Provides:	group(beagleindex)
@@ -151,12 +151,12 @@ Provides:	user(beagleindex)
 %description crawl-system
 Beagle crawl system.
 
-%description crawl-system -l pl
-System przeszukuj±cy beagle-crawl.
+%description crawl-system -l pl.UTF-8
+System przeszukujÄ…cy beagle-crawl.
 
 %package evolution
 Summary:	Beagle Evolution backend
-Summary(pl):	Backend Beagle dla Evolution
+Summary(pl.UTF-8):   Backend Beagle dla Evolution
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	dotnet-evolution-sharp >= 0.11.1
@@ -165,24 +165,24 @@ Requires:	evolution >= 2.8.0
 %description evolution
 Beagle Evolution backend.
 
-%description evolution -l pl
+%description evolution -l pl.UTF-8
 Backend Beagle dla Evolution.
 
 %package thunderbird
 Summary:	Beagle Mozilla Thunderbird backend
-Summary(pl):	Backend Beagle dla Mozilli Thunderbird
+Summary(pl.UTF-8):   Backend Beagle dla Mozilli Thunderbird
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 
 %description thunderbird
 Beagle Mozilla Thunderbird backend.
 
-%description thunderbird -l pl
+%description thunderbird -l pl.UTF-8
 Backend Beagle dla Mozilli Thunderbird.
 
 %package -n mozilla-firefox-extension-beagle
 Summary:	Mozilla Firefox extension - beagle
-Summary(pl):	Rozszerzenie dla Mozilla Firefox - beagle
+Summary(pl.UTF-8):   Rozszerzenie dla Mozilla Firefox - beagle
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	mozilla-firefox >= 2.0.0.1-2
@@ -191,13 +191,13 @@ Requires:	mozilla-firefox >= 2.0.0.1-2
 Mozilla Firefox extension that allows Beagle to index every page the
 user views.
 
-%description -n mozilla-firefox-extension-beagle -l pl
-Rozszerzenie dla Mozilla Firefox sprawiaj±ce, ¿e Beagle indeksuje
-ka¿d± odwiedzan± stronê.
+%description -n mozilla-firefox-extension-beagle -l pl.UTF-8
+Rozszerzenie dla Mozilla Firefox sprawiajÄ…ce, Å¼e Beagle indeksuje
+kaÅ¼dÄ… odwiedzanÄ… stronÄ™.
 
 %package -n epiphany-extension-beagle
 Summary:	Epiphany extension - beagle
-Summary(pl):	Rozszerzenie dla Epiphany - beagle
+Summary(pl.UTF-8):   Rozszerzenie dla Epiphany - beagle
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	epiphany-extensions >= 2.16.1
@@ -206,13 +206,13 @@ Requires:	epiphany-extensions >= 2.16.1
 Epiphany extension that allows Beagle to index every page the user
 views.
 
-%description -n epiphany-extension-beagle -l pl
-Rozszerzenie dla Epiphany sprawiaj±ce, ¿e Beagle indeksuje ka¿d±
-odwiedzan± stronê.
+%description -n epiphany-extension-beagle -l pl.UTF-8
+Rozszerzenie dla Epiphany sprawiajÄ…ce, Å¼e Beagle indeksuje kaÅ¼dÄ…
+odwiedzanÄ… stronÄ™.
 
 %package -n python-%{name}
 Summary:	Beagle Python bindings
-Summary(pl):	Wi±zania jêzyka Python dla Beagle
+Summary(pl.UTF-8):   WiÄ…zania jÄ™zyka Python dla Beagle
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 %pyrequires_eq  python-libs
@@ -220,12 +220,12 @@ Requires:	%{name} = %{version}-%{release}
 %description -n python-%{name}
 Beagle Python bindings.
 
-%description -n python-%{name} -l pl
-Wi±zania jêzyka Python dla Beagle.
+%description -n python-%{name} -l pl.UTF-8
+WiÄ…zania jÄ™zyka Python dla Beagle.
 
 %package search-gui
 Summary:	GNOME based Beagle GUI
-Summary(pl):	Oparty na GNOME graficzny interfejs dla Beagle
+Summary(pl.UTF-8):   Oparty na GNOME graficzny interfejs dla Beagle
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 Requires:	gtk+2 >= 2:2.10.6
@@ -233,12 +233,12 @@ Requires:	gtk+2 >= 2:2.10.6
 %description search-gui
 GNOME based Beagle GUI.
 
-%description search-gui -l pl
+%description search-gui -l pl.UTF-8
 Oparty na GNOME graficzny interfejs dla Beagle.
 
 %package startup
 Summary:	Automatic startup integration for Beagle
-Summary(pl):	Integracja funkcji automatycznego startu Beagle
+Summary(pl.UTF-8):   Integracja funkcji automatycznego startu Beagle
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	beagle-gnome
@@ -246,7 +246,7 @@ Obsoletes:	beagle-gnome
 %description startup
 Automatic session startup integration for Beagle.
 
-%description startup -l pl
+%description startup -l pl.UTF-8
 Integracja funkcji automatycznego startu Beagle.
 
 %prep
