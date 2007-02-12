@@ -21,7 +21,7 @@
 %endif
 #
 Summary:	Beagle - An indexing subsystem
-Summary(pl.UTF-8):   Beagle - podsystem indeksujący
+Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
 Version:	0.2.16
 Release:	1
@@ -95,7 +95,7 @@ bazie Lucene.Net.
 
 %package libs
 Summary:	Beagle libraries
-Summary(pl.UTF-8):   Bibiloteki Beagle
+Summary(pl.UTF-8):	Bibiloteki Beagle
 Group:		Libraries
 
 %description libs
@@ -106,7 +106,7 @@ Bibiloteki Beagle.
 
 %package devel
 Summary:	Beagle development files
-Summary(pl.UTF-8):   Pliki programistyczne Beagle
+Summary(pl.UTF-8):	Pliki programistyczne Beagle
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 
@@ -118,7 +118,7 @@ Pliki programistyczne Beagle.
 
 %package static
 Summary:	Beagle static libraries
-Summary(pl.UTF-8):   Statyczne biblioteki Beagle
+Summary(pl.UTF-8):	Statyczne biblioteki Beagle
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -130,7 +130,7 @@ Statyczne biblioteki Beagle.
 
 %package apidocs
 Summary:	libbeagle API documentation
-Summary(pl.UTF-8):   Dokumentacja API libbeagle
+Summary(pl.UTF-8):	Dokumentacja API libbeagle
 Group:		Documentation
 Requires:	gtk-doc-common
 
@@ -142,7 +142,7 @@ Dokumentacja API libbeagle.
 
 %package crawl-system
 Summary:	Beagle crawl system
-Summary(pl.UTF-8):   System przeszukujący beagle-crawl
+Summary(pl.UTF-8):	System przeszukujący beagle-crawl
 Group:		Applications/System
 Requires:	crondaemon
 Provides:	group(beagleindex)
@@ -156,7 +156,7 @@ System przeszukujący beagle-crawl.
 
 %package evolution
 Summary:	Beagle Evolution backend
-Summary(pl.UTF-8):   Backend Beagle dla Evolution
+Summary(pl.UTF-8):	Backend Beagle dla Evolution
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	dotnet-evolution-sharp >= 0.11.1
@@ -170,7 +170,7 @@ Backend Beagle dla Evolution.
 
 %package thunderbird
 Summary:	Beagle Mozilla Thunderbird backend
-Summary(pl.UTF-8):   Backend Beagle dla Mozilli Thunderbird
+Summary(pl.UTF-8):	Backend Beagle dla Mozilli Thunderbird
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 
@@ -182,7 +182,7 @@ Backend Beagle dla Mozilli Thunderbird.
 
 %package -n mozilla-firefox-extension-beagle
 Summary:	Mozilla Firefox extension - beagle
-Summary(pl.UTF-8):   Rozszerzenie dla Mozilla Firefox - beagle
+Summary(pl.UTF-8):	Rozszerzenie dla Mozilla Firefox - beagle
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	mozilla-firefox >= 2.0.0.1-2
@@ -197,7 +197,7 @@ każdą odwiedzaną stronę.
 
 %package -n epiphany-extension-beagle
 Summary:	Epiphany extension - beagle
-Summary(pl.UTF-8):   Rozszerzenie dla Epiphany - beagle
+Summary(pl.UTF-8):	Rozszerzenie dla Epiphany - beagle
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	epiphany-extensions >= 2.16.1
@@ -212,7 +212,7 @@ odwiedzaną stronę.
 
 %package -n python-%{name}
 Summary:	Beagle Python bindings
-Summary(pl.UTF-8):   Wiązania języka Python dla Beagle
+Summary(pl.UTF-8):	Wiązania języka Python dla Beagle
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 %pyrequires_eq  python-libs
@@ -225,7 +225,7 @@ Wiązania języka Python dla Beagle.
 
 %package search-gui
 Summary:	GNOME based Beagle GUI
-Summary(pl.UTF-8):   Oparty na GNOME graficzny interfejs dla Beagle
+Summary(pl.UTF-8):	Oparty na GNOME graficzny interfejs dla Beagle
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 Requires:	gtk+2 >= 2:2.10.6
@@ -238,7 +238,7 @@ Oparty na GNOME graficzny interfejs dla Beagle.
 
 %package startup
 Summary:	Automatic startup integration for Beagle
-Summary(pl.UTF-8):   Integracja funkcji automatycznego startu Beagle
+Summary(pl.UTF-8):	Integracja funkcji automatycznego startu Beagle
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	beagle-gnome
