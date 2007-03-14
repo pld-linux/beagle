@@ -23,17 +23,17 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
-Version:	0.2.16
+Version:	0.2.16.2
 Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	4818ca64dc2311208a27f03893836e49
+# Source0-md5:	4cff44be5917bfce5f1c265039a60626
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-kill_exec_a.patch
 Patch3:		%{name}-configure.patch
-Patch4:		%{name}-unary-plus-string.patch
+Patch4:		%{name}-epiphany-2.18.patch
 URL:		http://beagle-project.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -45,19 +45,17 @@ BuildRequires:	dotnet-gmime-sharp-devel >= 2.2.3
 #BuildRequires:	dotnet-gst-sharp-devel
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
 %if %{with epiphany} 
-BuildRequires:	epiphany-devel >= 2.16.1
+BuildRequires:	epiphany-devel >= 2.18.0
 %endif
-BuildRequires:	gtk+2-devel >= 2:2.10.6
-%{?with_apidocs:BuildRequires:	gtk-doc >= 1.7}
+BuildRequires:	gtk+2-devel >= 2:2.10.10
+%{?with_apidocs:BuildRequires:	gtk-doc >= 1.8}
 BuildRequires:	libexif-devel >= 0.6.13
-BuildRequires:	librsvg-devel >= 1:2.16.0
+BuildRequires:	librsvg-devel >= 1:2.16.1
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 1:2.6.26
+BuildRequires:	libxml2-devel >= 1:2.6.27
 BuildRequires:	mono-csharp >= 1.1.13.5
-# not used atm
-#BuildRequires:	mozilla-devel
-%{?with_python:BuildRequires:	python-pygtk-devel >= 2.10.3}
+%{?with_python:BuildRequires:	python-pygtk-devel >= 2:2.10.4}
 BuildRequires:	pkgconfig
 BuildRequires:	perl-XML-Parser
 BuildRequires:	python-devel
@@ -72,7 +70,7 @@ BuildRequires:	zip
 # GUI BRs
 %if %{with gui}
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
-BuildRequires:	gnome-vfs2-devel >= 2.16.1
+BuildRequires:	gnome-vfs2-devel >= 2.18.0.1
 %endif
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dotnet-gmime-sharp >= 2.2.3
@@ -160,7 +158,7 @@ Summary(pl.UTF-8):	Backend Beagle dla Evolution
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	dotnet-evolution-sharp >= 0.11.1
-Requires:	evolution >= 2.8.0
+Requires:	evolution >= 2.10.0
 
 %description evolution
 Beagle Evolution backend.
@@ -200,7 +198,7 @@ Summary:	Epiphany extension - beagle
 Summary(pl.UTF-8):	Rozszerzenie dla Epiphany - beagle
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
-Requires:	epiphany-extensions >= 2.16.1
+Requires:	epiphany-extensions >= 2.18.0
 
 %description -n epiphany-extension-beagle
 Epiphany extension that allows Beagle to index every page the user
@@ -228,7 +226,7 @@ Summary:	GNOME based Beagle GUI
 Summary(pl.UTF-8):	Oparty na GNOME graficzny interfejs dla Beagle
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
-Requires:	gtk+2 >= 2:2.10.6
+Requires:	gtk+2 >= 2:2.10.10
 
 %description search-gui
 GNOME based Beagle GUI.
@@ -289,7 +287,7 @@ install mozilla-extension/{chrome.manifest,install.rdf} $dest
 install mozilla-extension/chrome/beagle.jar $dest/chrome
 
 # Kill useless files
-rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/2.16/extensions/*.{la,a} \
+rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/2.18/extensions/*.{la,a} \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.la
 
 rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{a,la}
@@ -392,8 +390,8 @@ fi
 %files -n epiphany-extension-beagle
 %defattr(644,root,root,755)
 %doc epiphany-extension/README
-%attr(755,root,root) %{_libdir}/epiphany/2.16/extensions/libbeagleextension.so*
-%{_libdir}/epiphany/2.16/extensions/*.xml
+%attr(755,root,root) %{_libdir}/epiphany/2.18/extensions/libbeagleextension.so*
+%{_libdir}/epiphany/2.18/extensions/*.xml
 %endif
 
 %if %{with python}
