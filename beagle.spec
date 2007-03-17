@@ -23,12 +23,12 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
-Version:	0.2.16.2
+Version:	0.2.16.3
 Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	4cff44be5917bfce5f1c265039a60626
+# Source0-md5:	03b14e6df4afa22cfce8c498f8e43dec
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-kill_exec_a.patch
@@ -44,21 +44,21 @@ BuildRequires:	dotnet-gmime-sharp-devel >= 2.2.3
 %{?with_gsf:BuildRequires:	dotnet-gsf-sharp-devel >= 0.8.1}
 #BuildRequires:	dotnet-gst-sharp-devel
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
-%if %{with epiphany} 
+%if %{with epiphany}
 BuildRequires:	epiphany-devel >= 2.18.0
 %endif
 BuildRequires:	gtk+2-devel >= 2:2.10.10
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.8}
 BuildRequires:	libexif-devel >= 0.6.13
-BuildRequires:	librsvg-devel >= 1:2.16.1
 BuildRequires:	libpng-devel
+BuildRequires:	librsvg-devel >= 1:2.16.1
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.27
 BuildRequires:	mono-csharp >= 1.1.13.5
-%{?with_python:BuildRequires:	python-pygtk-devel >= 2:2.10.4}
-BuildRequires:	pkgconfig
 BuildRequires:	perl-XML-Parser
+BuildRequires:	pkgconfig
 BuildRequires:	python-devel
+%{?with_python:BuildRequires:	python-pygtk-devel >= 2:2.10.4}
 %if %{with sqlite3}
 BuildRequires:	sqlite3-devel >= 3.3.4
 %else
@@ -80,7 +80,7 @@ Requires:	sqlite3
 Requires:	sqlite
 %endif
 ExclusiveArch:	%{ix86} %{x8664} arm hppa ia64 ppc s390 s390x sparc sparcv9 sparc64
-ExcludeArch:    i386
+ExcludeArch:	i386
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
