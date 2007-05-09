@@ -23,15 +23,14 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
-Version:	0.2.16.3
+Version:	0.2.17
 Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	03b14e6df4afa22cfce8c498f8e43dec
+# Source0-md5:	75903ca41fe8b7729d1a02987625e90f
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
-Patch2:		%{name}-kill_exec_a.patch
 Patch3:		%{name}-configure.patch
 Patch4:		%{name}-epiphany-2.18.patch
 URL:		http://beagle-project.org/Main_Page
@@ -251,7 +250,6 @@ Integracja funkcji automatycznego startu Beagle.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 %patch3 -p1
 %patch4 -p1
 
