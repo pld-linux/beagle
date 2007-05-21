@@ -73,6 +73,7 @@ BuildRequires:	gnome-vfs2-devel >= 2.18.0.1
 %endif
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dotnet-gmime-sharp >= 2.2.3
+Requires:	dotnet-gsf-sharp
 %if %{with sqlite3}
 Requires:	sqlite3
 %else
