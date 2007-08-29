@@ -23,12 +23,12 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
-Version:	0.2.17
+Version:	0.2.18
 Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	75903ca41fe8b7729d1a02987625e90f
+# Source0-md5:	8bab6ce40fff497120dbfcfd0a789c65
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch3:		%{name}-configure.patch
@@ -37,7 +37,7 @@ URL:		http://beagle-project.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	chmlib-devel
-%{?with_evolution:BuildRequires:	dotnet-evolution-sharp-devel >= 0.11.1}
+%{?with_evolution:BuildRequires:	dotnet-evolution-sharp-devel >= 0.13.3}
 %{?with_galago:BuildRequires:	dotnet-galago-sharp-devel >= 0.5.0}
 BuildRequires:	dotnet-gmime-sharp-devel >= 2.2.3
 %{?with_gsf:BuildRequires:	dotnet-gsf-sharp-devel >= 0.8.1}
@@ -255,6 +255,7 @@ Integracja funkcji automatycznego startu Beagle.
 %patch4 -p1
 
 %build
+%{__intltoolize}
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
