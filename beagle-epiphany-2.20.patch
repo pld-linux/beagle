@@ -1,12 +1,14 @@
-diff -urN beagle-0.2.16.2/configure.in beagle-0.2.16.2.new/configure.in
---- beagle-0.2.16.2/configure.in	2007-02-22 18:55:03.000000000 +0100
-+++ beagle-0.2.16.2.new/configure.in	2007-03-14 21:14:59.000000000 +0100
-@@ -480,7 +480,10 @@
+--- beagle-0.2.18/configure.in~	2007-09-30 17:57:33.000000000 +0200
++++ beagle-0.2.18/configure.in	2007-09-30 17:58:01.000000000 +0200
+@@ -479,7 +479,13 @@
  	enable_epiphany_extension=$enableval,
  	enable_epiphany_extension=auto)
  
 -if $PKG_CONFIG --exists epiphany-2.16; then
-+if $PKG_CONFIG --exists epiphany-2.18; then
++if $PKG_CONFIG --exists epiphany-2.20; then
++        EPIPHANY_MAJOR=2.20
++        EPIPHANY_REQUIRED=2.20.0
++elif $PKG_CONFIG --exists epiphany-2.18; then
 +        EPIPHANY_MAJOR=2.18
 +        EPIPHANY_REQUIRED=2.18.0
 +elif $PKG_CONFIG --exists epiphany-2.16; then
