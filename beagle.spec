@@ -24,7 +24,7 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
 Version:	0.2.18
-Release:	2
+Release:	3
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
@@ -79,6 +79,8 @@ Requires:	sqlite3
 %else
 Requires:	sqlite
 %endif
+# sr@Latn vs. sr@latin
+Conflicts:	glibc-misc < 6:2.7
 ExclusiveArch:	%{ix86} %{x8664} arm hppa ia64 ppc s390 s390x sparc sparcv9 sparc64
 ExcludeArch:	i386
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -295,6 +297,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/*.{a,la}
 
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/no
 
+[ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
+	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
 %find_lang %{name}
 
 %clean
