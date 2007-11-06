@@ -14,7 +14,7 @@
 %bcond_without	python		# don't build python libraries
 %bcond_without	epiphany	# don't build epiphany extension
 %bcond_with	sqlite3		# use sqlite3 instead of sqlite2
-%bcond_with	thunderbird	# use Thunderbird backend
+%bcond_without	thunderbird	# use Thunderbird backend
 #
 %if !%{with gui}
 %undefine	with_evolution
