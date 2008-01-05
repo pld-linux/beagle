@@ -2,18 +2,21 @@
 # TODO:
 #       - kill bashisms in crawl stuff
 #	- mozilla extension?
+#	- check epiphany and firefox/thunderbird extensions
+#         as need to be installed in some mozillish/alternate way
+#	- other than that - it works for me
 #
 %include	/usr/lib/rpm/macros.mono
 #
 # Conditional build:
 %bcond_without	apidocs		# don't build API documentation
+%bcond_with	avahi		# enable Avahi support
 %bcond_without	evolution	# don't include evolution support
 %bcond_without	galago		# build without galago support
 %bcond_without	gsf		# build without libgsf support
 %bcond_without	gui		# don't build GNOME based GUI
 %bcond_without	python		# don't build python libraries
 %bcond_without	epiphany	# don't build epiphany extension
-%bcond_with	sqlite3		# use sqlite3 instead of sqlite2
 %bcond_without	thunderbird	# use Thunderbird backend
 #
 %if !%{with gui}
@@ -23,12 +26,12 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
-Version:	0.2.18
-Release:	3
+Version:	0.3.2
+Release:	0.1
 License:	Various
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	8bab6ce40fff497120dbfcfd0a789c65
+Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.3/%{name}-%{version}.tar.bz2
+# Source0-md5:	1c66a66a5049ae91930fa6a9b8091a33
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch3:		%{name}-configure.patch
@@ -43,6 +46,7 @@ BuildRequires:	dotnet-gmime-sharp-devel >= 2.2.3
 %{?with_gsf:BuildRequires:	dotnet-gsf-sharp-devel >= 0.8.1}
 #BuildRequires:	dotnet-gst-sharp-devel
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
+BuildRequires:	dotnet-ndesk-dbus-glib-sharp >= 0.3.0
 %if %{with epiphany}
 BuildRequires:	epiphany-devel >= 2.20.0
 %endif
@@ -58,11 +62,7 @@ BuildRequires:	perl-XML-Parser
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel
 %{?with_python:BuildRequires:	python-pygtk-devel >= 2:2.10.4}
-%if %{with sqlite3}
 BuildRequires:	sqlite3-devel >= 3.3.4
-%else
-BuildRequires:	sqlite-devel
-%endif
 BuildRequires:	wv-devel >= 1.2.4
 BuildRequires:	xorg-lib-libXScrnSaver-devel
 BuildRequires:	zip
@@ -74,11 +74,7 @@ BuildRequires:	gnome-vfs2-devel >= 2.18.0.1
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dotnet-gmime-sharp >= 2.2.3
 Requires:	dotnet-gsf-sharp
-%if %{with sqlite3}
 Requires:	sqlite3
-%else
-Requires:	sqlite
-%endif
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
 ExclusiveArch:	%{ix86} %{x8664} arm hppa ia64 ppc s390 s390x sparc sparcv9 sparc64
@@ -103,6 +99,18 @@ Beagle libraries.
 
 %description libs -l pl.UTF-8
 Bibiloteki Beagle.
+
+%package debug
+Summary:	Debug files for the Mono part of Beagle
+Summary(pl.UTF-8):	Pliki debugujące dla części Mono Beagle'a
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description debug
+Debug files for the Mono part of Beagle.
+
+%description -l pl.UTF-8
+Pliki debugujące dla części Mono Beagle'a.
 
 %package devel
 Summary:	Beagle development files
@@ -251,10 +259,11 @@ Integracja funkcji automatycznego startu Beagle.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
+#FIXME
+#%patch0 -p1
 %patch3 -p1
-%patch4 -p1
+#FIXME
+#%patch4 -p1
 
 %build
 %{__intltoolize}
@@ -269,7 +278,8 @@ Integracja funkcji automatycznego startu Beagle.
 	--%{!?with_epiphany:dis}%{?with_epiphany:en}able-epiphany-extension \
 	--%{!?with_evolution:dis}%{?with_evolution:en}able-evolution-sharp \
 	--%{!?with_gui:dis}%{?with_gui:en}able-gui \
-	--%{!?with_thunderbird:dis}%{?with_thunderbird:en}able-thunderbird
+	--%{!?with_thunderbird:dis}%{?with_thunderbird:en}able-thunderbird \
+	--%{!?with_avahi:dis}%{?with_avahi:en}able-avahi
 
 %{__make} \
 	MOZILLA_HOME=%{_libdir}/mozilla \
@@ -284,18 +294,18 @@ install -d $RPM_BUILD_ROOT%{_var}/cache/beagle/indexes
 	pythondir=%{py_sitedir}
 
 dest=$RPM_BUILD_ROOT%{_datadir}/mozilla-firefox/extensions/\{fda00e13-8c62-4f63-9d19-d168115b11ca\}
-install -d $dest $dest/chrome
-install mozilla-extension/{chrome.manifest,install.rdf} $dest
-install mozilla-extension/chrome/beagle.jar $dest/chrome
+#install -d $dest $dest/chrome
+#install mozilla-extension/{chrome.manifest,install.rdf} $dest
+#install mozilla-extension/chrome/beagle.jar $dest/chrome
 
 # Kill useless files
-rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/2.20/extensions/*.{la,a} \
-	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.la
+#rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/2.20/extensions/*.{la,a} \
+#	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.la
 
-rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{a,la}
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/*.{a,la}
+#rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{a,la}
+#rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/*.{a,la}
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/no
+#rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/no
 
 [ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
 	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
@@ -323,16 +333,13 @@ fi
 %attr(755,root,root) %{_bindir}/beagle-config
 %attr(755,root,root) %{_bindir}/beagled
 %attr(755,root,root) %{_bindir}/beagle-doc-extractor
-%attr(755,root,root) %{_bindir}/beagle-exercise-file-system
 %attr(755,root,root) %{_bindir}/beagle-extract-content
 %attr(755,root,root) %{_bindir}/beagle-index-info
-%attr(755,root,root) %{_bindir}/beagle-index-url
 %attr(755,root,root) %{_bindir}/beagle-info
 %attr(755,root,root) %{_bindir}/beagle-ping
 %attr(755,root,root) %{_bindir}/beagle-query
 %attr(755,root,root) %{_bindir}/beagle-shutdown
 %attr(755,root,root) %{_bindir}/beagle-status
-%attr(755,root,root) %{_libdir}/%{name}/libbeagleglue.so*
 %attr(755,root,root) %{_libdir}/%{name}/*.exe
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/Backends
@@ -345,24 +352,19 @@ fi
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%attr(755,root,root) %{_libdir}/%{name}/lib*.so.*.*.*
+
+%files debug
+%defattr(644,root,root,755)
+%{_libdir}/%{name}/Backends/*.mdb
+%{_libdir}/%{name}/Filters/*.mdb
+%{_libdir}/%{name}/*.mdb
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/*.so
-%{_includedir}/libbeagle
-%{_libdir}/*.la
+%attr(755,root,root) %{_libdir}/%{name}/*.so
+%{_libdir}/%{name}/*.la
 %{_pkgconfigdir}/*
-
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/*.a
-
-%if %{with apidocs}
-%files apidocs
-%defattr(644,root,root,755)
-%{_gtkdocdir}/beagle
-%endif
 
 %files crawl-system
 %defattr(644,root,root,755)
@@ -382,26 +384,20 @@ fi
 %if %{with thunderbird}
 %files thunderbird
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/beagle-contactviewer
+#%attr(755,root,root) %{_bindir}/beagle-contactviewer
 %{_libdir}/%{name}/Backends/Thunderbird*.dll
 %endif
 
 %files -n mozilla-firefox-extension-beagle
 %defattr(644,root,root,755)
-%{_datadir}/mozilla-firefox/extensions/{fda00e13-8c62-4f63-9d19-d168115b11ca}
+#%{_datadir}/mozilla-firefox/extensions/{fda00e13-8c62-4f63-9d19-d168115b11ca}
 
 %if %{with epiphany}
 %files -n epiphany-extension-beagle
 %defattr(644,root,root,755)
-%doc epiphany-extension/README
-%attr(755,root,root) %{_libdir}/epiphany/2.20/extensions/libbeagleextension.so*
-%{_libdir}/epiphany/2.20/extensions/*.xml
-%endif
-
-%if %{with python}
-%files -n python-%{name}
-%defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/*.so
+#%doc epiphany-extension/README
+#%attr(755,root,root) %{_libdir}/epiphany/2.20/extensions/libbeagleextension.so*
+#%{_libdir}/epiphany/2.20/extensions/*.xml
 %endif
 
 %if %{with gui}
@@ -411,9 +407,12 @@ fi
 %attr(755,root,root) %{_bindir}/beagle-search
 %attr(755,root,root) %{_bindir}/beagle-settings
 %attr(755,root,root) %{_libdir}/%{name}/libbeagleuiglue.so*
-%{_pixmapsdir}/*.png
 %{_desktopdir}/*.desktop
 %endif
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/%{name}/*.a
 
 %files startup
 %defattr(644,root,root,755)
