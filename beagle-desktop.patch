@@ -1,64 +1,55 @@
-diff -urN beagle-0.2.16.3/beagled/beagled-autostart.desktop beagle-0.2.16.3.new/beagled/beagled-autostart.desktop
---- beagle-0.2.16.3/beagled/beagled-autostart.desktop	2007-03-15 21:17:13.000000000 +0100
-+++ beagle-0.2.16.3.new/beagled/beagled-autostart.desktop	2007-03-17 13:41:18.000000000 +0100
+diff -ur beagle-0.3.3/beagled/beagled-autostart.desktop beagle-0.3.3-desktop/beagled/beagled-autostart.desktop
+--- beagle-0.3.3/beagled/beagled-autostart.desktop	2007-11-27 02:50:05.000000000 +0100
++++ beagle-0.3.3-desktop/beagled/beagled-autostart.desktop	2008-02-03 17:34:30.000000000 +0100
 @@ -1,8 +1,13 @@
  [Desktop Entry]
- Encoding=UTF-8
++Encoding=UTF-8
 +Name=Beagle
 +Comment=A system for searching and managing your personal information space
 +Comment[pl]=System przeszukiwania informacji osobistych i zarządzania nimi
  Exec=beagled --replace
 -Name=Beagle Search Daemon
-+Icon=stock_init
++Icon=stock-init
  Terminal=false
-+Type=Application
+ Type=Application
+ StartupNotify=false
  X-KDE-autostart-phase=2
  X-KDE-autostart-after=panel
- X-KDE-StartupNotify=false
 +X-GNOME-Autostart-enabled=true
-diff -urN beagle-0.2.16.3/search/beagle-search-autostart.desktop beagle-0.2.16.3.new/search/beagle-search-autostart.desktop
---- beagle-0.2.16.3/search/beagle-search-autostart.desktop	2007-02-07 20:04:11.000000000 +0100
-+++ beagle-0.2.16.3.new/search/beagle-search-autostart.desktop	2007-03-17 13:59:53.000000000 +0100
-@@ -3,6 +3,7 @@
- Exec=beagle-search --icon
- Name=Beagle Search Tool
+diff -ur beagle-0.3.3/search/beagle-search.desktop.in beagle-0.3.3-desktop/search/beagle-search.desktop.in
+--- beagle-0.3.3/search/beagle-search.desktop.in	2008-01-02 08:59:43.000000000 +0100
++++ beagle-0.3.3-desktop/search/beagle-search.desktop.in	2008-02-03 17:36:00.000000000 +0100
+@@ -7,7 +7,7 @@
  Terminal=false
-+Type=Application
- X-KDE-autostart-phase=2
- X-KDE-autostart-after=panel
- X-KDE-StartupNotify=false
-diff -urN beagle-0.2.16.3/search/beagle-search.desktop.in.in beagle-0.2.16.3.new/search/beagle-search.desktop.in.in
---- beagle-0.2.16.3/search/beagle-search.desktop.in.in	2007-02-07 20:04:11.000000000 +0100
-+++ beagle-0.2.16.3.new/search/beagle-search.desktop.in.in	2007-03-17 13:44:21.000000000 +0100
-@@ -1,5 +1,4 @@
- [Desktop Entry]
--X-SuSE-translate=true
- _Name=Search
- _GenericName=Search
- _Comment=Search for data on your desktop
-@@ -9,7 +8,7 @@
  Type=Application
  StartupNotify=true
- Encoding=UTF-8
--Categories=GNOME;GTK;Application;Core;Utility;Filesystem;
+-Categories=GNOME;GTK;Core;Utility;Filesystem;
 +Categories=GNOME;GTK;Utility;
  X-GNOME-Bugzilla-Bugzilla=GNOME
  X-GNOME-Bugzilla-Product=beagle
  X-GNOME-Bugzilla-Component=General
-diff -urN beagle-0.2.16.3/tools/beagle-settings.desktop.in.in beagle-0.2.16.3.new/tools/beagle-settings.desktop.in.in
---- beagle-0.2.16.3/tools/beagle-settings.desktop.in.in	2007-02-07 20:04:11.000000000 +0100
-+++ beagle-0.2.16.3.new/tools/beagle-settings.desktop.in.in	2007-03-17 14:00:15.000000000 +0100
-@@ -1,12 +1,11 @@
- [Desktop Entry]
- Encoding=UTF-8
--X-SuSE-translate=true
- _Name=Search & Indexing
- _GenericName=Configure Desktop Search
+diff -ur beagle-0.3.3/search/beagle-search.desktop.in.in beagle-0.3.3-desktop/search/beagle-search.desktop.in.in
+--- beagle-0.3.3/search/beagle-search.desktop.in.in	2007-11-27 02:49:58.000000000 +0100
++++ beagle-0.3.3-desktop/search/beagle-search.desktop.in.in	2008-02-03 17:35:49.000000000 +0100
+@@ -7,7 +7,7 @@
+ Terminal=false
+ Type=Application
+ StartupNotify=true
+-Categories=GNOME;GTK;Core;Utility;Filesystem;
++Categories=GNOME;GTK;Utility;
+ X-GNOME-Bugzilla-Bugzilla=GNOME
+ X-GNOME-Bugzilla-Product=beagle
+ X-GNOME-Bugzilla-Component=General
+diff -ur beagle-0.3.3/tools/beagle-settings.desktop.in.in beagle-0.3.3-desktop/tools/beagle-settings.desktop.in.in
+--- beagle-0.3.3/tools/beagle-settings.desktop.in.in	2007-11-27 02:49:57.000000000 +0100
++++ beagle-0.3.3-desktop/tools/beagle-settings.desktop.in.in	2008-02-03 17:36:48.000000000 +0100
+@@ -4,7 +4,7 @@
  Exec=beagle-settings
  Icon=system-search
  Type=Application
--Categories=Application;Settings;AdvancedSettings;Utility;Filesystem;X-Ximian-Settings;
+-Categories=Settings;Utility;Filesystem;X-Ximian-Settings;
 +Categories=GTK;GNOME;Settings;
  X-GNOME-Bugzilla-Bugzilla=GNOME
  X-GNOME-Bugzilla-Product=beagle
  X-GNOME-Bugzilla-Component=General
+
