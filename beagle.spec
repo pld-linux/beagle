@@ -1,7 +1,7 @@
 #
 # TODO:
 #       - kill bashisms in crawl stuff
-#	- update remaining patches
+#	- add qyoto based settings (requires new packages)
 #	- replace epiphany-extension hack
 #
 %include	/usr/lib/rpm/macros.mono
@@ -32,7 +32,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/beagle/0.3/%{name}-%{version}.ta
 # Source0-md5:	c1b6c340c72a70e33212c85513bc23f2
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
-Patch3:		%{name}-configure.patch
+Patch2:		%{name}-configure.patch
 URL:		http://beagle-project.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -271,10 +271,9 @@ przeglądarki internetowej.
 
 %prep
 %setup -q
-#FIXME
-#%patch0 -p1
-#$patch1 -p1
-%patch3 -p1
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 %{__intltoolize}
@@ -444,4 +443,4 @@ fi
 
 %files webinterface
 %defattr(644,root,root,755)
-%{_datadir}/%{name}/webinterface
+%{_datadir}/%{name}
