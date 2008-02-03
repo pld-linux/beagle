@@ -1,10 +1,8 @@
 #
 # TODO:
 #       - kill bashisms in crawl stuff
-#	- mozilla extension?
-#	- check epiphany and firefox/thunderbird extensions
-#         as need to be installed in some mozillish/alternate way
-#	- other than that - it works for me
+#	- update remaining patches
+#	- replace epiphany-extension hack
 #
 %include	/usr/lib/rpm/macros.mono
 #
@@ -27,15 +25,14 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
 Version:	0.3.3
-Release:	0.1
+Release:	0.9
 License:	Various
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.3/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/beagle/0.3/%{name}-%{version}.tar.bz2
 # Source0-md5:	c1b6c340c72a70e33212c85513bc23f2
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch3:		%{name}-configure.patch
-Patch4:		%{name}-epiphany-2.20.patch
 URL:		http://beagle-project.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -47,7 +44,7 @@ BuildRequires:	dotnet-gmime-sharp-devel >= 2.2.3
 #BuildRequires:	dotnet-gst-sharp-devel
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
 BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel >= 0.3.0
-BuildRequires:	dotnet-ndesk-dbus-sharp-devel	>= 0.6.0
+BuildRequires:	dotnet-ndesk-dbus-sharp-devel >= 0.6.0
 %if %{with epiphany}
 BuildRequires:	epiphany-devel >= 2.20.0
 %endif
@@ -258,13 +255,26 @@ Automatic session startup integration for Beagle.
 %description startup -l pl.UTF-8
 Integracja funkcji automatycznego startu Beagle.
 
+%package webinterface
+Summary:	A web interface for Beagle
+Summary(pl.UTF-8):	Interfejs sieciowy dla Beagle
+Group:		Applications
+Requires:	%{name} = %{version}-%{release}
+
+%description webinterface
+An AJAX interface that allows users to search for data through their
+web browser.
+
+%description webinterface -l pl.UTF-8
+AJAX-owy interfejs pozwalający użytkownikom wyszukiwać dane za pomocą
+przeglądarki internetowej.
+
 %prep
 %setup -q
 #FIXME
 #%patch0 -p1
+#$patch1 -p1
 %patch3 -p1
-#FIXME
-#%patch4 -p1
 
 %build
 %{__intltoolize}
@@ -299,14 +309,20 @@ install -d $dest $dest/chrome
 install firefox-extension/{chrome.manifest,install.rdf} $dest
 cp -r firefox-extension/chrome/* $dest/chrome
 
-# Kill useless files
-#rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/2.20/extensions/*.{la,a} \
-#	$RPM_BUILD_ROOT%{_libdir}/%{name}/*.la
+%if %{with epiphany}
+install -d $RPM_BUILD_ROOT%{_libdir}/epiphany/2.20/extensions
+sed -e "s|\@localedir\@|\%{_localedir}|g" \
+	< epiphany-extension/beagle.py.in > epiphany-extension/beagle.py
+install epiphany-extension/beagle.py $RPM_BUILD_ROOT%{_libdir}/epiphany/2.20/extensions/beagle.py
+install epiphany-extension/beagle.ephy-extension.in $RPM_BUILD_ROOT%{_libdir}/epiphany/2.20/extensions/beagle.ephy-extension
+%endif
 
-#rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{a,la}
-#rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/*.{a,la}
-
-#rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/no
+%if %{with thunderbird}
+tdest=$RPM_BUILD_ROOT%{_libdir}/mozilla-thunderbird/extensions/\{b656ef18-fd76-45e6-95cc-8043f26361e7\}
+install -d $tdest
+install thunderbird-extension/{chrome.manifest,install.rdf} $tdest
+cp -r thunderbird-extension/{chrome,components,defaults} $tdest
+%endif
 
 [ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
 	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
@@ -364,6 +380,7 @@ fi
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/*.so
+%attr(755,root,root) %ghost %{_libdir}/%{name}/*.so.0
 %{_libdir}/%{name}/*.la
 %{_pkgconfigdir}/*
 
@@ -376,6 +393,12 @@ fi
 %dir %attr(755,beagleindex,beagleindex) %{_var}/cache/beagle/indexes
 %attr(755,root,root) %{_sbindir}/*
 
+%if %{with apidocs}
+%files apidocs
+%defattr(644,root,root,755)
+%{_libdir}/monodoc/sources/*
+%endif
+
 %if %{with evolution}
 %files evolution
 %defattr(644,root,root,755)
@@ -385,8 +408,8 @@ fi
 %if %{with thunderbird}
 %files thunderbird
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_bindir}/beagle-contactviewer
 %{_libdir}/%{name}/Backends/Thunderbird*.dll
+%{_libdir}/mozilla-thunderbird/extensions/{b656ef18-fd76-45e6-95cc-8043f26361e7}
 %endif
 
 %files -n mozilla-firefox-extension-beagle
@@ -396,9 +419,8 @@ fi
 %if %{with epiphany}
 %files -n epiphany-extension-beagle
 %defattr(644,root,root,755)
-#%doc epiphany-extension/README
-#%attr(755,root,root) %{_libdir}/epiphany/2.20/extensions/libbeagleextension.so*
-#%{_libdir}/epiphany/2.20/extensions/*.xml
+%attr(755,root,root) %{_libdir}/epiphany/2.20/extensions/beagle.py
+%{_libdir}/epiphany/2.20/extensions/*.ephy-extension
 %endif
 
 %if %{with gui}
@@ -419,3 +441,7 @@ fi
 %defattr(644,root,root,755)
 %{_sysconfdir}/xdg/autostart/beagled-autostart.desktop
 %{_sysconfdir}/xdg/autostart/beagle-search-autostart.desktop
+
+%files webinterface
+%defattr(644,root,root,755)
+%{_datadir}/%{name}/webinterface
