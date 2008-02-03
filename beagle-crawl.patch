@@ -1,6 +1,17 @@
-diff -aurN beagle-0.2.7.orig/tools/crawl-rules/crawl-applications beagle-0.2.7/tools/crawl-rules/crawl-applications
---- beagle-0.2.7.orig/tools/crawl-rules/crawl-applications	2006-04-07 18:16:02.000000000 +0200
-+++ beagle-0.2.7/tools/crawl-rules/crawl-applications	2006-06-27 20:24:01.295867816 +0200
+diff -ur beagle-0.3.3/configure.in beagle-0.3.3-crawl/configure.in
+--- beagle-0.3.3/configure.in	2008-01-02 08:14:48.000000000 +0100
++++ beagle-0.3.3-crawl/configure.in	2008-02-03 17:47:18.000000000 +0100
+@@ -624,6 +624,7 @@
+ Filters/Makefile
+ tools/Makefile
+ tools/beagle-settings.desktop.in
++tools/beagle-crawl-system
+ search/Makefile
+ search/beagle-search.desktop.in
+ ImLogViewer/Makefile
+diff -ur beagle-0.3.3/tools/crawl-rules/crawl-applications beagle-0.3.3-crawl/tools/crawl-rules/crawl-applications
+--- beagle-0.3.3/tools/crawl-rules/crawl-applications	2008-01-02 04:00:22.000000000 +0100
++++ beagle-0.3.3-crawl/tools/crawl-rules/crawl-applications	2008-02-03 17:43:23.000000000 +0100
 @@ -2,7 +2,7 @@
  
  CRAWL_INDEX_NAME="applications"
@@ -10,9 +21,9 @@ diff -aurN beagle-0.2.7.orig/tools/crawl-rules/crawl-applications beagle-0.2.7/t
  
  CRAWL_RECURSIVE="yes"
  
-diff -aurN beagle-0.2.7.orig/tools/crawl-rules/crawl-documentation beagle-0.2.7/tools/crawl-rules/crawl-documentation
---- beagle-0.2.7.orig/tools/crawl-rules/crawl-documentation	2006-06-19 19:54:27.000000000 +0200
-+++ beagle-0.2.7/tools/crawl-rules/crawl-documentation	2006-06-27 20:25:28.212654456 +0200
+diff -ur beagle-0.3.3/tools/crawl-rules/crawl-documentation beagle-0.3.3-crawl/tools/crawl-rules/crawl-documentation
+--- beagle-0.3.3/tools/crawl-rules/crawl-documentation	2007-12-13 09:27:46.000000000 +0100
++++ beagle-0.3.3-crawl/tools/crawl-rules/crawl-documentation	2008-02-03 17:44:49.000000000 +0100
 @@ -2,7 +2,7 @@
  
  CRAWL_INDEX_NAME="documentation"
@@ -20,26 +31,33 @@ diff -aurN beagle-0.2.7.orig/tools/crawl-rules/crawl-documentation beagle-0.2.7/
 -CRAWL_PATHS="/usr/share/doc /usr/local/share/doc /opt/kde3/share/doc /opt/gnome/share/gnome/help /usr/share/gnome/help /opt/gnome/share/gtk-doc/html /usr/share/gtk-doc/html /usr/share/gnome/html"
 +CRAWL_PATHS="/usr/share/doc /usr/share/gnome/help"
  
- CRAWL_ALLOW_PATTERNS="*.xml,*.html,*.docbook"
+ CRAWL_ALLOW_PATTERNS="*.xml,*.html,*.docbook,*.pdf"
  
-diff -aurN beagle-0.2.7.orig/tools/Makefile.am beagle-0.2.7/tools/Makefile.am
---- beagle-0.2.7.orig/tools/Makefile.am	2006-06-19 19:54:27.000000000 +0200
-+++ beagle-0.2.7/tools/Makefile.am	2006-06-27 20:25:56.806307560 +0200
-@@ -35,7 +35,6 @@
- 	chmod +x $(CRAWL_WRAPPER)
+diff -ur beagle-0.3.3/tools/crawl-rules/crawl-monodoc beagle-0.3.3-crawl/tools/crawl-rules/crawl-monodoc
+--- beagle-0.3.3/tools/crawl-rules/crawl-monodoc	2007-12-13 10:37:03.000000000 +0100
++++ beagle-0.3.3-crawl/tools/crawl-rules/crawl-monodoc	2008-02-03 17:46:26.000000000 +0100
+@@ -1,8 +1,8 @@
+-CRAWL_ENABLED="no"
++CRAWL_ENABLED="yes"
  
- CRAWL_RULES = \
--	$(srcdir)/crawl-rules/crawl-windows		\
+ CRAWL_INDEX_NAME="monodoc"
+ 
+-CRAWL_PATHS="/usr/lib/monodoc/sources /usr/local/lib/monodoc/sources"
++CRAWL_PATHS="/usr/lib/monodoc/sources"
+ 
+ # Indexing Mono.zip will take a long time. It might be a good idea to add Mono.zip to deny patterns.
+ 
+diff -ur beagle-0.3.3/tools/Makefile.am beagle-0.3.3-crawl/tools/Makefile.am
+--- beagle-0.3.3/tools/Makefile.am	2008-01-02 00:25:15.000000000 +0100
++++ beagle-0.3.3-crawl/tools/Makefile.am	2008-02-03 17:45:38.000000000 +0100
+@@ -39,8 +39,7 @@
  	$(srcdir)/crawl-rules/crawl-applications	\
- 	$(srcdir)/crawl-rules/crawl-documentation
+ 	$(srcdir)/crawl-rules/crawl-documentation	\
+ 	$(srcdir)/crawl-rules/crawl-manpages		\
+-	$(srcdir)/crawl-rules/crawl-monodoc		\
+-	$(srcdir)/crawl-rules/crawl-windows
++	$(srcdir)/crawl-rules/crawl-monodoc
  
---- beagle-0.2.15.1/configure.in~	2007-02-05 18:07:14.000000000 +0100
-+++ beagle-0.2.15.1/configure.in	2007-02-05 18:25:44.000000000 +0100
-@@ -696,6 +696,7 @@
- Filters/Makefile
- tools/Makefile
- tools/beagle-settings.desktop.in
-+tools/beagle-crawl-system
- search/Makefile
- search/beagle-search.desktop.in
- ImLogViewer/Makefile
+ # FIXME: Per-distribution specific crawl rules
+ configdir = $(sysconfdir)/beagle
+
