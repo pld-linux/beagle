@@ -25,7 +25,7 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
 Version:	0.3.3
-Release:	0.9
+Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/beagle/0.3/%{name}-%{version}.tar.bz2
@@ -291,7 +291,7 @@ przeglądarki internetowej.
 	--%{!?with_thunderbird:dis}%{?with_thunderbird:en}able-thunderbird \
 	--%{!?with_avahi:dis}%{?with_avahi:en}able-avahi
 
-%{__make} -j1 \
+%{__make} \
 	MOZILLA_HOME=%{_libdir}/mozilla \
 	pythondir=%{py_sitedir}
 
@@ -301,7 +301,8 @@ install -d $RPM_BUILD_ROOT%{_var}/cache/beagle/indexes
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	pythondir=%{py_sitedir}
+	pythondir=%{py_sitedir} \
+	monodocdir=%{_libdir}/monodoc/sources
 
 dest=$RPM_BUILD_ROOT%{_datadir}/mozilla-firefox/extensions/\{fda00e13-8c62-4f63-9d19-d168115b11ca\}
 install -d $dest $dest/chrome
