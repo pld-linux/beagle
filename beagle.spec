@@ -26,12 +26,12 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
-Version:	0.3.2
+Version:	0.3.3
 Release:	0.1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/beagle/0.3/%{name}-%{version}.tar.bz2
-# Source0-md5:	1c66a66a5049ae91930fa6a9b8091a33
+# Source0-md5:	c1b6c340c72a70e33212c85513bc23f2
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch3:		%{name}-configure.patch
@@ -46,7 +46,8 @@ BuildRequires:	dotnet-gmime-sharp-devel >= 2.2.3
 %{?with_gsf:BuildRequires:	dotnet-gsf-sharp-devel >= 0.8.1}
 #BuildRequires:	dotnet-gst-sharp-devel
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
-BuildRequires:	dotnet-ndesk-dbus-glib-sharp >= 0.3.0
+BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel >= 0.3.0
+BuildRequires:	dotnet-ndesk-dbus-sharp-devel	>= 0.6.0
 %if %{with epiphany}
 BuildRequires:	epiphany-devel >= 2.20.0
 %endif
@@ -281,7 +282,7 @@ Integracja funkcji automatycznego startu Beagle.
 	--%{!?with_thunderbird:dis}%{?with_thunderbird:en}able-thunderbird \
 	--%{!?with_avahi:dis}%{?with_avahi:en}able-avahi
 
-%{__make} \
+%{__make} -j1 \
 	MOZILLA_HOME=%{_libdir}/mozilla \
 	pythondir=%{py_sitedir}
 
@@ -294,9 +295,9 @@ install -d $RPM_BUILD_ROOT%{_var}/cache/beagle/indexes
 	pythondir=%{py_sitedir}
 
 dest=$RPM_BUILD_ROOT%{_datadir}/mozilla-firefox/extensions/\{fda00e13-8c62-4f63-9d19-d168115b11ca\}
-#install -d $dest $dest/chrome
-#install mozilla-extension/{chrome.manifest,install.rdf} $dest
-#install mozilla-extension/chrome/beagle.jar $dest/chrome
+install -d $dest $dest/chrome
+install firefox-extension/{chrome.manifest,install.rdf} $dest
+cp -r firefox-extension/chrome/* $dest/chrome
 
 # Kill useless files
 #rm -f $RPM_BUILD_ROOT%{_libdir}/epiphany/2.20/extensions/*.{la,a} \
@@ -390,7 +391,7 @@ fi
 
 %files -n mozilla-firefox-extension-beagle
 %defattr(644,root,root,755)
-#%{_datadir}/mozilla-firefox/extensions/{fda00e13-8c62-4f63-9d19-d168115b11ca}
+%{_datadir}/mozilla-firefox/extensions/{fda00e13-8c62-4f63-9d19-d168115b11ca}
 
 %if %{with epiphany}
 %files -n epiphany-extension-beagle
