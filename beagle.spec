@@ -73,6 +73,9 @@ Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dotnet-gmime-sharp >= 2.2.3
 Requires:	dotnet-gsf-sharp
 Requires:	sqlite3
+Obsoletes:	beagle-libs
+Obsoletes:	beagle-static
+Obsoletes:	python-beagle
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
 ExclusiveArch:	%{ix86} %{x8664} arm hppa ia64 ppc s390 s390x sparc sparcv9 sparc64
@@ -86,17 +89,6 @@ Lucene.Net.
 %description -l pl.UTF-8
 Beagle jest podsystemem indeksującym i wyszukującym zbudowanym na
 bazie Lucene.Net.
-
-%package libs
-Summary:	Beagle libraries
-Summary(pl.UTF-8):	Bibiloteki Beagle
-Group:		Libraries
-
-%description libs
-Beagle libraries.
-
-%description libs -l pl.UTF-8
-Bibiloteki Beagle.
 
 %package debug
 Summary:	Debug files for the Mono part of Beagle
@@ -121,18 +113,6 @@ Beagle development files.
 
 %description devel -l pl.UTF-8
 Pliki programistyczne Beagle.
-
-%package static
-Summary:	Beagle static libraries
-Summary(pl.UTF-8):	Statyczne biblioteki Beagle
-Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
-
-%description static
-Beagle static libraries.
-
-%description static -l pl.UTF-8
-Statyczne biblioteki Beagle.
 
 %package apidocs
 Summary:	libbeagle API documentation
@@ -159,75 +139,6 @@ Beagle crawl system.
 
 %description crawl-system -l pl.UTF-8
 System przeszukujący beagle-crawl.
-
-%package evolution
-Summary:	Beagle Evolution backend
-Summary(pl.UTF-8):	Backend Beagle dla Evolution
-Group:		X11/Applications/Networking
-Requires:	%{name} = %{version}-%{release}
-Requires:	dotnet-evolution-sharp >= 0.11.1
-Requires:	evolution >= 2.10.0
-
-%description evolution
-Beagle Evolution backend.
-
-%description evolution -l pl.UTF-8
-Backend Beagle dla Evolution.
-
-%package thunderbird
-Summary:	Beagle Mozilla Thunderbird backend
-Summary(pl.UTF-8):	Backend Beagle dla Mozilli Thunderbird
-Group:		X11/Applications/Networking
-Requires:	%{name} = %{version}-%{release}
-
-%description thunderbird
-Beagle Mozilla Thunderbird backend.
-
-%description thunderbird -l pl.UTF-8
-Backend Beagle dla Mozilli Thunderbird.
-
-%package -n mozilla-firefox-extension-beagle
-Summary:	Mozilla Firefox extension - beagle
-Summary(pl.UTF-8):	Rozszerzenie dla Mozilla Firefox - beagle
-Group:		X11/Applications/Networking
-Requires:	%{name} = %{version}-%{release}
-Requires:	mozilla-firefox >= 2.0.0.1-2
-
-%description -n mozilla-firefox-extension-beagle
-Mozilla Firefox extension that allows Beagle to index every page the
-user views.
-
-%description -n mozilla-firefox-extension-beagle -l pl.UTF-8
-Rozszerzenie dla Mozilla Firefox sprawiające, że Beagle indeksuje
-każdą odwiedzaną stronę.
-
-%package -n epiphany-extension-beagle
-Summary:	Epiphany extension - beagle
-Summary(pl.UTF-8):	Rozszerzenie dla Epiphany - beagle
-Group:		X11/Applications/Networking
-Requires:	%{name} = %{version}-%{release}
-Requires:	epiphany-extensions >= 2.20.0
-
-%description -n epiphany-extension-beagle
-Epiphany extension that allows Beagle to index every page the user
-views.
-
-%description -n epiphany-extension-beagle -l pl.UTF-8
-Rozszerzenie dla Epiphany sprawiające, że Beagle indeksuje każdą
-odwiedzaną stronę.
-
-%package -n python-%{name}
-Summary:	Beagle Python bindings
-Summary(pl.UTF-8):	Wiązania języka Python dla Beagle
-Group:		Libraries/Python
-Requires:	%{name} = %{version}-%{release}
-%pyrequires_eq  python-libs
-
-%description -n python-%{name}
-Beagle Python bindings.
-
-%description -n python-%{name} -l pl.UTF-8
-Wiązania języka Python dla Beagle.
 
 %package search-gui
 Summary:	GNOME based Beagle GUI
@@ -269,6 +180,62 @@ web browser.
 AJAX-owy interfejs pozwalający użytkownikom wyszukiwać dane za pomocą
 przeglądarki internetowej.
 
+%package evolution
+Summary:	Beagle Evolution backend
+Summary(pl.UTF-8):	Backend Beagle dla Evolution
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+Requires:	dotnet-evolution-sharp >= 0.11.1
+Requires:	evolution >= 2.10.0
+
+%description evolution
+Beagle Evolution backend.
+
+%description evolution -l pl.UTF-8
+Backend Beagle dla Evolution.
+
+%package thunderbird
+Summary:	Beagle Mozilla Thunderbird backend
+Summary(pl.UTF-8):	Backend Beagle dla Mozilli Thunderbird
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+
+%description thunderbird
+Beagle Mozilla Thunderbird backend.
+
+%description thunderbird -l pl.UTF-8
+Backend Beagle dla Mozilli Thunderbird.
+
+%package -n epiphany-extension-beagle
+Summary:	Epiphany extension - beagle
+Summary(pl.UTF-8):	Rozszerzenie dla Epiphany - beagle
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+Requires:	epiphany-extensions >= 2.20.0
+
+%description -n epiphany-extension-beagle
+Epiphany extension that allows Beagle to index every page the user
+views.
+
+%description -n epiphany-extension-beagle -l pl.UTF-8
+Rozszerzenie dla Epiphany sprawiające, że Beagle indeksuje każdą
+odwiedzaną stronę.
+
+%package -n mozilla-firefox-extension-beagle
+Summary:	Mozilla Firefox extension - beagle
+Summary(pl.UTF-8):	Rozszerzenie dla przeglądarki Mozilla Firefox - beagle
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+Requires:	mozilla-firefox >= 2.0.0.1-2
+
+%description -n mozilla-firefox-extension-beagle
+Mozilla Firefox extension that allows Beagle to index every page the
+user views.
+
+%description -n mozilla-firefox-extension-beagle -l pl.UTF-8
+Rozszerzenie dla przeglądarki Mozilla Firefox sprawiające, że Beagle
+indeksuje każdą odwiedzaną stronę.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -282,7 +249,7 @@ przeglądarki internetowej.
 %{__autoconf}
 %{__automake}
 %configure \
-	--enable-static \
+	--disable-static \
 	%{?with_apidocs:--enable-gtk-doc} \
 	--with-html-dir=%{_gtkdocdir} \
 	--%{!?with_epiphany:dis}%{?with_epiphany:en}able-epiphany-extension \
@@ -291,9 +258,7 @@ przeglądarki internetowej.
 	--%{!?with_thunderbird:dis}%{?with_thunderbird:en}able-thunderbird \
 	--%{!?with_avahi:dis}%{?with_avahi:en}able-avahi
 
-%{__make} \
-	MOZILLA_HOME=%{_libdir}/mozilla \
-	pythondir=%{py_sitedir}
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -303,6 +268,8 @@ install -d $RPM_BUILD_ROOT%{_var}/cache/beagle/indexes
 	DESTDIR=$RPM_BUILD_ROOT \
 	pythondir=%{py_sitedir} \
 	monodocdir=%{_libdir}/monodoc/sources
+
+rm $RPM_BUILD_ROOT%{_libdir}/%{name}/lib*glue.la
 
 dest=$RPM_BUILD_ROOT%{_datadir}/mozilla-firefox/extensions/\{fda00e13-8c62-4f63-9d19-d168115b11ca\}
 install -d $dest $dest/chrome
@@ -341,14 +308,10 @@ if [ "$1" = "0" ]; then
         %groupremove beagleindex
 fi
 
-%post	libs -p /sbin/ldconfig
-%postun	libs -p /sbin/ldconfig
-
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/beagle-config
-%attr(755,root,root) %{_bindir}/beagled
 %attr(755,root,root) %{_bindir}/beagle-doc-extractor
 %attr(755,root,root) %{_bindir}/beagle-extract-content
 %attr(755,root,root) %{_bindir}/beagle-index-info
@@ -357,7 +320,9 @@ fi
 %attr(755,root,root) %{_bindir}/beagle-query
 %attr(755,root,root) %{_bindir}/beagle-shutdown
 %attr(755,root,root) %{_bindir}/beagle-status
+%attr(755,root,root) %{_bindir}/beagled
 %attr(755,root,root) %{_libdir}/%{name}/*.exe
+%attr(755,root,root) %{_libdir}/%{name}/libbeagleglue.so*
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/Backends
 %dir %{_libdir}/%{name}/Filters
@@ -365,11 +330,12 @@ fi
 %{_libdir}/%{name}/*.dll.config
 %{_libdir}/%{name}/Filters/*.dll
 %attr(755,root,root) %{_libdir}/%{name}/beagled-index-helper
-%{_mandir}/man*/*
-
-%files libs
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/lib*.so.*.*.*
+%{_mandir}/man1/beagle-config.1*
+%{_mandir}/man1/beagle-query.1*
+%{_mandir}/man1/beagle-search.1*
+%{_mandir}/man1/beagle-shutdown.1*
+%{_mandir}/man1/beagle-status.1*
+%{_mandir}/man1/beagled.1*
 
 %files debug
 %defattr(644,root,root,755)
@@ -379,25 +345,61 @@ fi
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/*.so
-%attr(755,root,root) %ghost %{_libdir}/%{name}/*.so.0
-%{_libdir}/%{name}/*.la
-%{_pkgconfigdir}/*
-
-%files crawl-system
-%defattr(644,root,root,755)
-%attr(750,root,crontab) %config(noreplace) %verify(not md5 mtime size) /etc/cron.daily/*
-%dir %{_sysconfdir}/beagle
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/*
-%dir %attr(755,beagleindex,beagleindex) %{_var}/cache/beagle
-%dir %attr(755,beagleindex,beagleindex) %{_var}/cache/beagle/indexes
-%attr(755,root,root) %{_sbindir}/*
+%{_pkgconfigdir}/beagle-0.0.pc
+%{_pkgconfigdir}/beagle-ui-0.0.pc
+%{_pkgconfigdir}/beagle-daemon.pc
 
 %if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
 %{_libdir}/monodoc/sources/*
 %endif
+
+%files crawl-system
+%defattr(644,root,root,755)
+%dir %{_sysconfdir}/beagle
+%dir %{_sysconfdir}/beagle/config-files
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/config-files/BeagleSearch.xml
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/config-files/Daemon.xml
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/config-files/FilesQueryable.xml
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/config-files/Networking.xml
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-applications
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-documentation
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-manpages
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-monodoc
+# XXX: samples not here
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/external-filters.xml.sample
+%attr(750,root,crontab) %config(noreplace) %verify(not md5 mtime size) /etc/cron.daily/beagle-crawl-system
+%dir %attr(755,beagleindex,beagleindex) %{_var}/cache/beagle
+%dir %attr(755,beagleindex,beagleindex) %{_var}/cache/beagle/indexes
+%attr(755,root,root) %{_sbindir}/beagle-build-index
+%attr(755,root,root) %{_sbindir}/beagle-dump-index
+%attr(755,root,root) %{_sbindir}/beagle-manage-index
+%attr(755,root,root) %{_sbindir}/beagle-master-delete-button
+%{_mandir}/man1/beagle-dump-index.1*
+%{_mandir}/man8/beagle-build-index.8*
+%{_mandir}/man8/beagle-extract-content.8*
+%{_mandir}/man8/beagle-manage-index.8*
+
+%if %{with gui}
+%files search-gui
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/beagle-imlogviewer
+%attr(755,root,root) %{_bindir}/beagle-search
+%attr(755,root,root) %{_bindir}/beagle-settings
+%attr(755,root,root) %{_libdir}/%{name}/libbeagleuiglue.so*
+%{_mandir}/man8/beagle-imlogviewer.8*
+%{_desktopdir}/*.desktop
+%endif
+
+%files startup
+%defattr(644,root,root,755)
+%{_sysconfdir}/xdg/autostart/beagled-autostart.desktop
+%{_sysconfdir}/xdg/autostart/beagle-search-autostart.desktop
+
+%files webinterface
+%defattr(644,root,root,755)
+%{_datadir}/%{name}
 
 %if %{with evolution}
 %files evolution
@@ -412,10 +414,6 @@ fi
 %{_libdir}/mozilla-thunderbird/extensions/{b656ef18-fd76-45e6-95cc-8043f26361e7}
 %endif
 
-%files -n mozilla-firefox-extension-beagle
-%defattr(644,root,root,755)
-%{_datadir}/mozilla-firefox/extensions/{fda00e13-8c62-4f63-9d19-d168115b11ca}
-
 %if %{with epiphany}
 %files -n epiphany-extension-beagle
 %defattr(644,root,root,755)
@@ -423,25 +421,6 @@ fi
 %{_libdir}/epiphany/2.20/extensions/*.ephy-extension
 %endif
 
-%if %{with gui}
-%files search-gui
+%files -n mozilla-firefox-extension-beagle
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/beagle-imlogviewer
-%attr(755,root,root) %{_bindir}/beagle-search
-%attr(755,root,root) %{_bindir}/beagle-settings
-%attr(755,root,root) %{_libdir}/%{name}/libbeagleuiglue.so*
-%{_desktopdir}/*.desktop
-%endif
-
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/%{name}/*.a
-
-%files startup
-%defattr(644,root,root,755)
-%{_sysconfdir}/xdg/autostart/beagled-autostart.desktop
-%{_sysconfdir}/xdg/autostart/beagle-search-autostart.desktop
-
-%files webinterface
-%defattr(644,root,root,755)
-%{_datadir}/%{name}
+%{_datadir}/mozilla-firefox/extensions/{fda00e13-8c62-4f63-9d19-d168115b11ca}
