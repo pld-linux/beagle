@@ -25,7 +25,7 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
 Version:	0.3.3
-Release:	5
+Release:	6
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/beagle/0.3/%{name}-%{version}.tar.bz2
@@ -46,7 +46,7 @@ BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
 BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel >= 0.3.0
 BuildRequires:	dotnet-ndesk-dbus-sharp-devel >= 0.6.0
 %if %{with epiphany}
-BuildRequires:	epiphany-devel >= 2.20.0
+BuildRequires:	epiphany-devel >= 2.22.0
 %endif
 BuildRequires:	gtk+2-devel >= 2:2.10.10
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.8}
@@ -210,7 +210,7 @@ Summary:	Epiphany extension - beagle
 Summary(pl.UTF-8):	Rozszerzenie dla Epiphany - beagle
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
-Requires:	epiphany-extensions >= 2.20.0
+Requires:	epiphany-extensions >= 2.22.0
 
 %description -n epiphany-extension-beagle
 Epiphany extension that allows Beagle to index every page the user
@@ -276,11 +276,11 @@ install firefox-extension/{chrome.manifest,install.rdf} $dest
 cp -r firefox-extension/chrome/* $dest/chrome
 
 %if %{with epiphany}
-install -d $RPM_BUILD_ROOT%{_libdir}/epiphany/2.20/extensions
+install -d $RPM_BUILD_ROOT%{_libdir}/epiphany/2.22/extensions
 sed -e "s|\@localedir\@|\%{_localedir}|g" \
 	< epiphany-extension/beagle.py.in > epiphany-extension/beagle.py
-install epiphany-extension/beagle.py $RPM_BUILD_ROOT%{_libdir}/epiphany/2.20/extensions/beagle.py
-install epiphany-extension/beagle.ephy-extension.in $RPM_BUILD_ROOT%{_libdir}/epiphany/2.20/extensions/beagle.ephy-extension
+install epiphany-extension/beagle.py $RPM_BUILD_ROOT%{_libdir}/epiphany/2.22/extensions/beagle.py
+install epiphany-extension/beagle.ephy-extension.in $RPM_BUILD_ROOT%{_libdir}/epiphany/2.22/extensions/beagle.ephy-extension
 %endif
 
 %if %{with thunderbird}
@@ -416,8 +416,8 @@ fi
 %if %{with epiphany}
 %files -n epiphany-extension-beagle
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/epiphany/2.20/extensions/beagle.py
-%{_libdir}/epiphany/2.20/extensions/*.ephy-extension
+%attr(755,root,root) %{_libdir}/epiphany/2.22/extensions/beagle.py
+%{_libdir}/epiphany/2.22/extensions/*.ephy-extension
 %endif
 
 %files -n mozilla-firefox-extension-beagle
