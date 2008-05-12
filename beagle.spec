@@ -24,12 +24,12 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
-Version:	0.3.3
-Release:	6
+Version:	0.3.7
+Release:	0.1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/beagle/0.3/%{name}-%{version}.tar.bz2
-# Source0-md5:	c1b6c340c72a70e33212c85513bc23f2
+# Source0-md5:	4845f674f540eeb24c09a1be1a5e2459
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-configure.patch
@@ -238,8 +238,8 @@ indeksuje każdą odwiedzaną stronę.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
+#%patch1 -p1
+#%patch2 -p1
 
 %build
 %{__intltoolize}
@@ -362,10 +362,10 @@ fi
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/config-files/Daemon.xml
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/config-files/FilesQueryable.xml
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/config-files/Networking.xml
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-applications
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-documentation
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-manpages
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-monodoc
+#%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-applications
+#%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-documentation
+#%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-manpages
+#%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-monodoc
 # XXX: samples not here
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/external-filters.xml.sample
 %attr(750,root,crontab) %config(noreplace) %verify(not md5 mtime size) /etc/cron.daily/beagle-crawl-system
