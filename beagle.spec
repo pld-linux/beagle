@@ -318,8 +318,10 @@ fi
 %attr(755,root,root) %{_bindir}/beagle-ping
 %attr(755,root,root) %{_bindir}/beagle-query
 %attr(755,root,root) %{_bindir}/beagle-shutdown
+%attr(755,root,root) %{_bindir}/beagle-static-query
 %attr(755,root,root) %{_bindir}/beagle-status
 %attr(755,root,root) %{_bindir}/beagled
+%attr(755,root,root) %{_bindir}/blocate
 %attr(755,root,root) %{_libdir}/%{name}/*.exe
 %attr(755,root,root) %{_libdir}/%{name}/libbeagleglue.so*
 %dir %{_libdir}/%{name}
@@ -358,14 +360,19 @@ fi
 %defattr(644,root,root,755)
 %dir %{_sysconfdir}/beagle
 %dir %{_sysconfdir}/beagle/config-files
+%dir %{_sysconfdir}/beagle/crawl-rules
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/blocate.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/query-mapping.xml
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/config-files/BeagleSearch.xml
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/config-files/Daemon.xml
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/config-files/FilesQueryable.xml
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/config-files/GoogleBackends.xml
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/config-files/Networking.xml
-#%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-applications
-#%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-documentation
-#%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-manpages
-#%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-monodoc
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-rules/crawl-applications
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-rules/crawl-documentation
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-rules/crawl-manpages
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-rules/crawl-monodoc
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/crawl-rules/crawl-windows
 # XXX: samples not here
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/beagle/external-filters.xml.sample
 %attr(750,root,crontab) %config(noreplace) %verify(not md5 mtime size) /etc/cron.daily/beagle-crawl-system
@@ -379,6 +386,7 @@ fi
 %{_mandir}/man8/beagle-build-index.8*
 %{_mandir}/man8/beagle-extract-content.8*
 %{_mandir}/man8/beagle-manage-index.8*
+%{_libdir}/%{name}/Backends/GoogleBackends*.dll
 
 %if %{with gui}
 %files search-gui
