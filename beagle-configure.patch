@@ -1,22 +1,11 @@
-diff -aurN beagle-0.2.7.orig/configure.in beagle-0.2.7/configure.in
---- beagle-0.2.7.orig/configure.in	2006-06-19 19:54:24.000000000 +0200
-+++ beagle-0.2.7/configure.in	2006-06-27 22:04:51.686068696 +0200
-@@ -332,7 +332,6 @@
+diff -urN beagle-0.3.8/configure.in beagle-0.3.8.new/configure.in
+--- beagle-0.3.8/configure.in	2008-06-12 18:06:25.000000000 +0200
++++ beagle-0.3.8.new/configure.in	2008-07-27 17:50:47.000000000 +0200
+@@ -376,7 +376,6 @@
  
  PKG_CHECK_MODULES(BEAGLED,
  [
 -	shared-mime-info
  	gmime-sharp >= $GMIME_SHARP_REQUIRED
- 	gtk-sharp-2.0 >= $GTK_SHARP_REQUIRED
+ 	glib-sharp-2.0 >= $GTK_SHARP_REQUIRED
  ])
---- beagle-0.2.7.orig/configure.in	2008-03-18 13:07:53.000000000 +0100
-+++ beagle-0.2.7/configure.in	2008-03-18 13:09:09.000000000 +0100
-@@ -415,7 +415,7 @@
- if test "x$enable_epiphany_extension" != "xno"; then
- 	AC_MSG_CHECKING([for Epiphany])
- 	AC_MSG_RESULT()
--	VALID_EPIPHANY_VERSIONS="2.20 2.19 2.18 2.17 2.16 2.15 2.14 1.8 1.6"
-+	VALID_EPIPHANY_VERSIONS="2.22 2.20 2.19 2.18 2.17 2.16 2.15 2.14 1.8 1.6"
- 	for v in $VALID_EPIPHANY_VERSIONS; do
- 	
- 		AC_MSG_CHECKING([for Epiphany $v])

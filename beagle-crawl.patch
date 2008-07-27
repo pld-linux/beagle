@@ -1,63 +1,54 @@
-diff -ur beagle-0.3.3/configure.in beagle-0.3.3-crawl/configure.in
---- beagle-0.3.3/configure.in	2008-01-02 08:14:48.000000000 +0100
-+++ beagle-0.3.3-crawl/configure.in	2008-02-03 17:47:18.000000000 +0100
-@@ -624,6 +624,7 @@
- Filters/Makefile
- tools/Makefile
- tools/beagle-settings.desktop.in
-+tools/beagle-crawl-system
- search/Makefile
- search/beagle-search.desktop.in
- ImLogViewer/Makefile
-diff -ur beagle-0.3.3/tools/crawl-rules/crawl-applications beagle-0.3.3-crawl/tools/crawl-rules/crawl-applications
---- beagle-0.3.3/tools/crawl-rules/crawl-applications	2008-01-02 04:00:22.000000000 +0100
-+++ beagle-0.3.3-crawl/tools/crawl-rules/crawl-applications	2008-02-03 17:43:23.000000000 +0100
+diff -urN beagle-0.3.8/conf-data/crawl-rules/crawl-applications beagle-0.3.8.new/conf-data/crawl-rules/crawl-applications
+--- beagle-0.3.8/conf-data/crawl-rules/crawl-applications	2008-01-03 10:22:37.000000000 +0100
++++ beagle-0.3.8.new/conf-data/crawl-rules/crawl-applications	2008-07-27 17:42:37.000000000 +0200
 @@ -2,7 +2,7 @@
  
  CRAWL_INDEX_NAME="applications"
  
 -CRAWL_PATHS="/usr/share/applications /usr/local/share/applications /opt/gnome/share/applications /opt/kde3/share/applications"
-+CRAWL_PATHS="/usr/share/applications"
++CRAWL_PATHS="/usr/share/applications /usr/local/share/applications"
  
  CRAWL_RECURSIVE="yes"
  
-diff -ur beagle-0.3.3/tools/crawl-rules/crawl-documentation beagle-0.3.3-crawl/tools/crawl-rules/crawl-documentation
---- beagle-0.3.3/tools/crawl-rules/crawl-documentation	2007-12-13 09:27:46.000000000 +0100
-+++ beagle-0.3.3-crawl/tools/crawl-rules/crawl-documentation	2008-02-03 17:44:49.000000000 +0100
+diff -urN beagle-0.3.8/conf-data/crawl-rules/crawl-documentation beagle-0.3.8.new/conf-data/crawl-rules/crawl-documentation
+--- beagle-0.3.8/conf-data/crawl-rules/crawl-documentation	2008-01-03 10:22:37.000000000 +0100
++++ beagle-0.3.8.new/conf-data/crawl-rules/crawl-documentation	2008-07-27 17:45:43.000000000 +0200
 @@ -2,7 +2,7 @@
  
  CRAWL_INDEX_NAME="documentation"
  
 -CRAWL_PATHS="/usr/share/doc /usr/local/share/doc /opt/kde3/share/doc /opt/gnome/share/gnome/help /usr/share/gnome/help /opt/gnome/share/gtk-doc/html /usr/share/gtk-doc/html /usr/share/gnome/html"
-+CRAWL_PATHS="/usr/share/doc /usr/share/gnome/help"
++CRAWL_PATHS="/usr/share/doc /usr/local/share/doc /usr/share/gnome/help"
  
  CRAWL_ALLOW_PATTERNS="*.xml,*.html,*.docbook,*.pdf"
  
-diff -ur beagle-0.3.3/tools/crawl-rules/crawl-monodoc beagle-0.3.3-crawl/tools/crawl-rules/crawl-monodoc
---- beagle-0.3.3/tools/crawl-rules/crawl-monodoc	2007-12-13 10:37:03.000000000 +0100
-+++ beagle-0.3.3-crawl/tools/crawl-rules/crawl-monodoc	2008-02-03 17:46:26.000000000 +0100
-@@ -1,8 +1,8 @@
+diff -urN beagle-0.3.8/conf-data/crawl-rules/crawl-executables beagle-0.3.8.new/conf-data/crawl-rules/crawl-executables
+--- beagle-0.3.8/conf-data/crawl-rules/crawl-executables	2008-04-26 04:47:25.000000000 +0200
++++ beagle-0.3.8.new/conf-data/crawl-rules/crawl-executables	2008-07-27 17:46:08.000000000 +0200
+@@ -3,7 +3,7 @@
+ # Use the same index as the applications index
+ CRAWL_INDEX_NAME="applications"
+ 
+-CRAWL_PATHS="/bin /sbin /usr/bin /usr/sbin /usr/local/bin/ /usr/local/sbin"
++CRAWL_PATHS="/bin /sbin /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin"
+ 
+ # Only index files in the gives directories
+ CRAWL_RECURSIVE="no"
+diff -urN beagle-0.3.8/conf-data/crawl-rules/crawl-monodoc beagle-0.3.8.new/conf-data/crawl-rules/crawl-monodoc
+--- beagle-0.3.8/conf-data/crawl-rules/crawl-monodoc	2008-01-03 10:22:37.000000000 +0100
++++ beagle-0.3.8.new/conf-data/crawl-rules/crawl-monodoc	2008-07-27 17:46:32.000000000 +0200
+@@ -1,4 +1,4 @@
 -CRAWL_ENABLED="no"
 +CRAWL_ENABLED="yes"
  
  CRAWL_INDEX_NAME="monodoc"
  
--CRAWL_PATHS="/usr/lib/monodoc/sources /usr/local/lib/monodoc/sources"
-+CRAWL_PATHS="/usr/lib/monodoc/sources"
+diff -urN beagle-0.3.8/conf-data/crawl-rules/crawl-windows beagle-0.3.8.new/conf-data/crawl-rules/crawl-windows
+--- beagle-0.3.8/conf-data/crawl-rules/crawl-windows	2008-01-03 10:22:37.000000000 +0100
++++ beagle-0.3.8.new/conf-data/crawl-rules/crawl-windows	2008-07-27 17:47:00.000000000 +0200
+@@ -1,4 +1,4 @@
+-CRAWL_ENABLED="yes"
++CRAWL_ENABLED="no"
  
- # Indexing Mono.zip will take a long time. It might be a good idea to add Mono.zip to deny patterns.
+ CRAWL_INDEX_NAME="windows"
  
-diff -ur beagle-0.3.3/tools/Makefile.am beagle-0.3.3-crawl/tools/Makefile.am
---- beagle-0.3.3/tools/Makefile.am	2008-01-02 00:25:15.000000000 +0100
-+++ beagle-0.3.3-crawl/tools/Makefile.am	2008-02-03 17:45:38.000000000 +0100
-@@ -39,8 +39,7 @@
- 	$(srcdir)/crawl-rules/crawl-applications	\
- 	$(srcdir)/crawl-rules/crawl-documentation	\
- 	$(srcdir)/crawl-rules/crawl-manpages		\
--	$(srcdir)/crawl-rules/crawl-monodoc		\
--	$(srcdir)/crawl-rules/crawl-windows
-+	$(srcdir)/crawl-rules/crawl-monodoc
- 
- # FIXME: Per-distribution specific crawl rules
- configdir = $(sysconfdir)/beagle
-
