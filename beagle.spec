@@ -23,7 +23,7 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
 Version:	0.3.8
-Release:	3
+Release:	4
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/beagle/0.3/%{name}-%{version}.tar.bz2
@@ -33,6 +33,7 @@ Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-configure.patch
 Patch3:		%{name}-use-xdg-open.patch
 Patch4:		%{name}-epiphany.patch
+Patch5:		%{name}-gmime-2.4.patch
 URL:		http://beagle-project.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -40,7 +41,7 @@ BuildRequires:	chmlib-devel
 %{?with_avahi:BuildRequires:	dotnet-avahi-devel >= 0.6.10}
 %{?with_evolution:BuildRequires:	dotnet-evolution-sharp-devel >= 0.13.3}
 %{?with_galago:BuildRequires:	dotnet-galago-sharp-devel >= 0.5.0}
-BuildRequires:	dotnet-gmime-sharp-devel >= 2.2.3
+BuildRequires:	dotnet-gmime-sharp-devel >= 2.3.5
 %{?with_gsf:BuildRequires:	dotnet-gsf-sharp-devel >= 0.8.1}
 BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
 BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel >= 0.3.0
@@ -63,7 +64,7 @@ BuildRequires:	zip
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	librsvg-devel >= 1:2.16.1
 %endif
-Requires:	dotnet-gmime-sharp >= 2.2.3
+Requires:	dotnet-gmime-sharp >= 2.3.5
 Requires:	dotnet-gsf-sharp
 Requires:	shared-mime-info
 Requires:	sqlite3
@@ -242,6 +243,7 @@ indeksuje każdą odwiedzaną stronę.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %{__intltoolize}
