@@ -23,7 +23,7 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
 Version:	0.3.9
-Release:	1
+Release:	2
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/beagle/0.3/%{name}-%{version}.tar.bz2
@@ -426,8 +426,8 @@ fi
 %if %{with epiphany}
 %files -n epiphany-extension-beagle
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/epiphany/2.24/extensions/beagle.py
-%{_libdir}/epiphany/2.24/extensions/*.ephy-extension
+%attr(755,root,root) %{_libdir}/epiphany/2.26/extensions/beagle.py
+%{_libdir}/epiphany/2.26/extensions/*.ephy-extension
 %endif
 
 %files -n iceweasel-extension-beagle
