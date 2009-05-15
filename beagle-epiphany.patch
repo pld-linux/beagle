@@ -6,7 +6,7 @@ diff -urN beagle-0.3.8/configure.in beagle-0.3.8.new/configure.in
  	dnl need to see the handling of the epiphany_version variable in the
  	dnl epiphany extension code
 -	VALID_EPIPHANY_VERSIONS="2.22 2.20 2.19 2.18 2.17 2.16 2.15 2.14 1.8 1.6"
-+	VALID_EPIPHANY_VERSIONS="2.24 2.22 2.20 2.19 2.18 2.17 2.16 2.15 2.14 1.8 1.6"
++	VALID_EPIPHANY_VERSIONS="2.26 2.24 2.22 2.20 2.19 2.18 2.17 2.16 2.15 2.14 1.8 1.6"
  	for v in $VALID_EPIPHANY_VERSIONS; do
  	
  		AC_MSG_CHECKING([for Epiphany $v])
