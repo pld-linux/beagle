@@ -22,12 +22,12 @@
 Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
-Version:	0.3.8
-Release:	7
+Version:	0.3.9
+Release:	1
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/beagle/0.3/%{name}-%{version}.tar.bz2
-# Source0-md5:	fcafad26efa65a3bf06a019268ae6230
+# Source0-md5:	b73c12423d2d67133dbb05933f4c8fe1
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-crawl.patch
 Patch2:		%{name}-configure.patch
