@@ -12,7 +12,8 @@
 %bcond_without	galago		# build without galago support
 %bcond_without	gsf		# build without libgsf support
 %bcond_without	gui		# don't build GNOME based GUI
-%bcond_without	epiphany	# don't build epiphany extension
+# required epiphany with python support (2009.06.06 removed permanently from epiphany)
+%bcond_with	epiphany	# don't build epiphany extension
 %bcond_without	thunderbird	# use Thunderbird backend
 #
 %if !%{with gui}
@@ -63,6 +64,7 @@ BuildRequires:	zip
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
 BuildRequires:	gtk+2-devel >= 2:2.10.10
 BuildRequires:	librsvg-devel >= 1:2.16.1
+BuildRequires:	rpm-pythonprov
 %endif
 Requires:	dotnet-gmime-sharp >= 2.3.5
 Requires:	dotnet-gsf-sharp
