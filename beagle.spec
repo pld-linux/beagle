@@ -284,9 +284,13 @@ install thunderbird-extension/{chrome.manifest,install.rdf} $tdest
 cp -r thunderbird-extension/{chrome,components,defaults} $tdest
 %endif
 
+%if %{with gui}
 [ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
 	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
 %find_lang %{name}
+%else
+touch %{name}.lang
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
