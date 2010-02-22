@@ -48,7 +48,6 @@ BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel >= 0.3.0
 BuildRequires:	dotnet-ndesk-dbus-sharp-devel >= 0.6.0
 %{?with_epiphany:BuildRequires:	epiphany-devel >= 2.22.0}
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2:2.10.10
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libtool
 BuildRequires:	mono-csharp >= 1.2.4
@@ -62,6 +61,7 @@ BuildRequires:	zip
 # GUI BRs
 %if %{with gui}
 BuildRequires:	dotnet-gnome-sharp-devel >= 2.16.0
+BuildRequires:	gtk+2-devel >= 2:2.10.10
 BuildRequires:	librsvg-devel >= 1:2.16.1
 %endif
 Requires:	dotnet-gmime-sharp >= 2.3.5
@@ -309,7 +309,7 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/beagle-config
-%attr(755,root,root) %{_bindir}/beagle-doc-extractor
+%{?with_gsf:%attr(755,root,root) %{_bindir}/beagle-doc-extractor}
 %attr(755,root,root) %{_bindir}/beagle-extract-content
 %attr(755,root,root) %{_bindir}/beagle-index-info
 %attr(755,root,root) %{_bindir}/beagle-info
