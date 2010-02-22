@@ -343,7 +343,6 @@ fi
 %{_mandir}/man1/beagle-info.1*
 %{_mandir}/man1/beagle-ping.1*
 %{_mandir}/man1/beagle-query.1*
-%{_mandir}/man1/beagle-search.1*
 %{_mandir}/man1/beagle-shutdown.1*
 %{_mandir}/man1/beagle-status.1*
 %{_mandir}/man1/beagled.1*
@@ -359,7 +358,7 @@ fi
 %files devel
 %defattr(644,root,root,755)
 %{_pkgconfigdir}/beagle-0.0.pc
-%{_pkgconfigdir}/beagle-ui-0.0.pc
+%{?with_gui:%{_pkgconfigdir}/beagle-ui-0.0.pc}
 %{_pkgconfigdir}/beagle-daemon.pc
 
 %if %{with apidocs}
@@ -400,6 +399,7 @@ fi
 %attr(755,root,root) %{_bindir}/beagle-settings
 %attr(755,root,root) %{_libdir}/%{name}/libbeagleuiglue.so*
 %attr(755,root,root) %{_libdir}/%{name}/keygrabber.py
+%{_mandir}/man1/beagle-search.1*
 %{_mandir}/man1/beagle-settings.1*
 %{_mandir}/man8/beagle-imlogviewer.8*
 %{_desktopdir}/*.desktop
@@ -408,7 +408,7 @@ fi
 %files startup
 %defattr(644,root,root,755)
 %{_sysconfdir}/xdg/autostart/beagled-autostart.desktop
-%{_sysconfdir}/xdg/autostart/beagle-search-autostart.desktop
+%{?with_gui:%{_sysconfdir}/xdg/autostart/beagle-search-autostart.desktop}
 
 %files webinterface
 %defattr(644,root,root,755)
