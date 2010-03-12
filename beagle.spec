@@ -24,7 +24,7 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
 Version:	0.3.9
-Release:	3
+Release:	4
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/beagle/0.3/%{name}-%{version}.tar.bz2
@@ -35,6 +35,7 @@ Patch2:		%{name}-configure.patch
 Patch3:		%{name}-use-xdg-open.patch
 Patch4:		%{name}-epiphany.patch
 Patch5:		%{name}-gmime-2.4.patch
+Patch6:		%{name}-sqlite.patch
 URL:		http://beagle-project.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -246,6 +247,7 @@ indeksuje każdą odwiedzaną stronę.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 %{__intltoolize}
@@ -262,15 +264,14 @@ indeksuje każdą odwiedzaną stronę.
 	--%{!?with_thunderbird:dis}%{?with_thunderbird:en}able-thunderbird \
 	--%{!?with_avahi:dis}%{?with_avahi:en}able-avahi
 
-%{__make}
+%{__make} -j1
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_var}/cache/beagle/indexes
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	monodocdir=%{_libdir}/monodoc/sources
+	DESTDIR=$RPM_BUILD_ROOT
 
 rm $RPM_BUILD_ROOT%{_libdir}/%{name}/lib*glue.la
 
@@ -366,7 +367,7 @@ fi
 %if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
-%{_libdir}/monodoc/sources/*
+%{_prefix}/lib/monodoc/sources/*
 %endif
 
 %files crawl-system
