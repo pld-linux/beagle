@@ -24,7 +24,7 @@ Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
 Version:	0.3.9
-Release:	5
+Release:	6
 License:	Various
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/beagle/0.3/%{name}-%{version}.tar.bz2
@@ -36,6 +36,7 @@ Patch3:		%{name}-use-xdg-open.patch
 Patch4:		%{name}-epiphany.patch
 Patch5:		%{name}-gmime-2.4.patch
 Patch6:		%{name}-sqlite.patch
+Patch7:		%{name}-mono28.patch
 URL:		http://beagle-project.org/Main_Page
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -248,6 +249,7 @@ indeksuje każdą odwiedzaną stronę.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 %{__intltoolize}
