@@ -98,7 +98,7 @@ Requires:	%{name} = %{version}-%{release}
 %description debug
 Debug files for the Mono part of Beagle.
 
-%description -l pl.UTF-8
+%description debug -l pl.UTF-8
 Pliki debugujące dla części Mono Beagle'a.
 
 %package devel
