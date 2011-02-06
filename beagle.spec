@@ -3,8 +3,6 @@
 #       - kill bashisms in crawl stuff
 #	- add qyoto based settings (requires new packages)
 #
-%include	/usr/lib/rpm/macros.mono
-#
 # Conditional build:
 %bcond_without	apidocs		# don't build API documentation
 %bcond_with	avahi		# enable Avahi support
@@ -19,7 +17,8 @@
 %if !%{with gui}
 %undefine	with_evolution
 %endif
-#
+
+%include	/usr/lib/rpm/macros.mono
 Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
