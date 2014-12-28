@@ -49,7 +49,7 @@ BuildRequires:	dotnet-gtk-sharp2-devel >= 2.10.0
 BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel >= 0.3.0
 BuildRequires:	dotnet-ndesk-dbus-sharp-devel >= 0.6.0
 %{?with_epiphany:BuildRequires:	epiphany-devel >= 2.22.0}
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libtool
 BuildRequires:	mono-csharp >= 1.2.4
