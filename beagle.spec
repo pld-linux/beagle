@@ -18,7 +18,6 @@
 %undefine	with_evolution
 %endif
 
-%include	/usr/lib/rpm/macros.mono
 Summary:	Beagle - An indexing subsystem
 Summary(pl.UTF-8):	Beagle - podsystem indeksujący
 Name:		beagle
